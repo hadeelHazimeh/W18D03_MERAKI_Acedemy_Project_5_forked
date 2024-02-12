@@ -18,6 +18,11 @@ const createNewRole = (req, res) => {
       });
     });
 };
+
+
+
 module.exports = {
   createNewRole,
+
 };
+
