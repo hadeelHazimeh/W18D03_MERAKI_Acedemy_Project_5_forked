@@ -95,6 +95,9 @@ CREATE TABLE orders_services (
     created_at TIMESTAMP DEFAULT NOW (),
     is_deleted SMALLINT DEFAULT 0,
     FOREIGN KEY (order_id) REFERENCES orders (order_id),
+
     FOREIGN KEY (service_id) REFERENCES services (service_id),
+ 
     PRIMARY KEY (orders_services_id)
 );
+
