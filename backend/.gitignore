@@ -102,3 +102,5 @@ dist
 
 # Environment variables file
 .env
+
+.package-lock.json

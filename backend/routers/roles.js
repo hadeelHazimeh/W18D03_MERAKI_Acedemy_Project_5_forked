@@ -5,4 +5,5 @@ const roleRouter = express.Router();
 
 roleRouter.post("/create",createNewRole)
 
+
 module.exports = roleRouter;
