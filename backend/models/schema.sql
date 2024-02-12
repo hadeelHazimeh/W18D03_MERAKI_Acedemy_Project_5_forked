@@ -20,9 +20,9 @@ CREATE TABLE users (
     user_id SERIAL PRIMARY KEY,
     userName VARCHAR,
     email VARCHAR UNIQUE,
-    password VARCHAR,
+    password VARCHAR(255),
     is_deleted SMALLINT,
-    role INTEGER,
+    role INT,
     created_at TIMESTAMP
 );
 
