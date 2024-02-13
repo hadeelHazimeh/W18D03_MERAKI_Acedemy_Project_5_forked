@@ -97,7 +97,7 @@ CREATE TABLE orders_services (
     FOREIGN KEY (order_id) REFERENCES orders (order_id),
 
     FOREIGN KEY (service_id) REFERENCES services (service_id),
- 
+
     PRIMARY KEY (orders_services_id)
 );
 
