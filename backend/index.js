@@ -11,11 +11,9 @@ const roleRouter = require("./routers/roles");
 const orderRouter=require("./routers/ordersRouter")
 app.use(cors());
 app.use(express.json());
-
+const eventRouter = require("./routers/eventRouter");
+const serviceRouter = require("./routers/service");
 // Routes Middleware
-app.use("/roles",roleRouter)
-app.use("/orders",orderRouter)
-
 
 // Handles any other endpoints [unassigned - endpoints]
 app.use("*", (req, res) => res.status(404).json("NO content at this path"));
