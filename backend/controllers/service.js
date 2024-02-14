@@ -57,8 +57,21 @@ const getServiceByName = (req, res) => {
     });
 };
 
-
+//this function to get All service from the database
+// End Point : GET /service
+const getAllServices = (req, res) => {
+  pool
+    .query("SELECT * FROM services WHERE services.is_deleted=0")
+    .then((result) => {
+      res.status(200).json({
+        success: true,
+        message: `All the services`,
+        services: result.rows,
+      });
+    });
+};
 module.exports = {
   createService,
-  getServiceByName
+  getAllServices,
+  getServiceByName,
 };
