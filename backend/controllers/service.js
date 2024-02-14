@@ -65,10 +65,23 @@ const getAllServices = (req, res) => {
   pool
     .query("SELECT * FROM services WHERE services.is_deleted=0")
     .then((result) => {
+      if (result.rows.length === 0) {
+        res.status(404).json({
+          success: false,
+          message: `No Services Found!`,
+        });
+      }
       res.status(200).json({
         success: true,
         message: `All the services`,
         services: result.rows,
+      });
+    })
+    .catch((err) => {
+      res.status(500).json({
+        success: false,
+        message: "Server error",
+        err: err.message,
       });
     });
 };
