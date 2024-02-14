@@ -18,7 +18,12 @@ app.use(express.json());
 app.use("/roles",roleRouter);
 app.use("/users",userRouter)
 app.use("/orders",orderRouter)
-app.use("/service", serviceRouter)
+
+app.use("/events",eventRouter)
+
+
+
+
 // Handles any other endpoints [unassigned - endpoints]
 app.use("*", (req, res) => res.status(404).json("NO content at this path"));
 
