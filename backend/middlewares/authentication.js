@@ -10,6 +10,7 @@ const authentication = (req, res, next) => {
       });
     }
     const token = req.headers.authorization.split(" ").pop();
+    console.log("token", token);
 
     jwt.verify(token, process.env.SECRET, (err, result) => {
       if (err) {
