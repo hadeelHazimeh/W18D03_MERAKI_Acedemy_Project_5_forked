@@ -3,6 +3,9 @@ const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 
 const register = async (req, res) => {
+  /*1	admin
+2	serviceProvider
+3	client */
   const { userName, email, password, role } = req.body;
   const encryptedPassword = await bcrypt.hash(password, 7);
   const query = `INSERT INTO users (userName, email, password,role) VALUES ($1,$2,$3,$4)`;
@@ -39,9 +42,9 @@ const login = (req, res) => {
           if (err) res.json(err);
           if (response) {
             const payload = {
-              userId: result.rows[0].id,
-              country: result.rows[0].country,
-              role: result.rows[0].role_id,
+              userId: result.rows[0].user_id,
+              
+              role: result.rows[0].role,
             };
             const options = { expiresIn: "1d" };
             const secret = process.env.SECRET;
@@ -51,7 +54,7 @@ const login = (req, res) => {
                 token,
                 success: true,
                 message: `Valid login credentials`,
-                userId:result.rows[0].id
+                userId:result.rows[0].user_id
               });
             } else {
               throw Error;

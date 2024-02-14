@@ -83,7 +83,7 @@ CREATE TABLE orders (
     place VARCHAR(255),
     created_at TIMESTAMP DEFAULT NOW(),
     is_deleted SMALLINT DEFAULT 0,
-    status VARCHAR(255) DEFAULT 'pending',
+    status VARCHAR (255) DEFAULT 'pending',
     FOREIGN KEY (user_id) REFERENCES users (user_id),
     PRIMARY KEY (order_id)
 );
