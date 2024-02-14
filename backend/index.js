@@ -19,7 +19,7 @@ app.use("/roles",roleRouter);
 app.use("/users",userRouter)
 app.use("/orders",orderRouter)
 
-app.use("/service", serviceRouter)
+app.use("/service",serviceRouter)
 
 
 // Handles any other endpoints [unassigned - endpoints]
