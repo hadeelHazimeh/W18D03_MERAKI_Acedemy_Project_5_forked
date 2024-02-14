@@ -5,6 +5,7 @@ const { pool } = require("../models/db");
 
 const createService = (req, res) => {
   const provider = req.token.userId;
+  console.log("provider", req.token);
   const { service_name, details, price, image } = req.body;
   pool
     .query(
