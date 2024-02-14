@@ -1,4 +1,5 @@
 const express = require("express");
+const authentication = require("../middlewares/authentication");
 
 const {
   createService,
@@ -6,7 +7,6 @@ const {
   getServiceByName,
 } = require("../controllers/service");
 
-const authentication = require("../middlewares/authentication");
 const serviceRouter = express.Router();
 
 serviceRouter.post("/", authentication, createService);
