@@ -68,11 +68,19 @@ CREATE TABLE package (
     Description VARCHAR (255),
     image VARCHAR (255),
     event INT,
-    services INT,
     is_deleted SMALLINT DEFAULT 0,
     FOREIGN KEY (event) REFERENCES events (event_id),
-    FOREIGN KEY (services) REFERENCES services (service_id),
     PRIMARY KEY (package_id)
+);
+
+CREATE TABLE service_package (
+    id SERIAL NOT NULL,
+    service_id INT,
+    package_id INT,
+    FOREIGN KEY (service_id) REFERENCES services (service_id),
+    FOREIGN KEY (package_id) REFERENCES package (package_id),
+    is_deleted SMALLINT DEFAULT 0,
+    PRIMARY KEY (id)
 );
 
 CREATE TABLE orders (
