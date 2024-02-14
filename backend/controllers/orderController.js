@@ -129,5 +129,5 @@ module.exports = {
   createNewOrder,
   createNewOrderServices,
   getAllOrders,
-  getOrderById,
+ getOrderById
 };
