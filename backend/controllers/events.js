@@ -46,9 +46,34 @@ const getAllEvents = (req, res) => {
       });
     });
 };
+//======================================================================
 
+//this function for getting all events
+const createNewEventService = (req, res) => {
+  const { service_id, event_id } = req.body;
+  const value = [service_id, event_id ];
+  const query = `INSERT INTO service_event (service_id, event_id) VALUES ($1,$2) RETURNING *;`;
+  pool
+    .query(query, value)
+    .then((result) => {
+      console.log(result.rows);
+      res.status(200).json({
+        success: true,
+        message: "service_event created successfully",
+        result: result.rows[0],
+      });
+    })
+    .catch((err) => {
+      res.status(500).json({
+        success: false,
+        message: "Server error",
+        err: err,
+      });
+    });
+};
 
 module.exports = {
   createNewEvent,
-  getAllEvents
+  getAllEvents,
+  createNewEventService
 };
