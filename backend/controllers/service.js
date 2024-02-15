@@ -167,17 +167,6 @@ const deleteServiceById = (req, res) => {
               err: err,
             });
           });
-
-          message: `The status: ${pending} has no services`,
-        });
-      
-      } else {
-        res.status(200).json({
-          success: true,
-          message: `All services for the status: ${pending}`,
-          result: result.rows,
-        });
-
       }
     })
     .catch((err) => {
@@ -188,15 +177,11 @@ const deleteServiceById = (req, res) => {
       });
     });
 };
-
 module.exports = {
   createService,
   getAllServices,
   getServiceByName,
-
   getServiceByProviderId,
   deleteServiceById,
-
-  getPendingService
-
+  getPendingService,
 };
