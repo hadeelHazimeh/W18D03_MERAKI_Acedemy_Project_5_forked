@@ -7,7 +7,6 @@ const {
   getServiceByName,
   getServiceByProviderId,
   deleteServiceById,
-=======
   getPendingService
 
 } = require("../controllers/service");
