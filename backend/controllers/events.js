@@ -48,11 +48,19 @@ WHERE
   pool
     .query(query)
     .then((result) => {
+      if (result.rows.length !== 0) {
       res.status(200).json({
         success: true,
         message: "All the Events",
         result: result.rows,
-      });
+      })}
+      else{ 
+
+        res.status(404).json({
+          success: false,
+          message: `No events Found!`,
+        });
+      }
     })
     .catch((err) => {
       res.status(500).json({
@@ -88,10 +96,49 @@ const createNewEventService = (req, res) => {
     });
 };
 
+const deleteServiceFromEvent=(req,res)=>{
+  const event_id = req.params.eventId;
+  const service_id = req.params.serviceId;
+  const query = `
+  DELETE FROM service_event 
+  WHERE event_id = $1
+  AND service_id = $2
+`;
 
+const data = [event_id, service_id];
+
+
+pool.query(query,data)
+.then(result => {
+  console.log("result",result.rowCount)
+  if (result.rowCount > 0) {
+
+    res.status(200).json({
+      success: true,
+      message: `Service deleted from event ${event_id} successfully.`,
+    });
+  } else {
+    
+    res.status(404).json({
+      success: false,
+      message: `Service was not associated with event ${event_id}.`,
+    });
+  }
+})
+.catch(err => {
+ 
+  res.status(500).json({
+    success: false,
+    message: "Server error",
+    error: err,
+  });
+});
+
+
+}
 module.exports = {
   createNewEvent,
   getAllEvents,
   createNewEventService,
- 
+  deleteServiceFromEvent
 };
