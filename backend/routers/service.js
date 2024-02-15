@@ -4,6 +4,8 @@ const {
   createService,
   getAllServices,
   getServiceByName,
+  getServiceByProviderId,
+  deleteServiceById,
 } = require("../controllers/service");
 
 const authentication = require("../middlewares/authentication");
@@ -14,5 +16,7 @@ serviceRouter.post("/", authentication, createService);
 serviceRouter.get("/", getAllServices);
 
 serviceRouter.get("/byName", getServiceByName);
+serviceRouter.get("/provider/:id", authentication,getServiceByProviderId)
+serviceRouter.delete("/:id", authentication, deleteServiceById)
 
 module.exports = serviceRouter;
