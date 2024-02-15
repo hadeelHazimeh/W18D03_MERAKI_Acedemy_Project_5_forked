@@ -85,6 +85,15 @@ const getAllServices = (req, res) => {
       });
     });
 };
+
+
+// this function to Get all service by provider id
+// EndPoint : GET /service/provider/:id
+const getServiceByProviderId = (req, res) => {
+  const id = req.params.id;
+  pool
+    .query(`SELECT * FROM services WHERE provider =$1 AND is_deleted=0`, [id])
+
 const getPendingService = (req, res) => {
   const pending = req.query.status;
   const query = `SELECT * FROM services WHERE status = $1 AND is_deleted=0;`;
@@ -92,10 +101,73 @@ const getPendingService = (req, res) => {
 
   pool
     .query(query, data)
+
     .then((result) => {
       if (result.rows.length === 0) {
         res.status(404).json({
           success: false,
+
+          message: `No Services Found for this provider ${id}!`,
+        });
+      }
+      res.status(200).json({
+        success: true,
+        message: `All the services for this provider ${id}`,
+        services: result.rows,
+      });
+    })
+    .catch((err) => {
+      res.status(500).json({
+        success: false,
+        message: "Server error",
+        err: err.message,
+      });
+    });
+};
+
+// this function to delete a service By id
+// EndPoint : GET /service/:id
+const deleteServiceById = (req, res) => {
+  const id = req.params.id;
+  const userId = req.token.userId;
+  pool
+    .query(
+      "UPDATE services SET is_deleted=1 WHERE service_id=$1 AND status='pending' AND provider =$2 RETURNING * ",
+      [id, userId]
+    )
+    .then((result) => {
+      if (result.rows.length !== 0) {
+        res.status(200).json({
+          success: true,
+          message: `Service with id: ${id} deleted successfully`,
+        });
+      } else {
+        pool
+          .query(
+            "SELECT * FROM services WHERE service_id=$1 AND provider =$2",
+            [id, userId]
+          )
+          .then((result) => {
+            if (result.rows.length !== 0) {
+              res.status(400).json({
+                success: false,
+                message: `Cannot delete service with id: ${id} because its status is not 'pending'`,
+              });
+            } else {
+              res.status(404).json({
+                success: false,
+                message: `Service with id: ${id} not found`,
+              });
+            }
+          })
+          .catch((err) => {
+            res.status(500).json({
+              success: false,
+              message: "Server error",
+              err: err,
+            });
+          });
+
           message: `The status: ${pending} has no services`,
         });
       
@@ -105,6 +177,7 @@ const getPendingService = (req, res) => {
           message: `All services for the status: ${pending}`,
           result: result.rows,
         });
+
       }
     })
     .catch((err) => {
@@ -120,5 +193,10 @@ module.exports = {
   createService,
   getAllServices,
   getServiceByName,
+
+  getServiceByProviderId,
+  deleteServiceById,
+
   getPendingService
+
 };
