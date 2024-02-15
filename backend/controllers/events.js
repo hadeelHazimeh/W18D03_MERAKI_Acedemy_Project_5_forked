@@ -27,7 +27,23 @@ const createNewEvent = (req, res) => {
 
 //this function for getting all events
 const getAllEvents = (req, res) => {
-  const query = `SELECT * FROM events WHERE is_deleted=0;`;
+  const query = `SELECT 
+  events.event_id, 
+  events.event,
+  services.service_id,
+  services.service_name,
+  services.details,
+  services.price,
+  services.image
+FROM 
+  events
+INNER JOIN 
+  service_event ON events.event_id = service_event.event_id
+INNER JOIN 
+  services ON service_event.service_id = services.service_id
+WHERE 
+  events.is_deleted = 0 AND 
+  services.is_deleted = 0`;
 
   pool
     .query(query)
@@ -72,8 +88,10 @@ const createNewEventService = (req, res) => {
     });
 };
 
+
 module.exports = {
   createNewEvent,
   getAllEvents,
-  createNewEventService
+  createNewEventService,
+ 
 };
