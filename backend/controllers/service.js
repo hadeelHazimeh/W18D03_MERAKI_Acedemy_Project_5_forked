@@ -71,11 +71,12 @@ const getAllServices = (req, res) => {
           message: `No Services Found!`,
         });
       }
-      res.status(200).json({
+      else {res.status(200).json({
         success: true,
         message: `All the services`,
         services: result.rows,
-      });
+      })}
+      
     })
     .catch((err) => {
       res.status(500).json({
