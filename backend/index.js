@@ -11,6 +11,8 @@ const roleRouter = require("./routers/roles");
 const orderRouter=require("./routers/ordersRouter")
 const eventRouter = require("./routers/eventRouter");
 const serviceRouter = require("./routers/service");
+const packageRouter = require("./routers/packageRouter");
+
 app.use(cors());
 app.use(express.json());
 
@@ -18,6 +20,8 @@ app.use(express.json());
 app.use("/roles",roleRouter);
 app.use("/users",userRouter)
 app.use("/orders",orderRouter)
+app.use("/package",packageRouter)
+
 
 app.use("/events",eventRouter)
 
