@@ -167,7 +167,12 @@ const updateServiceById = (req, res) => {
     })
     .catch((err) => {
       console.log(err)
-
+      res.status(500).json({
+        success: false,
+        message: "Server error",
+        err: err,
+      });})
+    }
 
 // this function to delete a service By id
 // EndPoint : GET /service/:id
