@@ -2,7 +2,8 @@ const express = require("express");
 const {
     createNewEvent,
     getAllEvents,
-    createNewEventService
+    createNewEventService,
+    deleteServiceFromEvent
 } = require("../controllers/events");
 // Create event router
 const eventRouter = express.Router();
@@ -20,6 +21,8 @@ eventRouter.get("/", getAllEvents);//admin
 //endpoint=>/events/create/service_event
 //body=>{ service_id, event_id  }
 eventRouter.post("/service_event", createNewEventService);//admin
-
+//========================================
+//this function deletes a servcies from an event
+eventRouter.delete("/delete/:eventId/services/:serviceId",deleteServiceFromEvent)
 
 module.exports = eventRouter;
