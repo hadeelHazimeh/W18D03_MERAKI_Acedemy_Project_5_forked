@@ -32,6 +32,6 @@ packageRouter.get("/:id", getAllServicesByPackageId); //admin
 
 // this function update the package
 //endpoint /package/updatePackage/:id
-//id is for package
+//id is for package 
 packageRouter.put("/updatePackage/:id", authentication, updatePackageById); //admin
 module.exports = packageRouter;

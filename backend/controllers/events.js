@@ -95,7 +95,8 @@ const createNewEventService = (req, res) => {
       });
     });
 };
-
+//=====================================
+//This function deletes a service from an event 
 const deleteServiceFromEvent=(req,res)=>{
   const event_id = req.params.eventId;
   const service_id = req.params.serviceId;

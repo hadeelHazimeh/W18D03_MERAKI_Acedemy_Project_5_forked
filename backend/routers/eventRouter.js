@@ -23,6 +23,8 @@ eventRouter.get("/", getAllEvents);//admin
 eventRouter.post("/service_event", createNewEventService);//admin
 //========================================
 //this function deletes a servcies from an event
+//end point   /events/delete/:eventId/services/:serviceId
+
 eventRouter.delete("/delete/:eventId/services/:serviceId",deleteServiceFromEvent)
 
 module.exports = eventRouter;
