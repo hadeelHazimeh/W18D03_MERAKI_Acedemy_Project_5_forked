@@ -237,7 +237,6 @@ module.exports = {
   getAllServices,
   getServiceByName,
   updateServiceById,
-
   getServiceByProviderId,
   deleteServiceById,
   getPendingService,
