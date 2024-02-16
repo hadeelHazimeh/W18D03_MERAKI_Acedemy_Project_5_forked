@@ -5,10 +5,10 @@ const {
   createService,
   getAllServices,
   getServiceByName,
-  updateServiceById
+  updateServiceById,
   getServiceByProviderId,
   deleteServiceById,
-  getPendingService
+  getPendingService,
 
 } = require("../controllers/service");
 
