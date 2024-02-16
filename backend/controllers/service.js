@@ -8,7 +8,8 @@ const createService = (req, res) => {
   const { service_name, details, price, image } = req.body;
   pool
     .query(
-      "INSERT INTO services (service_name, details, price, image, provider) VALUES ($1,  $2, $3, $4, $5) RETURNING *",
+      `INSERT INTO services (service_name, details, price, image, provider)
+       VALUES ($1,  $2, $3, $4, $5) RETURNING *`,
       [service_name, details, price, image, provider]
     )
     .then((result) => {
@@ -94,7 +95,8 @@ const getServiceByProviderId = (req, res) => {
       if (result.rows.length === 0) {
         res.status(404).json({
           success: false,
-          message: `No Services Found!`,
+
+          message: `No Services Found for this provider ${id}!`,
         });
       }
       res.status(200).json({
@@ -108,37 +110,6 @@ const getServiceByProviderId = (req, res) => {
         success: false,
         message: "Server error",
         err: err.message,
-      });
-    });
-};
-
-const getPendingService = (req, res) => {
-  const pending = req.query.status;
-  const query = "SELECT * FROM services WHERE status = $1 AND is_deleted=0";
-  const data = [pending];
-
-  pool
-    .query(query, data)
-    .then((result) => {
-      if (result.rows.length === 0) {
-        res.status(404).json({
-          success: false,
-          message: `The status: ${pending} has no services`,
-        });
-      
-      } else {
-        res.status(200).json({
-          success: true,
-          message: `All services for the status: ${pending}`,
-          result: result.rows,
-        });
-      }
-    })
-    .catch((err) => {
-      res.status(500).json({
-        success: false,
-        message: "Server error",
-        err: err,
       });
     });
 };
@@ -171,7 +142,7 @@ const deleteServiceById = (req, res) => {
             if (result.rows.length !== 0) {
               res.status(400).json({
                 success: false,
-                message: `Cannot delete service with id: ${id} because its status is not 'pending'`,
+                message:`Cannot delete service with id: ${id} because its status is not 'pending'`,
               });
             } else {
               res.status(404).json({
@@ -197,10 +168,12 @@ const deleteServiceById = (req, res) => {
       });
     });
 };
+
 module.exports = {
   createService,
   getAllServices,
   getServiceByName,
+  updateServiceById,
   getServiceByProviderId,
   deleteServiceById,
   getPendingService,
