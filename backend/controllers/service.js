@@ -143,6 +143,31 @@ const getPendingService = (req, res) => {
       });
     });
 };
+const updateServiceById = (req, res) => {
+  const id = req.params.service_id;
+  let { status } = req.body;
+
+  const query = `UPDATE services SET status = COALESCE($1,status) WHERE service_id=$2 AND is_deleted = 0  RETURNING *`;
+  const data = [status||null,id];
+  pool
+    .query(query, data)
+    .then((result) => {
+      if (result.rows.length !== 0) {
+        res.status(200).json({
+          success: true,
+          message: `Service with id: ${id} updated successfully `,
+          result: result.rows[0],
+        });
+      } 
+        else {
+          throw new Error("Error happened while updating service");
+
+        }
+      
+    })
+    .catch((err) => {
+      console.log(err)
+
 
 // this function to delete a service By id
 // EndPoint : GET /service/:id
@@ -200,10 +225,13 @@ const deleteServiceById = (req, res) => {
 };
 
 
+
 module.exports = {
   createService,
   getAllServices,
   getServiceByName,
+  updateServiceById,
+
   getServiceByProviderId,
   deleteServiceById,
   getPendingService,
