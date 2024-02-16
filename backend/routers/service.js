@@ -5,7 +5,7 @@ const {
   createService,
   getAllServices,
   getServiceByName,
-  updateServiceById
+  updateServiceById,
   getServiceByProviderId,
   deleteServiceById,
   getPendingService
