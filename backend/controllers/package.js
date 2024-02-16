@@ -48,7 +48,40 @@ const createNewServicePackage = (req, res) => {
         });
       });
   };
+  //======================================================================
+
+//this function for getting all packages from packages services 
+const getAllPackagesServices = (req, res) => {
+    const query = `
+    SELECT * FROM service_package
+    RIGHT OUTER JOIN package ON package.package_id = service_package.package_id
+    LEFT OUTER JOIN services ON services.service_id = service_package.service_id
+    `;
+  
+    pool
+      .query(query)
+      .then((result) => {
+        if (result.rows.length === 0) {
+          res.status(404).json({
+            success: false,
+            message: `there is no packages available`,
+          });
+        } else{ res.status(200).json({
+          success: true,
+          message: "All the Events",
+          result: result.rows,
+        });}
+      })
+      .catch((err) => {
+        res.status(500).json({
+          success: false,
+          message: "Server error",
+          err: err,
+        });
+      });
+  };
 module.exports = {
   createNewPackage,
-  createNewServicePackage
+  createNewServicePackage,
+  getAllPackagesServices
 };
