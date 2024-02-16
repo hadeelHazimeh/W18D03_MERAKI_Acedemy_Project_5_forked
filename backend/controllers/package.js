@@ -68,7 +68,43 @@ const getAllPackagesServices = (req, res) => {
           });
         } else{ res.status(200).json({
           success: true,
-          message: "All the Events",
+          message: "All the packages",
+          result: result.rows,
+        });}
+      })
+      .catch((err) => {
+        res.status(500).json({
+          success: false,
+          message: "Server error",
+          err: err,
+        });
+      });
+  };
+
+  //======================================================================
+
+//this function for getting all packages from packages services 
+const getAllServicesByPackageId = (req, res) => {
+  const {id}=req.params
+  const value=[id]
+    const query = `
+    SELECT * FROM service_package
+    RIGHT OUTER JOIN package ON package.package_id = service_package.package_id
+    LEFT OUTER JOIN services ON services.service_id = service_package.service_id
+    WHERE package.package_id=$1
+    `;
+  
+    pool
+      .query(query,value)
+      .then((result) => {
+        if (result.rows.length === 0) {
+          res.status(404).json({
+            success: false,
+            message: `there is no services for package with id=${id}`,
+          });
+        } else{ res.status(200).json({
+          success: true,
+          message: "All the services",
           result: result.rows,
         });}
       })
@@ -83,5 +119,6 @@ const getAllPackagesServices = (req, res) => {
 module.exports = {
   createNewPackage,
   createNewServicePackage,
-  getAllPackagesServices
+  getAllPackagesServices,
+  getAllServicesByPackageId
 };
