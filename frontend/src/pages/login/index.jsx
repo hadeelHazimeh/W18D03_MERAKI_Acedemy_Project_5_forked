@@ -51,7 +51,8 @@ const[errorMessage,setErrorMessage]=useState("")
       <MDBRow>
 
         <MDBCol col='10' md='6'>
-          <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.webp" class="img-fluid" alt="Sample image" />
+          <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.webp" 
+          class="img-fluid" alt="Sample image" />
         </MDBCol>
 
         <MDBCol col='4' md='6'>
@@ -90,7 +91,9 @@ const[errorMessage,setErrorMessage]=useState("")
             <MDBBtn className="mb-0 px-5" size='lg' onClick={(e) => {
               login(e);
             }}>Login</MDBBtn>
-            <p className="small fw-bold mt-2 pt-1 mb-2">Don't have an account? <a href="#!" className="link-danger">Register</a></p>
+            <p className="small fw-bold mt-2 pt-1 mb-2">Don't have an account? 
+          
+            <a href="#!" className="link-danger">Register</a></p>
           </div>
 
         </MDBCol>
@@ -105,25 +108,7 @@ const[errorMessage,setErrorMessage]=useState("")
           Copyright © 2020. All rights reserved.
         </div>
 
-        <div>
-
-          <MDBBtn tag='a' color='none' className='mx-3' style={{ color: 'white' }}>
-            <MDBIcon fab icon='facebook-f' size="md"/>
-          </MDBBtn>
-
-          <MDBBtn tag='a' color='none' className='mx-3' style={{ color: 'white'  }}>
-            <MDBIcon fab icon='twitter' size="md"/>
-          </MDBBtn>
-
-          <MDBBtn tag='a' color='none' className='mx-3' style={{ color: 'white'  }}>
-            <MDBIcon fab icon='google' size="md"/>
-          </MDBBtn>
-
-          <MDBBtn tag='a' color='none' className='mx-3' style={{ color: 'white'  }}>
-            <MDBIcon fab icon='linkedin-in' size="md"/>
-          </MDBBtn>
-
-        </div>
+       
 
       </div>
 
