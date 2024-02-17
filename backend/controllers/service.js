@@ -173,8 +173,9 @@ const updateServiceById = (req, res) => {
         success: false,
         message: "Server error",
         err: err,
-      });})
-    }
+      });
+    });
+};
 
 // this function to delete a service By id
 // EndPoint : GET /service/:id
