@@ -11,6 +11,7 @@ const Login = () => {
   const dispatch=useDispatch()
 const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
+const[errorMessage,setErrorMessage]=useState("")
   const [password, setPassword] = useState("");
   const [status, setStatus] = useState(false);
   //handlelogin
@@ -24,18 +25,19 @@ const [email, setEmail] = useState("");
       });
       console.log("result",result.data)
       if (result.data) {
-        setMessage("");
-      
+       setStatus(true);
+       setMessage(result.data.message);
         dispatch(setLogin(result.data.token))
 
         dispatch(setUserId(result.data.userId))
-        //setLogin
+        
       } else throw Error;
     } catch (error) {
+      
       if (error.response && error.response.data) {
-        return setMessage(error.response.data.message);
+        return setErrorMessage(error.response.data.message);
       }
-      setMessage("Error happened while Login, please try again");
+      setErrorMessage("Error happened while Login, please try again");
     }
   };
 
@@ -56,9 +58,7 @@ const [email, setEmail] = useState("");
 
           
 
-          <div className="divider d-flex align-items-center my-4">
-            <p className="text-center fw-bold mx-3 mb-0">Or</p>
-          </div>
+          
 
           <MDBInput wrapperClass='mb-4' label='Email address' id='formControlLg' type='email' size="lg" 
               onChange={(e) => setEmail(e.target.value)}  
@@ -68,10 +68,7 @@ const [email, setEmail] = useState("");
           onChange={(e) => setPassword(e.target.value)}
           />
 
-          <div className="d-flex justify-content-between mb-4">
-            <MDBCheckbox name='flexCheck' value='' id='flexCheckDefault' label='Remember me' />
-            <a href="!#">Forgot password?</a>
-          </div>
+          
 
           <div className='text-center text-md-start mt-4 pt-2'>
             <MDBBtn className="mb-0 px-5" size='lg' onClick={(e) => {
@@ -81,6 +78,8 @@ const [email, setEmail] = useState("");
           </div>
 
         </MDBCol>
+
+        {status ?  <p>{message}</p>:  <p>{errorMessage}</p>}
 
       </MDBRow>
 
@@ -112,9 +111,7 @@ const [email, setEmail] = useState("");
 
       </div>
 
-    {status
-              ? message && <div className="SuccessMessage">{message}</div>
-              : message && <div className="ErrorMessage">{message}</div>}
+    
     </MDBContainer>
   
 
