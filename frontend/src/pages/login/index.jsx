@@ -40,7 +40,7 @@ const [email, setEmail] = useState("");
   };
 
   return (
-    <div>test
+    <div>
 
 
  
@@ -54,23 +54,7 @@ const [email, setEmail] = useState("");
 
         <MDBCol col='4' md='6'>
 
-          <div className="d-flex flex-row align-items-center justify-content-center">
-
-            <p className="lead fw-normal mb-0 me-3">Sign in with</p>
-
-            <MDBBtn floating size='md' tag='a' className='me-2'>
-              <MDBIcon fab icon='facebook-f' />
-            </MDBBtn>
-
-            <MDBBtn floating size='md' tag='a'  className='me-2'>
-              <MDBIcon fab icon='twitter' />
-            </MDBBtn>
-
-            <MDBBtn floating size='md' tag='a'  className='me-2'>
-              <MDBIcon fab icon='linkedin-in' />
-            </MDBBtn>
-
-          </div>
+          
 
           <div className="divider d-flex align-items-center my-4">
             <p className="text-center fw-bold mx-3 mb-0">Or</p>
@@ -103,7 +87,7 @@ const [email, setEmail] = useState("");
       <div className="d-flex flex-column flex-md-row text-center text-md-start justify-content-between py-4 px-4 px-xl-5 bg-primary">
 
         <div className="text-white mb-3 mb-md-0">
-          Copyright © 2020. All rights reserved.
+          Copyright © 2024. All rights reserved.
         </div>
 
         <div>
@@ -128,11 +112,13 @@ const [email, setEmail] = useState("");
 
       </div>
 
+    {status
+              ? message && <div className="SuccessMessage">{message}</div>
+              : message && <div className="ErrorMessage">{message}</div>}
     </MDBContainer>
   
 
   
-
 
 
 
