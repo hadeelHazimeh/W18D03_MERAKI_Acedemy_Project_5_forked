@@ -8,7 +8,7 @@ const {
   updateServiceById,
   getServiceByProviderId,
   deleteServiceById,
-  getPendingService
+  getPendingService,
 
 } = require("../controllers/service");
 

@@ -95,7 +95,8 @@ const getServiceByProviderId = (req, res) => {
       if (result.rows.length === 0) {
         res.status(404).json({
           success: false,
-          message:`No Services Found`,
+
+          message: `No Services Found for this provider ${id}!`,
         });
       }
       res.status(200).json({
@@ -112,6 +113,7 @@ const getServiceByProviderId = (req, res) => {
       });
     });
 };
+
 
 const getPendingService = (req, res) => {
   const pending = req.query.status;
@@ -229,14 +231,11 @@ const deleteServiceById = (req, res) => {
     });
 };
 
-
-
 module.exports = {
   createService,
   getAllServices,
   getServiceByName,
   updateServiceById,
-
   getServiceByProviderId,
   deleteServiceById,
   getPendingService,
