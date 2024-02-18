@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import "./style.css";
 import axios from "axios";
 import { useSelector } from "react-redux";
+import Swal from 'sweetalert2';
+
 //import {isLoggedIn} from "../../services/redux/reducer/auth/index";
 import {
   MDBBtn,
@@ -27,9 +29,13 @@ const Register = () => {
   const [password, setPassword] = useState("");
   const[role, setRole] = useState("");
   const [message, setMessage] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
   const [status, setStatus] = useState(false);
   //....................................
+  
 
+  
+  
   const addNewUser = async () => {
     // e.preventDefault();
     console.log("register")
@@ -44,14 +50,23 @@ const Register = () => {
       if (result.data.success) {
         
         setStatus(true);
-        setMessage(result.data.message);
+        Swal.fire({
+          icon: 'success',
+          title: 'Success!',
+          text: result.data.message,
+        });
+        
       } else throw Error;
     } catch (error) {
       setStatus(false);
-      if (error.response && error.response.data) {
-        return setMessage(error.response.data.message);
-      }
-      setMessage("Error happened while register, please try again");
+      Swal.fire({
+        icon: "error",
+        text: error.response.data.message,
+      });
+      // if (error.response && error.response.data) {
+      //   return setMessage(error.response.data.message);
+      // }
+      // setMessage("Error happened while register, please try again");
     }
   };
   //............................
@@ -143,10 +158,10 @@ const Register = () => {
               addNewUser()}}>
                 Submit
               </MDBBtn>
-            </MDBCardBody>
+             </MDBCardBody>
           </MDBCard>
         </MDBRow>
-       
+        {/* {status ? {message}: <p>{errorMessage}</p>} */}
       </MDBContainer>
     </div>
   );
