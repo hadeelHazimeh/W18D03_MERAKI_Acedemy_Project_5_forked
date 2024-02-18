@@ -38,7 +38,7 @@ const Register = () => {
         name,
         email,
         password,
-        // role,
+         role,
       });
       console.log("registerResult",result)
       if (result.data.success) {
@@ -55,7 +55,10 @@ const Register = () => {
     }
   };
   //............................
-
+  const handleRadioChoice = (e) => {
+    setRole(e.target.value);
+    console.log(role, e.target.value);
+  };
   return (
     <div>
       <MDBContainer fluid>
@@ -107,22 +110,29 @@ const Register = () => {
                   <MDBRadio
                     name="inlineRadio"
                     id="inlineRadio1"
-                    value="option1"
+                    value="1"
                     label="Event Planner"
+                    checked={role==="admin"}//admin role 
+                    onChange={handleRadioChoice}
                     inline
                   />
                   <MDBRadio
                     name="inlineRadio"
                     id="inlineRadio2"
-                    value="option2"
+                    value="2"
                     label="Service Provider"
+                    checked={role==="serviceProvider"}//serviceProvider role 
+                    onChange={handleRadioChoice}
                     inline
                   />
                   <MDBRadio
                     name="inlineRadio"
                     id="inlineRadio3"
-                    value="option3"
+                    value="3"
                     label="Client"
+                    checked={role==="client"}//client role 
+                    onChange={handleRadioChoice}
+
                     inline
                   />
                 </MDBCol>
@@ -136,9 +146,7 @@ const Register = () => {
             </MDBCardBody>
           </MDBCard>
         </MDBRow>
-        {status
-              ? message && <div className="SuccessMessage">{message}</div>
-              : message && <div className="ErrorMessage">{message}</div>}
+       
       </MDBContainer>
     </div>
   );
