@@ -1,0 +1,10 @@
+body {
+    /* fallback for old browsers */
+    background: #a0e9ff;
+  
+    /* Chrome 10-25, Safari 5.1-6 */
+    background: -webkit-linear-gradient(to bottom right, rgb(161, 233, 255), rgba(161, 233, 255, 0.5));
+  
+    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background: linear-gradient(to bottom right, rgb(161, 233, 255), rgba(161, 233, 255, 0.5));
+}
