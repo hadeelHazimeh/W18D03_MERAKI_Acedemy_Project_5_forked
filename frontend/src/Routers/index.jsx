@@ -3,6 +3,7 @@ import ServiceProvider from "../pages/ServiceProvider"
 import Login from "../pages/login"
 export const router= createBrowserRouter(
 [
+   
 
     {
         path:"/login",
@@ -11,7 +12,14 @@ export const router= createBrowserRouter(
     {
         path:"service/provider",
         element: <ServiceProvider/>
-    }
+    },
+
+    { 
+        path:"/register",
+        element:<Register />
+     }
+    
+
 ]
 
 )
