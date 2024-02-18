@@ -5,13 +5,15 @@ import viteLogo from '/vite.svg'
 import 'mdb-react-ui-kit/dist/css/mdb.min.css';
 
 import Login from './pages/login'
+import Register from './pages/register';
 function App() {
   const [count, setCount] = useState(0)
 
   return (
+
   <>
   <Login/>
-  
+ <Register/>
   </>
       
   )
