@@ -9,6 +9,7 @@ import {
   MDBCheckbox,
 } from "mdb-react-ui-kit";
 import { useNavigate } from "react-router-dom";
+
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import "./style.css";
@@ -25,7 +26,7 @@ const Login = () => {
   const [errorMessage, setErrorMessage] = useState("");
   const [password, setPassword] = useState("");
   const [status, setStatus] = useState(false);
-
+  const navigate =useNavigate();
   //================handlelogin
   const login = async (e) => {
     e.preventDefault();
@@ -93,9 +94,13 @@ const Login = () => {
               </MDBBtn>
               <p className="small fw-bold mt-2 pt-1 mb-2">
                 Don't have an account?
-                <a href="#!" className="link-danger">
+                <span
+                  className="link-danger"
+                  onClick={() => navigate("/register")} // Navigate to register page
+                  style={{ cursor: "pointer" }}
+                >
                   Register
-                </a>
+                </span>
               </p>
             </div>
           </MDBCol>
