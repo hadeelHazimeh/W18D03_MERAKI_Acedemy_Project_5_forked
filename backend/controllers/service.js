@@ -232,6 +232,36 @@ const deleteServiceById = (req, res) => {
     });
 };
 
+// this function to Get all service by provider 
+// EndPoint : GET /service/provider
+const getServiceByProvider = (req, res) => {
+  const id = req.token.userId;
+  pool
+    .query(`SELECT * FROM services WHERE provider =$1 AND is_deleted=0`, [id])
+    .then((result) => {
+      if (result.rows.length === 0) {
+        res.status(404).json({
+          success: false,
+
+          message: `No Services Found for this provider ${id}!`,
+        });
+      }
+      res.status(200).json({
+        success: true,
+        message: `All the services`,
+        services: result.rows,
+      });
+    })
+    .catch((err) => {
+      res.status(500).json({
+        success: false,
+        message: "Server error",
+        err: err.message,
+      });
+    });
+};
+
+
 module.exports = {
   createService,
   getAllServices,
@@ -240,4 +270,5 @@ module.exports = {
   getServiceByProviderId,
   deleteServiceById,
   getPendingService,
+  getServiceByProvider
 };
