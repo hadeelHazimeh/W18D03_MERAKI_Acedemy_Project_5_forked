@@ -22,16 +22,16 @@ const Client = () => {
   const token = useSelector((state) => state.auth.token);
   const [services, setServices] = useState([]);
   const [checked, setChecked] = useState(false);
-
+  const [checkedServices, setCheckedServices] = useState([]);
   const [orderData, setOrderData] = useState({
     order_price: 0,
     eventDate: "",
     place: "",
   });
+
   //......................
 
   const ShowServices = async (e) => {
-   
     axios
       .get(`http://localhost:5000/service`)
       .then((result) => {
@@ -48,7 +48,6 @@ const Client = () => {
     setOrderData({ ...orderData, [name]: value });
   };
   //.............................................
-
   const handleSubmitOrder = async (e) => {
     // e.preventDefault();
     //loader
@@ -68,6 +67,8 @@ const Client = () => {
   };
 
   //................................................
+  const handleCheckboxChange = (serviceId) => {};
+  //....................................................
 
   return (
     <div>
@@ -95,15 +96,17 @@ const Client = () => {
             onChange={handleInputChange}
           />
         </MDBRow>
-        <MDBBtn type="button"
-          onClick={() => {
+        <a
+          href="#"
+          onClick={(e) => {
+            e.preventDefault();
             console.log("handle");
             handleSubmitOrder();
             ShowServices();
           }}
         >
           Choose the services
-        </MDBBtn>
+        </a>
         <div style={{ display: "flex", flexWrap: "wrap", gap: "20px" }}>
           {services.map((service) => (
             <MDBCard>
@@ -116,10 +119,9 @@ const Client = () => {
                 </MDBCardText>
 
                 <MDBCheckbox
-                  id="controlledCheckbox"
                   label="Select"
-                  checked={checked}
-                  onChange={() => setChecked(!checked)}
+                  checked={checkedServices.includes(service.service_id)}
+                  onChange={() => handleCheckboxChange(service.service_id)}
                 />
               </MDBCardBody>
             </MDBCard>
