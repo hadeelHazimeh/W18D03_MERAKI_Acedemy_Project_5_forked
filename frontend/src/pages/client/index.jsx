@@ -12,12 +12,13 @@ import {
 import { useSelector } from "react-redux";
 import axios from "axios";
 import { useState } from "react";
-import serviceProvider from "../../services/redux/reducer/serviceProvider";
+
 //.....................................
 //const { order_price, eventDate, place, status }
 const Client = () => {
   const { isLoggedIn } = useSelector((state) => state.auth);
   const [status, setStatus] = useState(false);
+  const [checkedServices, setCheckedServices] = useState([]);
   const [orderId, setOrderId] = useState("");
   const token = useSelector((state) => state.auth.token);
   const [services, setServices] = useState([]);
@@ -68,6 +69,10 @@ const Client = () => {
   };
 
   //................................................
+  const handleCheckboxChange = (serviceId) => {
+  
+  };
+  //....................................................
 
   return (
     <div>
@@ -95,15 +100,20 @@ const Client = () => {
             onChange={handleInputChange}
           />
         </MDBRow>
-        <MDBBtn type="button"
-          onClick={() => {
+        
+        <a
+          href="#"
+          onClick={(e) => {
+            e.preventDefault();
             console.log("handle");
             handleSubmitOrder();
             ShowServices();
           }}
         >
           Choose the services
-        </MDBBtn>
+        </a>
+
+
         <div style={{ display: "flex", flexWrap: "wrap", gap: "20px" }}>
           {services.map((service) => (
             <MDBCard>
@@ -116,10 +126,9 @@ const Client = () => {
                 </MDBCardText>
 
                 <MDBCheckbox
-                  id="controlledCheckbox"
-                  label="Select"
-                  checked={checked}
-                  onChange={() => setChecked(!checked)}
+                 label="Select"
+                  checked={checkedServices.includes(service.service_id)}
+                  onChange={() => handleCheckboxChange(service.service_id)}
                 />
               </MDBCardBody>
             </MDBCard>
