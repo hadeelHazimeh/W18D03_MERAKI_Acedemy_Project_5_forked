@@ -7,5 +7,6 @@ export default configureStore({
   reducer: {
     auth:index,
     serviceProvider: serviceProviderReducer,  
+    
   },
 });
