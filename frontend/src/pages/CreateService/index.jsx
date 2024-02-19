@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
-import { addService } from "../../services/redux/reducer/auth/serviceProvider";
+import { addService } from "../../services/redux/reducer/serviceProvider";
 
 const CreateService = () => {
   const [service_name, setService_name] = useState("");
