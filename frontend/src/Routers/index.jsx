@@ -4,6 +4,7 @@ import Login from "../pages/login"
 import Register from "../pages/register"
 
 import CreateService from "../pages/CreateService"
+import Client from "../pages/client"
 
 export const router= createBrowserRouter(
 [
@@ -28,9 +29,13 @@ export const router= createBrowserRouter(
         path: "/service/provider/create",
         element: <CreateService/>
 
-       
+     },
+     {
+        path:"client",
+        element:<Client/>
 
      }
+     
     
 
 ]
