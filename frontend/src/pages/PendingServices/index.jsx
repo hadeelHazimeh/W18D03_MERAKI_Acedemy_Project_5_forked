@@ -1,4 +1,6 @@
-import React from "react";
+import React,{  useEffect, useState } from "react";
+import axios from "axios";
+
 import {
   MDBBtn,
   MDBCard,
@@ -12,6 +14,7 @@ import {
   MDBTypography,
 } from "mdb-react-ui-kit";
 
+//SELECT * FROM services WHERE status = $1 AND is_deleted=0
 
 const PendingServices = () => {
     return (
