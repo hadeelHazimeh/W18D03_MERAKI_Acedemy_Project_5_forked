@@ -8,6 +8,6 @@ export default configureStore({
   reducer: {
     auth:index,
     serviceProvider: serviceProviderReducer,  
-    pendingServices: serviceProviderReducer
+    pendingServices: pendingServicesReducer
   },
 });

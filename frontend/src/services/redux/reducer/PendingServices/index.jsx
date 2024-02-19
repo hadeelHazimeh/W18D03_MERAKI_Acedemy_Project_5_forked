@@ -2,14 +2,12 @@ import { createSlice } from "@reduxjs/toolkit";
 export const pendingServicesSlice = createSlice({
   name: "pendingServices",
   initialState: {
-    pendingServices: [],
+    pendingServices:[],
   },
   reducers: {
     setPendingServices(state, action) {
       state.pendingServices = action.payload;
-    },
-    addPendingServices(state, action) {
-
+    
     },
   },
 });
