@@ -9,6 +9,7 @@ import Packages from "../pages/Package"
 
 
 import CreateService from "../pages/CreateService"
+import Client from "../pages/client"
 
 
 export const router= createBrowserRouter(
@@ -37,6 +38,12 @@ export const router= createBrowserRouter(
  {
         path: "/service/provider/create",
         element: <CreateService/>
+
+
+     },
+     {
+        path:"client",
+        element:<Client/>
 
 
      },
