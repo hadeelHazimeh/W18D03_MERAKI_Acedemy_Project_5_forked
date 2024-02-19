@@ -19,11 +19,11 @@ import {
 //......................................................
 
 const Register = () => {
-  const { isLoggedIn } = useSelector(
-    (state) =>
+  // const { isLoggedIn } = useSelector(
+  //   (state) =>
       
-      state.auth
-  );
+  //     state.auth
+  // );
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
