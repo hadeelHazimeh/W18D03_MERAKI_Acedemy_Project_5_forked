@@ -14,7 +14,7 @@ const AdminSideBar = () => {
           <CDBSidebarHeader prefix={<i className="fa fa-bars" />}>Contrast</CDBSidebarHeader>
           <CDBSidebarContent>
             <CDBSidebarMenu>
-              <CDBSidebarMenuItem icon="th-large">Dashboard</CDBSidebarMenuItem>
+              <CDBSidebarMenuItem OnClick={{}} icon="th-large">Dashboard</CDBSidebarMenuItem>
               <CDBSidebarMenuItem icon="sticky-note">Components</CDBSidebarMenuItem>
               <CDBSidebarMenuItem icon="credit-card" iconType="solid">
                 Metrics
