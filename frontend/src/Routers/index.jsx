@@ -2,9 +2,11 @@ import{createBrowserRouter} from "react-router-dom"
 import ServiceProvider from "../pages/ServiceProvider"
 import Login from "../pages/login"
 import Register from "../pages/register"
+import Home from "../pages/Home"
+
 
 import Packages from "../pages/Package"
-=======
+
 
 import CreateService from "../pages/CreateService"
 
@@ -37,6 +39,10 @@ export const router= createBrowserRouter(
         element: <CreateService/>
 
 
+     },
+     {
+        path:"/",
+        element:<Home/>
      }
 
     
