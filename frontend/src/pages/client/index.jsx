@@ -13,26 +13,28 @@ import { useSelector } from "react-redux";
 import axios from "axios";
 import { useState } from "react";
 
+
+
 //.....................................
 //const { order_price, eventDate, place, status }
 const Client = () => {
   const { isLoggedIn } = useSelector((state) => state.auth);
   const [status, setStatus] = useState(false);
-  const [checkedServices, setCheckedServices] = useState([]);
+  //const [checkedServices, setCheckedServices] = useState([]);
   const [orderId, setOrderId] = useState("");
   const token = useSelector((state) => state.auth.token);
   const [services, setServices] = useState([]);
   const [checked, setChecked] = useState(false);
-
+  const [checkedServices, setCheckedServices] = useState([]);
   const [orderData, setOrderData] = useState({
     order_price: 0,
     eventDate: "",
     place: "",
   });
+
   //......................
 
   const ShowServices = async (e) => {
-   
     axios
       .get(`http://localhost:5000/service`)
       .then((result) => {
@@ -49,7 +51,6 @@ const Client = () => {
     setOrderData({ ...orderData, [name]: value });
   };
   //.............................................
-
   const handleSubmitOrder = async (e) => {
     // e.preventDefault();
     //loader
@@ -69,12 +70,15 @@ const Client = () => {
   };
 
   //................................................
+   
+
   const handleCheckboxChange = (serviceId) => {
   
   };
   //....................................................
 
   return (
+
     <div>
       <h1>
         Plan your event by <a>services</a> or choose from our <a>packages</a>
