@@ -2,8 +2,14 @@ import React, { useState } from "react";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { addService } from "../../services/redux/reducer/serviceProvider";
+import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
+import Modal from 'react-bootstrap/Modal'; 
 
 const CreateService = () => {
+    const [show, setShow] = useState(false);
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
   const [service_name, setService_name] = useState("");
   const [details, setDetails] = useState("");
   const [price, setPrice] = useState("");
