@@ -38,7 +38,8 @@ const Navbar = () => {
           </Nav>
         </Container>
       </Navbar>
-    </>  )
+    </> 
+     )
 }
 
 export default Navbar
