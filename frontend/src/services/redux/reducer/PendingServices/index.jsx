@@ -7,7 +7,7 @@ export const pendingServicesSlice = createSlice({
   reducers: {
     setPendingServices(state, action) {
       state.pendingServices = action.payload;
-    
+   // console.log(state.pendingServices);
     },
   },
 });
