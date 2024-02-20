@@ -22,8 +22,14 @@ import {
 //http://localhost:5000/service/byStatus?status=pending
 
 
+
 const PendingServices = () => {
     const dispatch = useDispatch();
+      const { isLoggedIn,token } = useSelector(
+    (state) =>
+      
+      state.auth
+  );
     const getPendingService = () => {
         axios
           .get("http://localhost:5000/service/byStatus?status=pending")
@@ -39,6 +45,21 @@ const PendingServices = () => {
       getPendingService()
       }, []);
   
+      const handelStatus = () => {
+      /*   axios
+          .put("http://localhost:5000/service/byStatus?status=pending",
+          {  },
+          {
+            headers: { Authorization: `Bearer ${token}` },
+          })
+          .then((result) => {
+           console.log(result.data.result);
+           dispatch(setPendingServices(result.data.result));
+          })
+          .catch((err) => {
+            console.log(err);
+          }); */
+      };
 
         const {pendingServices} = useSelector((state)=> 
         state.pendingServices
