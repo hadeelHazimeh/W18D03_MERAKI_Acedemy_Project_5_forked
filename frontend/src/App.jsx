@@ -1,4 +1,3 @@
- import { useState } from 'react'
 import { RouterProvider } from 'react-router-dom';
 import { router } from './Routers';
 import Navbar from './components/Navbar';
@@ -9,7 +8,6 @@ function App() {
   <RouterProvider router={router}/>
   <Navbar/>
   </>
-  return<RouterProvider router={router}/>
 
 }
 

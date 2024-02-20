@@ -14,13 +14,17 @@ import AdminDashboard from "../pages/AdminDashbored"
 import PendingServices from "../pages/PendingServices"
 export const router= createBrowserRouter(
 [
-   
+   {
+      path:"",
+      element:<Home/>,
+     
+   },
 
-    {
-        path:"/login",
-        element:<Login/>,
-         
-    },
+   {
+      path:"/login",
+      element:<Login/>,
+       
+  },
     {
         path:"service/provider",
         element: <ServiceProvider/>
@@ -47,10 +51,7 @@ export const router= createBrowserRouter(
 
 
      },
-     {
-        path:"/",
-        element:<Home/>
-     }, 
+    
      {
       path:"/admin/dashboard",
       element:<AdminDashboard/>,

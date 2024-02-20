@@ -1,5 +1,4 @@
-
-import React, { useState } from 'react';
+import{ useState } from 'react';
 import {
   MDBContainer,
   MDBNavbar,
@@ -28,7 +27,7 @@ const Navbar = () => {
             />
           </MDBNavbarBrand>
         
-          <MDBNavbarLink  >
+          <MDBNavbarLink href='service/provider' >
                 Are You Vendor?
               </MDBNavbarLink>
             
@@ -41,7 +40,9 @@ const Navbar = () => {
 <div>
 <MDBNavbar expand='lg' light bgColor='light'>
       <MDBContainer fluid>
-        <MDBNavbarBrand href='#'>Navbar</MDBNavbarBrand>
+        <MDBNavbarBrand href='#'>
+         
+            </MDBNavbarBrand>
         <MDBNavbarToggler
           aria-expanded='false'
           aria-label='Toggle navigation'
@@ -51,16 +52,17 @@ const Navbar = () => {
         </MDBNavbarToggler>
         <MDBCollapse navbar open={openNavSecond}>
           <MDBNavbarNav>
-            <MDBNavbarLink active aria-current='page' href='#'>
-              Home
+            <MDBNavbarLink active aria-current='page' href=''>
+              home
             </MDBNavbarLink>
-            <MDBNavbarLink href='#'>Features</MDBNavbarLink>
-            <MDBNavbarLink href='#'>Pricing</MDBNavbarLink>
-            {/* <MDBNavbarLink disabled href='#' tabIndex={-1} aria-disabled='true'>
-              Disabled
-            </MDBNavbarLink> */}
+           
+            <MDBNavbarLink href='/login'>Login</MDBNavbarLink>
+            <MDBNavbarLink href='#'>Lets Talk!</MDBNavbarLink>
+            <MDBNavbarLink href='#'>About us</MDBNavbarLink>
+
           </MDBNavbarNav>
-        </MDBCollapse>
+        </MDBCollapse> 
+      
       </MDBContainer>
     </MDBNavbar>
     
