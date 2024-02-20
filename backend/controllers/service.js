@@ -114,7 +114,6 @@ const getServiceByProviderId = (req, res) => {
     });
 };
 
-
 const getPendingService = (req, res) => {
   const pending = req.query.status;
   const query = "SELECT * FROM services WHERE status = $1 AND is_deleted=0";
@@ -128,7 +127,6 @@ const getPendingService = (req, res) => {
           success: false,
           message: `The status: ${pending} has no services`,
         });
-      
       } else {
         res.status(200).json({
           success: true,
@@ -150,7 +148,7 @@ const updateServiceById = (req, res) => {
   let { status } = req.body;
 
   const query = `UPDATE services SET status = COALESCE($1,status) WHERE service_id=$2 AND is_deleted = 0  RETURNING *`;
-  const data = [status||null,id];
+  const data = [status || null, id];
   pool
     .query(query, data)
     .then((result) => {
@@ -160,15 +158,12 @@ const updateServiceById = (req, res) => {
           message: `Service with id: ${id} updated successfully `,
           result: result.rows[0],
         });
-      } 
-        else {
-          throw new Error("Error happened while updating service");
-
-        }
-      
+      } else {
+        throw new Error("Error happened while updating service");
+      }
     })
     .catch((err) => {
-      console.log(err)
+      console.log(err);
       res.status(500).json({
         success: false,
         message: "Server error",
@@ -193,7 +188,7 @@ const deleteServiceById = (req, res) => {
         res.status(200).json({
           success: true,
           message: `Service with id: ${id} deleted successfully`,
-          service:result.rows[0]
+          service: result.rows[0],
         });
       } else {
         pool
@@ -205,7 +200,7 @@ const deleteServiceById = (req, res) => {
             if (result.rows.length !== 0) {
               res.status(400).json({
                 success: false,
-                message:`Cannot delete service with id: ${id} because its status is not 'pending'`,
+                message: `Cannot delete service with id: ${id} because its status is not 'pending'`,
               });
             } else {
               res.status(404).json({
@@ -232,7 +227,7 @@ const deleteServiceById = (req, res) => {
     });
 };
 
-// this function to Get all service by provider 
+// this function to Get all service by provider
 // EndPoint : GET /service/provider
 const getServiceByProvider = (req, res) => {
   const id = req.token.userId;
@@ -261,6 +256,41 @@ const getServiceByProvider = (req, res) => {
     });
 };
 
+// this function to update Service
+// EndPoint : PUT /service/provider/update/:id
+// this function for service provider
+const updateService = (req, res) => {
+  const id = req.params.id;
+  const { service_name, details, price, image } = req.body;
+  pool
+    .query(
+      `UPDATE services 
+     SET service_name = $1, details = $2, price = $3, image = $4
+     WHERE service_id = $5`,
+      [service_name, details, price, image, id]
+    )
+    .then((result) => {
+      if (result.rows.length !== 0) {
+        res.status(404).json({
+          success: false,
+          message: "The service with the given ID was not found.",
+        });
+      } else {
+        res.status(200).json({
+          success: true,
+          message: "Service has been updated.",
+          service: result.rows[0],
+        });
+      }
+    })
+    .catch((err) => {
+      res.status(500).json({
+        success: false,
+        message: "Server error",
+        err: err.message,
+      });
+    });
+};
 
 module.exports = {
   createService,
@@ -270,5 +300,6 @@ module.exports = {
   getServiceByProviderId,
   deleteServiceById,
   getPendingService,
-  getServiceByProvider
+  getServiceByProvider,
+  updateService,
 };

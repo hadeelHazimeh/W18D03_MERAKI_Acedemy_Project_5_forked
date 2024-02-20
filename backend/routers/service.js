@@ -10,6 +10,7 @@ const {
   deleteServiceById,
   getPendingService,
   getServiceByProvider,
+  updateService,
 
 } = require("../controllers/service");
 
@@ -28,5 +29,6 @@ serviceRouter.delete("/:id", authentication, deleteServiceById)
 
 serviceRouter.get("/byStatus", getPendingService);
 serviceRouter.get("/provider", authentication, getServiceByProvider)
+serviceRouter.put("/provider/update/:id", authentication, updateService)
 
 module.exports = serviceRouter;
