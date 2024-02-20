@@ -10,8 +10,8 @@ import Packages from "../pages/Package"
 
 import CreateService from "../pages/CreateService"
 import Client from "../pages/client"
-
-
+import AdminDashboard from "../pages/AdminDashbored"
+import PendingServices from "../pages/PendingServices"
 export const router= createBrowserRouter(
 [
    
@@ -50,7 +50,17 @@ export const router= createBrowserRouter(
      {
         path:"/",
         element:<Home/>
-     }
+     }, 
+     {
+      path:"/admin/dashboard",
+      element:<AdminDashboard/>,
+      children:[
+         {
+            path:"pending/Services",
+            element:<PendingServices/>
+         }, 
+      ]
+   },
 
     
 
