@@ -12,7 +12,6 @@ import {
 import { useSelector } from "react-redux";
 import axios from "axios";
 import { useState } from "react";
-import serviceProvider from "../../services/redux/reducer/serviceProvider";
 //.....................................
 //const { order_price, eventDate, place, status }
 const Client = () => {
@@ -67,10 +66,7 @@ const Client = () => {
   };
 
   //................................................
-  const handleCheckboxChange = (serviceId) => {};
-  //....................................................
-
-  return (
+    return (
     <div>
       <h1>
         Plan your event by <a>services</a> or choose from our <a>packages</a>
@@ -96,17 +92,15 @@ const Client = () => {
             onChange={handleInputChange}
           />
         </MDBRow>
-        <a
-          href="#"
-          onClick={(e) => {
-            e.preventDefault();
+        <MDBBtn type="button"
+          onClick={() => {
             console.log("handle");
             handleSubmitOrder();
             ShowServices();
           }}
         >
           Choose the services
-        </a>
+        </MDBBtn>
         <div style={{ display: "flex", flexWrap: "wrap", gap: "20px" }}>
           {services.map((service) => (
             <MDBCard>
@@ -119,9 +113,10 @@ const Client = () => {
                 </MDBCardText>
 
                 <MDBCheckbox
+                  id="controlledCheckbox"
                   label="Select"
-                  checked={checkedServices.includes(service.service_id)}
-                  onChange={() => handleCheckboxChange(service.service_id)}
+                  checked={checked}
+                  onChange={() => setChecked(!checked)}
                 />
               </MDBCardBody>
             </MDBCard>
