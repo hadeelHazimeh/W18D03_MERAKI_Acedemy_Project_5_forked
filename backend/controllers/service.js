@@ -266,11 +266,11 @@ const updateService = (req, res) => {
     .query(
       `UPDATE services 
      SET service_name = $1, details = $2, price = $3, image = $4
-     WHERE service_id = $5`,
+     WHERE service_id = $5 RETURNING *`,
       [service_name, details, price, image, id]
     )
     .then((result) => {
-      if (result.rows.length !== 0) {
+      if (result.rows.length === 0) {
         res.status(404).json({
           success: false,
           message: "The service with the given ID was not found.",
