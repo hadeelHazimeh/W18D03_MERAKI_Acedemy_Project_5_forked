@@ -40,9 +40,9 @@ const Navbar = () => {
 <div>
 <MDBNavbar expand='lg' light bgColor='light'>
       <MDBContainer fluid>
-        <MDBNavbarBrand href='#'>
-         
-            </MDBNavbarBrand>
+      <MDBNavbarLink active aria-current='page' href=''>
+              Home
+            </MDBNavbarLink>
         <MDBNavbarToggler
           aria-expanded='false'
           aria-label='Toggle navigation'
@@ -52,8 +52,8 @@ const Navbar = () => {
         </MDBNavbarToggler>
         <MDBCollapse navbar open={openNavSecond}>
           <MDBNavbarNav>
-            <MDBNavbarLink active aria-current='page' href=''>
-              home
+            <MDBNavbarLink active aria-current='page' href='/serviceClient'>
+              Services
             </MDBNavbarLink>
            
             <MDBNavbarLink href='/login'>Login</MDBNavbarLink>
@@ -72,44 +72,7 @@ const Navbar = () => {
 
   }
 
-<>
-      {/* <Navbar bg="dark" data-bs-theme="dark">
-        <Container>
-          <Navbar.Brand href="#home">Navbar</Navbar.Brand>
-          <Nav className="me-auto">
-            <Nav.Link href="#home">Home</Nav.Link>
-            <Nav.Link href="#features">Features</Nav.Link>
-            <Nav.Link href="#pricing">Pricing</Nav.Link>
-          </Nav>
-        </Container>
-      </Navbar>
-      <br />
-      <Navbar bg="primary" data-bs-theme="dark">
-        <Container>
-          <Navbar.Brand href="#home">Navbar</Navbar.Brand>
-          <Nav className="me-auto">
-            <Nav.Link href="#home">Home</Nav.Link>
-            <Nav.Link href="#features">Features</Nav.Link>
-            <Nav.Link href="#pricing">Pricing</Nav.Link>
-          </Nav>
-        </Container>
-      </Navbar>
 
-      <br />
-      <Navbar bg="light" data-bs-theme="light">
-        <Container>
-          <Navbar.Brand href="#home">Navbar</Navbar.Brand>
-          <Nav className="me-auto">
-            <Nav.Link href="#home">Home</Nav.Link>
-            <Nav.Link href="#features">Features</Nav.Link>
-            <Nav.Link href="#pricing">Pricing</Nav.Link>
-          </Nav>
-        </Container>
-      </Navbar> */}
-    </> 
-     )
-
-
-}
+     
 
 export default Navbar;

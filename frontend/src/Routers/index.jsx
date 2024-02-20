@@ -12,6 +12,7 @@ import CreateService from "../pages/CreateService"
 import Client from "../pages/client"
 import AdminDashboard from "../pages/AdminDashbored"
 import PendingServices from "../pages/PendingServices"
+import Service from "../pages/Service/Service"
 export const router= createBrowserRouter(
 [
    {
@@ -19,6 +20,11 @@ export const router= createBrowserRouter(
       element:<Home/>,
      
    },
+   {
+      path:"/serviceClient",
+      element:<Client/>,
+       
+  },
 
    {
       path:"/login",
