@@ -18,11 +18,10 @@ import { useState } from "react";
 const Client = () => {
   const { isLoggedIn } = useSelector((state) => state.auth);
   const [status, setStatus] = useState(false);
-  //const [checkedServices, setCheckedServices] = useState([]);
-  const [orderId, setOrderId] = useState("");
+  // const [orderId, setOrderId] = useState("");
   const token = useSelector((state) => state.auth.token);
   const [services, setServices] = useState([]);
-  const [checked, setChecked] = useState(false);
+  // const [checked, setChecked] = useState(false);
   const [checkedServices, setCheckedServices] = useState([]);
   const [orderData, setOrderData] = useState({
     order_price: 0,
@@ -32,10 +31,6 @@ const Client = () => {
 
   //......................
   useEffect(() => {
-    ShowServices();
-  }, []);
-  //...............................
-  const ShowServices = async (e) => {
     axios
       .get(`http://localhost:5000/service`)
       .then((result) => {
@@ -45,7 +40,8 @@ const Client = () => {
       .catch((err) => {
         console.log(err);
       });
-  };
+  }, []);
+
   //...............................
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -55,19 +51,7 @@ const Client = () => {
   const handleSubmitOrder = async (e) => {
     // // e.preventDefault();
     // //loader
-    // try {
-    //   const result = await axios.post(
-    //     `http://localhost:5000/orders/create`,
-    //     orderData,
-    //     {
-    //       headers: { Authorization: `Bearer ${token}` },
-    //     }
-    //   );
-    //   console.log(result.data);
-    //   setOrderId(result.data.order_id);
-    // } catch (error) {
-    //   console.error("Error creating order:", error);
-    // }
+
     e.preventDefault();
     try {
       // Create the order (date and place)
@@ -80,8 +64,8 @@ const Client = () => {
       );
       console.log(orderResult.data.result[0]);
       //setOrderId(orderResult.data.order_id);
-      
-       //selected services with the created order
+
+      //selected services with the created order
       const orderServiceResult = await axios.post(
         `http://localhost:5000/orders/orderService/${orderResult.data.result[0].order_id}`,
 
@@ -92,9 +76,9 @@ const Client = () => {
       );
 
       console.log(orderServiceResult.data);
-     } catch (error) {
-       console.error("Error creating order:", error);
-     }
+    } catch (error) {
+      console.error("Error creating order:", error);
+    }
   };
 
   //................................................
