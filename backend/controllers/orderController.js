@@ -32,8 +32,6 @@ const createNewOrderServices = (req, res) => {
   const order_id = req.params.id;
   const { service_ids } = req.body; // array
 
-
-
   const data= service_ids.map((service_id) => `(${order_id}, ${service_id})`).join(', ');
 
   const query = `
@@ -43,7 +41,7 @@ const createNewOrderServices = (req, res) => {
 
   pool.query(query)
     .then((result) => {
-      res.status(201).json({
+       res.status(201).json({
         success: true,
         message: `new order created with services are created`,
         result: result.rows,
@@ -83,7 +81,7 @@ const getAllOrders = (req, res) => {
       }
     })
     .catch((err) => {
-      res.status(500).json({
+       res.status(500).json({
         success: false,
         message: "Server error",
         err: err,
