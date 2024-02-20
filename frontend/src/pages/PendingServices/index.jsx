@@ -16,6 +16,7 @@ import {
   MDBInput,
   MDBRow,
   MDBTypography,
+  MDBBtnGroup 
 } from "mdb-react-ui-kit";
 
 //http://localhost:5000/service/byStatus?status=pending
@@ -47,58 +48,52 @@ const PendingServices = () => {
         <>
 
           <MDBContainer className="py-5 ">
-            <MDBRow className="justify-content-center align-items-center h-100">
-              <MDBCol md="8">
-                <div className="d-flex justify-content-between align-items-center mb-4">
-                  <MDBTypography tag="h3" className="fw-normal mb-0 text-black">
-                    Pending Services
-                  </MDBTypography>
-                  {/* <div>
-                    <p className="mb-0">
-                      <span className="text-muted">Sort by:</span>
-                      <a href="#!" className="text-body">
-                        price <i className="fas fa-angle-down mt-1"></i>
-                      </a>
-                    </p>
-                  </div> */}
-                </div>
-            {pendingServices.length===0?<>no pending services available</>:<>{pendingServices.map((service,i)=>{
-return(<MDBCard className="rounded-3 mb-4">
-<MDBCardBody className="p-4">
-  <MDBRow className="justify-content-between align-items-center">
-    <MDBCol md="2" lg="2" xl="2">
-      <MDBCardImage className="rounded-3" fluid
-        src={service.image}
-        alt="services" />
-    </MDBCol>
-    <MDBCol md="3" lg="3" xl="4">
-      <p className="lead fw-normal mb-2">{service.service_name}</p>
-      <p>
-      <span className="text-muted">Provider: </span>{service.provider}<br/>
-
-          <span className="text-muted">Details: </span>{service.details}<br/>
-          <span className="text-muted">Status: </span>{service.status}
           
-      </p>
-    </MDBCol>
-   
-    <MDBCol md="3" lg="2" xl="2" className="offset-lg-1">
-      <MDBTypography tag="h5" className="mb-0">
+              
+                <MDBRow style={{marginBottom:"80px"}} className="justify-content-right align-items-center h-100"> 
+            {pendingServices.length===0?<>no pending services available</>:<>{pendingServices.map((service,i)=>{
+return(
+ 
+ <MDBCol  size={"sm"} sm="3"> <MDBCard style={{padding:"10px"}}>
+          <MDBCardImage
+            src="https://mdbootstrap.com/img/new/standard/city/042.webp"
+            alt="..."
+            position="top"
+          />
+          <MDBCardBody >
+            <MDBCardTitle>{service.service_name}</MDBCardTitle>
+            <MDBCardText>
+            <span className="text-muted">Provider: </span>{service.provider}<br/>
+            </MDBCardText>
+            <MDBCardText>
+                  
+          <span className="text-muted">Details: </span>{service.details}<br/>
+            </MDBCardText>
+            <MDBCardText>
+                  
+            <span className="text-muted">Status: </span>{service.status}
+                    </MDBCardText>
+                    <MDBTypography tag="h5" className="mb-0">
         {service.price} JOD
       </MDBTypography>
-    </MDBCol>
-    <MDBCol md="1" lg="1" xl="1" className="text-end">
-      <a href="#!" className="text">
-      <MDBIcon fas icon="check" size="lg" />
+      
+      <MDBBtnGroup style={{margin:"12px"}} shadow='3' aria-label='Basic example'>
+      <MDBBtn color='secondary' outline>
+        Confirm
+      </MDBBtn>
+      
+      <MDBBtn color='secondary' outline>
+        Reject
+      </MDBBtn>
+    </MDBBtnGroup>
+          </MDBCardBody>
+        </MDBCard>
+        </MDBCol>
        
-      </a>
-    </MDBCol>
-  </MDBRow>
-</MDBCardBody>
-</MDBCard>)
+)
             })}</>}
       
-        
+      </MDBRow>
              {/*    <MDBCard>
                   <MDBCardBody>
                     <MDBBtn className="ms-3" color="warning" block size="lg">
@@ -106,8 +101,7 @@ return(<MDBCard className="rounded-3 mb-4">
                     </MDBBtn>
                   </MDBCardBody>
                 </MDBCard> */}
-              </MDBCol>
-            </MDBRow>
+          
           </MDBContainer>
           </>
         );

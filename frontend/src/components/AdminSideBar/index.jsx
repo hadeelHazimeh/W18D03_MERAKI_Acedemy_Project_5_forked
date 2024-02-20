@@ -14,7 +14,7 @@ const AdminSideBar = () => {
           <CDBSidebarHeader prefix={<i className="fa fa-bars" />}>Contrast</CDBSidebarHeader>
           <CDBSidebarContent>
             <CDBSidebarMenu>
-              <NavLink to="pending/Services"><CDBSidebarMenuItem icon="th-large">Dashboard</CDBSidebarMenuItem></NavLink>
+              <NavLink to="pending/Services"><CDBSidebarMenuItem icon="th-large">Pending Services</CDBSidebarMenuItem></NavLink>
               <CDBSidebarMenuItem icon="sticky-note">Components</CDBSidebarMenuItem>
               <CDBSidebarMenuItem icon="credit-card" iconType="solid">
                 Metrics
