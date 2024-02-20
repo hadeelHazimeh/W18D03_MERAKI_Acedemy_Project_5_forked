@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+
 import "./style.css";
 import axios from "axios";
 import { useSelector } from "react-redux";
@@ -28,8 +29,8 @@ const Register = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const[role, setRole] = useState("");
-  const [message, setMessage] = useState("");
-  const [errorMessage, setErrorMessage] = useState("");
+  // const [message, setMessage] = useState("");
+  // const [errorMessage, setErrorMessage] = useState("");
   const [status, setStatus] = useState(false);
   //....................................
   

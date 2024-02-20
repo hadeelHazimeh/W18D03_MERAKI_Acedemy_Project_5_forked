@@ -9,6 +9,8 @@ function App() {
   <RouterProvider router={router}/>
   <Navbar/>
   </>
+  return<RouterProvider router={router}/>
+
 }
 
 export default App
