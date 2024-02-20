@@ -13,8 +13,6 @@ import { useSelector } from "react-redux";
 import axios from "axios";
 import { useState } from "react";
 
-
-
 //.....................................
 //const { order_price, eventDate, place, status }
 const Client = () => {
@@ -33,7 +31,10 @@ const Client = () => {
   });
 
   //......................
-
+  useEffect(() => {
+    ShowServices();
+  }, []);
+  //...............................
   const ShowServices = async (e) => {
     axios
       .get(`http://localhost:5000/service`)
@@ -52,38 +53,70 @@ const Client = () => {
   };
   //.............................................
   const handleSubmitOrder = async (e) => {
-    // e.preventDefault();
-    //loader
+    // // e.preventDefault();
+    // //loader
+    // try {
+    //   const result = await axios.post(
+    //     `http://localhost:5000/orders/create`,
+    //     orderData,
+    //     {
+    //       headers: { Authorization: `Bearer ${token}` },
+    //     }
+    //   );
+    //   console.log(result.data);
+    //   setOrderId(result.data.order_id);
+    // } catch (error) {
+    //   console.error("Error creating order:", error);
+    // }
+    e.preventDefault();
     try {
-      const result = await axios.post(
+      // Create the order (date and place)
+      const orderResult = await axios.post(
         `http://localhost:5000/orders/create`,
         orderData,
         {
           headers: { Authorization: `Bearer ${token}` },
         }
       );
-      console.log(result.data);
-      setOrderId(result.data.order_id);
-    } catch (error) {
-      console.error("Error creating order:", error);
-    }
+      console.log(orderResult.data.result[0]);
+      //setOrderId(orderResult.data.order_id);
+      
+       //selected services with the created order
+      const orderServiceResult = await axios.post(
+        `http://localhost:5000/orders/orderService/${orderResult.data.result[0].order_id}`,
+
+        { service_ids: checkedServices },
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
+
+      console.log(orderServiceResult.data);
+     } catch (error) {
+       console.error("Error creating order:", error);
+     }
   };
 
   //................................................
-   
 
   const handleCheckboxChange = (serviceId) => {
-  
+    console.log("checkedServices", checkedServices, "serviceId", serviceId);
+    if (checkedServices.includes(serviceId)) {
+      // Remove serviceId if already checked
+      setCheckedServices(checkedServices.filter((id) => id !== serviceId));
+    } else {
+      // Add serviceId if not checked
+      setCheckedServices([...checkedServices, serviceId]);
+    }
   };
   //....................................................
 
   return (
-
     <div>
       <h1>
         Plan your event by <a>services</a> or choose from our <a>packages</a>
       </h1>
-      <form>
+      <form onSubmit={handleSubmitOrder}>
         <MDBRow className="mb-4">
           <MDBInput
             label="Event Date"
@@ -104,8 +137,8 @@ const Client = () => {
             onChange={handleInputChange}
           />
         </MDBRow>
-        
-        <a
+
+        {/* <a
           href="#"
           onClick={(e) => {
             e.preventDefault();
@@ -115,22 +148,23 @@ const Client = () => {
           }}
         >
           Choose the services
-        </a>
-
+        </a> */}
 
         <div style={{ display: "flex", flexWrap: "wrap", gap: "20px" }}>
           {services.map((service) => (
             <MDBCard>
               <MDBCardBody>
                 <MDBCardTitle>name: {service.service_name}</MDBCardTitle>
+
                 <MDBCardText>
+                  {service.image}
                   Price: ${service.price}
                   <br />
                   description: {service.details}
                 </MDBCardText>
 
                 <MDBCheckbox
-                 label="Select"
+                  label="Select"
                   checked={checkedServices.includes(service.service_id)}
                   onChange={() => handleCheckboxChange(service.service_id)}
                 />
