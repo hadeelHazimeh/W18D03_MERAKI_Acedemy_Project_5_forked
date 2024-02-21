@@ -31,26 +31,39 @@ const createNewOrder = (req, res) => {
 
 const createNewOrderServices = (req, res) => {
   const order_id = req.params.id;
-  const { service_ids} = req.body; // array
-  //,service_package_id
-  const data1= service_ids.map((service_id) => `(${order_id}, ${service_id})`).join(', ');
-  // const data2= service_package_id
-  const queryServices = `
+ const{service_package_id,service_ids} = req.body; // array
+  //,
+  let service;
+   service_ids?service=service_ids:service=null
+  console.log(service_ids,service);
+   const data2= service_package_id
+  // const queryServices = `
+  //   INSERT INTO orders_services (order_id, service_id) 
+  //   VALUES ${data1}
+  //   RETURNING *`;
+
+    // const queryPackages=`INSERT INTO orders_services (order_id, service_package_id) 
+    // VALUES (${order_id},${data2}) 
+    // RETURNING *` 
+    let query
+   
+  if(service!=null){
+    console.log(req.body)
+    const data1= service.map((service_id) => `(${order_id}, ${service_id})`).join(', ');
+    query=`
     INSERT INTO orders_services (order_id, service_id) 
     VALUES ${data1}
     RETURNING *`;
-
-    // const queryPackages=`INSERT INTO orders_services (order_id, service_package_id) 
-    // VALUES ${data2}
-    // RETURNING *` 
-    // let query
-  // if(service_ids){
-  //   query=queryServices
-  // }
-  // else{
-  //   query=queryPackages
-  // }
-  pool.query(queryServices)
+    
+  }
+  else{
+    query=`INSERT INTO orders_services (order_id, service_package_id) 
+    VALUES (${order_id},${data2}) 
+    RETURNING *` 
+    
+  }
+  console.log(query)
+  pool.query(query)
     .then((result) => {
        res.status(201).json({
         success: true,
@@ -67,6 +80,49 @@ const createNewOrderServices = (req, res) => {
       });
     });
 };
+//   const order_id = req.params.id;
+//   const { service_ids, service_package_id} = req.body; // array
+//   //,service_package_id
+  
+//   const data1= service_ids.map((service_id) => `(${order_id}, ${service_id})`).join(",");
+// // console.log(JSON.stringify(data1));
+
+//   //const data=[order_id,(data1)||null,service_package_id||null]
+  
+//   console.log(data)
+//   // const data2= service_package_id
+//   const queryServices = `
+//     INSERT INTO orders_services (order_id, service_id,service_package_id) 
+//     VALUES ($1,$2,$3)
+//     RETURNING *`;
+
+//     // const queryPackages=`INSERT INTO orders_services (order_id, service_package_id) 
+//     // VALUES ${data2}
+//     // RETURNING *` 
+//     // let query
+//   // if(service_ids){
+//   //   query=queryServices
+//   // }
+//   // else{
+//   //   query=queryPackages
+//   // }
+//   pool.query(queryServices,data)
+//     .then((result) => {
+//        res.status(201).json({
+//         success: true,
+//         message: `new order created with services are created`,
+//         result: result.rows,
+//       });
+//     })
+//     .catch((err) => {
+//       console.error("Error creating order services:", err);
+//       res.status(500).json({
+//         success: false,
+//         message: "Server error",
+//         err: err,
+//       });
+//     });
+
 
 
 const getAllOrders = (req, res) => {
