@@ -13,6 +13,7 @@ import Client from "../pages/client"
 import AdminDashboard from "../pages/AdminDashbored"
 import PendingServices from "../pages/PendingServices"
 import CreatePackage from "../pages/createPackage"
+import AdminServicesRender from "../pages/AdminServicesRender"
 export const router= createBrowserRouter(
 [
    
@@ -67,7 +68,10 @@ export const router= createBrowserRouter(
             element:<PendingServices/>}
 
             ]
-        },
+        },  {
+         path:"Services",
+         element:<AdminServicesRender/>
+      },
       ]
    },
 
