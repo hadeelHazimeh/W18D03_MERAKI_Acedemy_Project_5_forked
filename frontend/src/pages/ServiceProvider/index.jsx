@@ -10,7 +10,12 @@ import {
   Form,
   Modal,
 } from "react-bootstrap";
-import { setServices, updateServiceById } from "../../services/redux/reducer/serviceProvider";
+import {
+  setServices,
+  updateServiceById,
+  deleteServiceByID,
+} from "../../services/redux/reducer/serviceProvider";
+
 
 const ServiceProvider = () => {
   const dispatch = useDispatch();
@@ -32,6 +37,24 @@ const ServiceProvider = () => {
     handleShow();
   };
 
+  // delete a service by id
+  const deleteService = (id) => {
+    console.log("serviceId", id);
+    axios
+      .delete(`http://localhost:5000/service/${id}`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      })
+      .then((result) => {
+        console.log(result);
+        dispatch(deleteServiceByID( id ));
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
   const updateService = () => {
     axios
       .put(
@@ -40,7 +63,7 @@ const ServiceProvider = () => {
           service_name,
           details,
           price,
-          image
+          image,
         },
         {
           headers: {
@@ -51,13 +74,20 @@ const ServiceProvider = () => {
       .then((response) => {
         console.log(response.data);
         handleClose();
-        dispatch(updateServiceById({service_name, details, price, image, service_id: serviceId}))
+        dispatch(
+          updateServiceById({
+            service_name,
+            details,
+            price,
+            image,
+            service_id: serviceId,
+          })
+        );
         // getServiceProvider();
       })
       .catch((error) => {
         console.error("Error updating service:", error);
       });
-      
   };
 
   const getServiceProvider = () => {
@@ -68,7 +98,7 @@ const ServiceProvider = () => {
         },
       })
       .then((result) => {
-        console.log("serveice",result.data.services);
+        console.log("serveice", result.data.services);
         dispatch(setServices(result.data.services));
       })
       .catch((err) => {
@@ -117,6 +147,13 @@ const ServiceProvider = () => {
                     >
                       UPDATE
                     </Button>
+                    <Button
+                      variant="dark"
+                      className="mt-3 mx-1 "
+                      onClick={() => deleteService(service.service_id)}
+                    >
+                      Delete
+                    </Button>
                   </div>
                 </div>
               </div>
@@ -161,8 +198,8 @@ const ServiceProvider = () => {
             <Form.Group className="mb-3" controlId="image">
               <Form.Label>Image</Form.Label>
               <Form.Control
-                type="file" 
-                onChange={(e)=> setImage(e.target.value)}
+                type="file"
+                onChange={(e) => setImage(e.target.value)}
               />
             </Form.Group>
           </Form>
@@ -173,9 +210,6 @@ const ServiceProvider = () => {
           </Button>
           <Button variant="primary" onClick={updateService}>
             Save Changes
-          </Button>
-          <Button variant="primary" onClick={updateService}>
-            Delete Service
           </Button>
         </Modal.Footer>
       </Modal>

@@ -175,8 +175,9 @@ const updateServiceById = (req, res) => {
 // this function to delete a service By id
 // EndPoint : GET /service/:id
 const deleteServiceById = (req, res) => {
-  const id = req.params.id;
+  const {id} = req.params;
   const userId = req.token.userId;
+  console.log(id);
   pool
     .query(
       "UPDATE services SET is_deleted=1 WHERE service_id=$1 AND status='pending' AND provider =$2 RETURNING * ",
@@ -303,3 +304,4 @@ module.exports = {
   getServiceByProvider,
   updateService,
 };
+

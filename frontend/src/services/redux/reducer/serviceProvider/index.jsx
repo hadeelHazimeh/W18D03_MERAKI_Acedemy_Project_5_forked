@@ -9,7 +9,7 @@ export const serviceProviderSlice = createSlice({
       state.services = action.payload;
     },
     addService(state, action) {
-      state.services = [ ...action.payload,...state.services];
+      state.services = [...action.payload, ...state.services];
     },
     updateServiceById(state, action) {
       state.services = state.services.map((service, index) => {
@@ -19,8 +19,14 @@ export const serviceProviderSlice = createSlice({
         return service;
       });
     },
+    deleteServiceByID(state, action) {
+      console.log("action", action.payload);
+      state.services = state.services.filter(
+        service => service.service_id !== action.payload 
+      );
+    },
   },
 });
-export const { setServices, addService, updateServiceById } =
+export const { setServices, addService, updateServiceById, deleteServiceByID } =
   serviceProviderSlice.actions;
 export default serviceProviderSlice.reducer;
