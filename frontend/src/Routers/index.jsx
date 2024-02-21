@@ -58,7 +58,10 @@ export const router= createBrowserRouter(
          {
             path:"pending/Services",
             element:<PendingServices/>
-         }, 
+         },{
+            path:"packages",
+            element:<Packages/>
+        },
       ]
    },
 
