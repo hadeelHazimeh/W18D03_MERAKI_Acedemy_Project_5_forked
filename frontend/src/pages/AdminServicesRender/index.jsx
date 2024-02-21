@@ -17,7 +17,7 @@ function AdminServicesRender() {
             
           })
           .then((result) => {
-            console.log("services", result.data.services);
+           // console.log("services", result.data.services);
             setServices(result.data.services);
             
             
