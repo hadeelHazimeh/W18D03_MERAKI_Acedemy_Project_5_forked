@@ -62,7 +62,7 @@ const getServiceByName = (req, res) => {
 // End Point : GET /service
 const getAllServices = (req, res) => {
   pool
-    .query("SELECT * FROM services WHERE services.is_deleted=0")
+    .query("SELECT * FROM services WHERE services.is_deleted=0 order by service_id desc")
     .then((result) => {
       if (result.rows.length === 0) {
         res.status(404).json({
@@ -232,7 +232,7 @@ const deleteServiceById = (req, res) => {
 const getServiceByProvider = (req, res) => {
   const id = req.token.userId;
   pool
-    .query(`SELECT * FROM services WHERE provider =$1 AND is_deleted=0`, [id])
+    .query(`SELECT * FROM services WHERE provider =$1 AND is_deleted=0 order by service_id desc`, [id])
     .then((result) => {
       if (result.rows.length === 0) {
         res.status(404).json({

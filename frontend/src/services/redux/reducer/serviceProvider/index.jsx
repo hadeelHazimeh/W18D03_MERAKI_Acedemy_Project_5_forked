@@ -9,7 +9,7 @@ export const serviceProviderSlice = createSlice({
       state.services = action.payload;
     },
     addService(state, action) {
-      state.services = [...state.services, action.payload];
+      state.services = [ ...action.payload,...state.services];
     },
     updateServiceById(state, action) {
       state.services = state.services.map((service, index) => {

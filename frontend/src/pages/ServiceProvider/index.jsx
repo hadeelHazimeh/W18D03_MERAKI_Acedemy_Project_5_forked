@@ -68,7 +68,7 @@ const ServiceProvider = () => {
         },
       })
       .then((result) => {
-        console.log(result.data.services);
+        console.log("serveice",result.data.services);
         dispatch(setServices(result.data.services));
       })
       .catch((err) => {
@@ -78,6 +78,7 @@ const ServiceProvider = () => {
 
   useEffect(() => {
     getServiceProvider();
+    console.log(serviceProvider);
   }, []);
 
   return (
