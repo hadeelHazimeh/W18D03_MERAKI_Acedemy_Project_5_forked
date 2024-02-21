@@ -11,7 +11,16 @@ export const serviceProviderSlice = createSlice({
     addService(state, action) {
       state.services = [...state.services, action.payload];
     },
+    updateServiceById(state, action) {
+      state.services = state.services.map((service, index) => {
+        if (service.service_id === action.payload.service_id) {
+          return { ...service, ...action.payload };
+        }
+        return service;
+      });
+    },
   },
 });
-export const { setServices, addService } = serviceProviderSlice.actions;
+export const { setServices, addService, updateServiceById } =
+  serviceProviderSlice.actions;
 export default serviceProviderSlice.reducer;
