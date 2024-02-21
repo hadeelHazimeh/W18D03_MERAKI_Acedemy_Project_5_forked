@@ -1,3 +1,4 @@
+// const { Query } = require("pg");
 const { pool } = require("../models/db");
 
 const createNewOrder = (req, res) => {
@@ -30,16 +31,26 @@ const createNewOrder = (req, res) => {
 
 const createNewOrderServices = (req, res) => {
   const order_id = req.params.id;
-  const { service_ids } = req.body; // array
-
-  const data= service_ids.map((service_id) => `(${order_id}, ${service_id})`).join(', ');
-
-  const query = `
+  const { service_ids} = req.body; // array
+  //,service_package_id
+  const data1= service_ids.map((service_id) => `(${order_id}, ${service_id})`).join(', ');
+  // const data2= service_package_id
+  const queryServices = `
     INSERT INTO orders_services (order_id, service_id) 
-    VALUES ${data}
+    VALUES ${data1}
     RETURNING *`;
 
-  pool.query(query)
+    // const queryPackages=`INSERT INTO orders_services (order_id, service_package_id) 
+    // VALUES ${data2}
+    // RETURNING *` 
+    // let query
+  // if(service_ids){
+  //   query=queryServices
+  // }
+  // else{
+  //   query=queryPackages
+  // }
+  pool.query(queryServices)
     .then((result) => {
        res.status(201).json({
         success: true,
@@ -136,3 +147,6 @@ module.exports = {
   getAllOrders,
  getOrderById
 };
+
+
+

@@ -17,7 +17,8 @@ import { useState } from "react";
 
 const Client = () => {
   // const { isLoggedIn } = useSelector((state) => state.auth);
-  const [status, setStatus] = useState(false);
+  const [showPrice, setShowPrice] = useState(false);
+  const [ClickedPrice,setClickedPrice]=useState(false)
   const token = useSelector((state) => state.auth.token);
   const [services, setServices] = useState([]);
    const [checkedServices, setCheckedServices] = useState([]);
@@ -50,16 +51,6 @@ const Client = () => {
      e.preventDefault();
     //loader
     try {
-      //reduce HOF to calculate the total order price as summation of checked services
-      const totalOrderPrice = checkedServices.reduce((total, serviceId) => {
-        const selectedService = services.find(
-          (service) => service.service_id === serviceId
-        );
-
-        return total + selectedService.price;
-      }, 0);
-      console.log("total price", totalOrderPrice);
-      setOrderData({ ...orderData, order_price: totalOrderPrice });
       const orderResult = await axios.post(
         `http://localhost:5000/orders/create`,
         orderData,
@@ -84,9 +75,25 @@ const Client = () => {
     }
   };
 
+  const handleOrderPrice=()=>{
+    const totalOrderPrice = checkedServices.reduce((total, serviceId) => {
+      const selectedService = services.find(
+        (service) => service.service_id === serviceId
+      );
+
+      return total + selectedService.price;
+    }, 0);
+    console.log("total price", totalOrderPrice);
+    setOrderData({ ...orderData, order_price: totalOrderPrice });
+    setClickedPrice(true)
+  }
+
   //.........................................................................................
 
   const handleCheckboxChange = (serviceId) => {
+    
+      //reduce HOF to calculate the total order price as summation of checked services
+      
     console.log("checkedServices", checkedServices, "serviceId", serviceId);
     if (checkedServices.includes(serviceId)) {
       // Remove serviceId if already checked
@@ -94,6 +101,7 @@ const Client = () => {
     } else {
       // Add serviceId if not checked
       setCheckedServices([...checkedServices, serviceId]);
+      setShowPrice(true)
     }
   };
   //..........................................................................................
@@ -148,15 +156,27 @@ const Client = () => {
             </MDBCard>
           ))}
         </div>
+
+       {showPrice?<><MDBRow className="mb-4">
+          <MDBBtn className="mb-4" type="submit" onClick={handleOrderPrice} block>
+           calculate the total Price
+            </MDBBtn>
+        </MDBRow></>:<></>} 
+
+       {ClickedPrice?<>
         <MDBRow className="mb-4">
           <p>Total Price: JD {orderData.order_price}</p>
         </MDBRow>
-        
+       
+       
+       </>:<></>} 
         <MDBRow className="mb-4">
           <MDBBtn className="mb-4" type="submit" block>
             Submit your plan
           </MDBBtn>
         </MDBRow>
+
+      
       </form>
     </div>
   );
