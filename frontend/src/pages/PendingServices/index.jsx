@@ -2,7 +2,7 @@ import React,{  useEffect, useState } from "react";
 import axios from "axios";
 
 import { useDispatch, useSelector } from "react-redux";
-import { setPendingServices } from "../../services/redux/reducer/PendingServices";
+import { setPendingServices,updateServiceStatusById } from "../../services/redux/reducer/PendingServices";
 import {
   MDBCardTitle,
   MDBCardText,
@@ -44,21 +44,21 @@ const PendingServices = () => {
       useEffect(() => {
       getPendingService()
       }, []);
-  
-      const handelStatus = () => {
-      /*   axios
-          .put("http://localhost:5000/service/byStatus?status=pending",
-          {  },
+  //---------------------------handel confirm /reject btn
+      const handelStatus = (status,id) => {
+         axios
+          .put(`http://localhost:5000/service/${id}`,
+          {status},
           {
             headers: { Authorization: `Bearer ${token}` },
           })
           .then((result) => {
            console.log(result.data.result);
-           dispatch(setPendingServices(result.data.result));
+          dispatch(updateServiceStatusById(id))
           })
           .catch((err) => {
             console.log(err);
-          }); */
+          });
       };
 
         const {pendingServices} = useSelector((state)=> 
@@ -75,7 +75,7 @@ const PendingServices = () => {
             {pendingServices.length===0?<>no pending services available</>:<>{pendingServices.map((service,i)=>{
 return(
  
- <MDBCol  size={"sm"} sm="3"> <MDBCard style={{padding:"10px"}}>
+ <MDBCol key={i}  size={"sm"} sm="3"> <MDBCard style={{padding:"10px"}}>
           <MDBCardImage
             src="https://mdbootstrap.com/img/new/standard/city/042.webp"
             alt="..."
@@ -98,15 +98,19 @@ return(
         {service.price} JOD
       </MDBTypography>
       
-      <MDBBtnGroup style={{margin:"12px"}} shadow='3' aria-label='Basic example'>
-      <MDBBtn color='secondary' outline>
+      
+      <MDBBtn onClick={()=>{
+        handelStatus("confirmed",service.service_id)
+      }} color='secondary' outline>
         Confirm
       </MDBBtn>
       
-      <MDBBtn color='secondary' outline>
+      <MDBBtn onClick={()=>{
+        handelStatus("Rejected",service.service_id)
+      }} color='secondary' outline>
         Reject
       </MDBBtn>
-    </MDBBtnGroup>
+    
           </MDBCardBody>
         </MDBCard>
         </MDBCol>
