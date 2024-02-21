@@ -29,8 +29,7 @@ const Register = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const[role, setRole] = useState("");
-  // const [message, setMessage] = useState("");
-  // const [errorMessage, setErrorMessage] = useState("");
+
   const [status, setStatus] = useState(false);
   //....................................
   
@@ -55,6 +54,7 @@ const Register = () => {
           icon: 'success',
           title: 'Success!',
           text: result.data.message,
+          confirmButtonText: 'Preview Order'
         });
         
       } else throw Error;
