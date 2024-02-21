@@ -16,18 +16,17 @@ import PendingServices from "../pages/PendingServices"
 import PortFolio from "../pages/PortFolio"
 import Talk from "../pages/LetsTalk"
 import About from "../pages/About"
+import Navbar from "../components/Navbar"
 export const router= createBrowserRouter(
 [
    {
       path:"/",
-      element:<Home/>,
+      element:<>  <Navbar/>
+      <Home/> </>
+     
      
    },
-   {
-      path:"/serviceClient",
-      element:<Client/>,
-       
-  },
+ 
 
    {
       path:"/login",
@@ -40,15 +39,22 @@ export const router= createBrowserRouter(
     },
     {
       path:"/portfolio",
-      element: <PortFolio/>
+      element: 
+      <> <Navbar/>
+      <PortFolio/>
+      </>
   },
   {
    path:"/letstalk",
-   element: <Talk/>
+   element:<> <Navbar/>
+   <Talk/>
+   </> 
 },
 {
    path:"/AboutUs",
-   element: <About/>
+   element: <> <Navbar/>
+   <About/>
+   </>
 },
     { 
         path:"/register",
@@ -67,8 +73,10 @@ export const router= createBrowserRouter(
      },
      {
         path:"client",
-        element:<Client/>
-
+        element:<>
+        <Navbar/>
+        <Client/>
+        </>
 
      },
     

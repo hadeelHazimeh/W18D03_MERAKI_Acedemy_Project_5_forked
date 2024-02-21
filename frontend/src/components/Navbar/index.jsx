@@ -24,15 +24,15 @@ const Navbar = () => {
         <MDBContainer>
           <MDBNavbarBrand href='/'>
             <img
-              src='https://res.cloudinary.com/dycpjbdto/image/upload/c_scale,h_650,q_auto:best/v1708476141/2-removebg-preview_hvrakt.png'
-              height='200'
-              width='50%'
+              src='https://res.cloudinary.com/dycpjbdto/image/upload/v1708504176/2-removebg-preview-less_uolwak.png'
+              height='50'
+              width='90%'
               alt=''
               loading='lazy'
             />
           </MDBNavbarBrand>
         
-          <MDBNavbarLink href='service/provider' >
+          <MDBNavbarLink href='/login' >
                 Are You Vendor?
               </MDBNavbarLink>
             
