@@ -12,22 +12,55 @@ import CreateService from "../pages/CreateService"
 import Client from "../pages/client"
 import AdminDashboard from "../pages/AdminDashbored"
 import PendingServices from "../pages/PendingServices"
+
 import CreatePackage from "../pages/createPackage"
 import AdminServicesRender from "../pages/AdminServicesRender"
+
+// import Service from "../pages/Service/Service"
+import PortFolio from "../pages/PortFolio"
+import Talk from "../pages/LetsTalk"
+import About from "../pages/About"
+import Navbar from "../components/Navbar"
+
 export const router= createBrowserRouter(
 [
-   
+   {
+      path:"/",
+      element:<>  <Navbar/>
+      <Home/> </>
+     
+     
+   },
+ 
 
-    {
-        path:"/login",
-        element:<Login/>,
-         
-    },
+   {
+      path:"/login",
+      element:<Login/>,
+       
+  },
     {
         path:"service/provider",
         element: <ServiceProvider/>
     },
-
+    {
+      path:"/portfolio",
+      element: 
+      <> <Navbar/>
+      <PortFolio/>
+      </>
+  },
+  {
+   path:"/letstalk",
+   element:<> <Navbar/>
+   <Talk/>
+   </> 
+},
+{
+   path:"/AboutUs",
+   element: <> <Navbar/>
+   <About/>
+   </>
+},
     { 
         path:"/register",
 
@@ -45,14 +78,13 @@ export const router= createBrowserRouter(
      },
      {
         path:"client",
-        element:<Client/>
-
+        element:<>
+        <Navbar/>
+        <Client/>
+        </>
 
      },
-     {
-        path:"/",
-        element:<Home/>
-     }, 
+    
      {
       path:"/admin/dashboard",
       element:<AdminDashboard/>,

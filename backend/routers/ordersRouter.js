@@ -10,7 +10,7 @@ const authentication = require("../middlewares/authentication");
 const orderRouter = express.Router();
 
 orderRouter.post("/create", authentication, createNewOrder); //client
-orderRouter.post("/orderService", authentication, createNewOrderServices); //client
+orderRouter.post("/orderService/:id", authentication, createNewOrderServices); //client
 orderRouter.get("/allOrders", getAllOrders); //admin
 orderRouter.get("/search_1/:id", getOrderById); //admin or client
 module.exports = orderRouter;

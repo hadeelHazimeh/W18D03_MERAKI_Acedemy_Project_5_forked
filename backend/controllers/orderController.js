@@ -1,3 +1,4 @@
+// const { Query } = require("pg");
 const { pool } = require("../models/db");
 
 const createNewOrder = (req, res) => {
@@ -29,29 +30,44 @@ const createNewOrder = (req, res) => {
 };
 
 const createNewOrderServices = (req, res) => {
-  const { order_id, service_id } = req.body;
-  const query = `INSERT INTO orders_services (order_id,
-    service_id) VALUES ($1,$2) RETURNING *`;
-  const data = [order_id, service_id];
-  // service id :6,7, order_id :2
-  //
-  pool
-    .query(query, data)
+  const order_id = req.params.id;
+  const { service_ids} = req.body; // array
+  //,service_package_id
+  const data1= service_ids.map((service_id) => `(${order_id}, ${service_id})`).join(', ');
+  // const data2= service_package_id
+  const queryServices = `
+    INSERT INTO orders_services (order_id, service_id) 
+    VALUES ${data1}
+    RETURNING *`;
+
+    // const queryPackages=`INSERT INTO orders_services (order_id, service_package_id) 
+    // VALUES ${data2}
+    // RETURNING *` 
+    // let query
+  // if(service_ids){
+  //   query=queryServices
+  // }
+  // else{
+  //   query=queryPackages
+  // }
+  pool.query(queryServices)
     .then((result) => {
-      res.status(201).json({
+       res.status(201).json({
         success: true,
-        message: `new order-services are created`,
+        message: `new order created with services are created`,
         result: result.rows,
       });
     })
     .catch((err) => {
+      console.error("Error creating order services:", err);
       res.status(500).json({
         success: false,
-        message: `Server error`,
+        message: "Server error",
         err: err,
       });
     });
 };
+
 
 const getAllOrders = (req, res) => {
   const query = `SELECT o.order_id, o.order_price, o.eventDate, o.place,
@@ -76,7 +92,7 @@ const getAllOrders = (req, res) => {
       }
     })
     .catch((err) => {
-      res.status(500).json({
+       res.status(500).json({
         success: false,
         message: "Server error",
         err: err,
@@ -131,3 +147,6 @@ module.exports = {
   getAllOrders,
  getOrderById
 };
+
+
+
