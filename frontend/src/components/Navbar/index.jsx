@@ -24,8 +24,9 @@ const Navbar = () => {
         <MDBContainer>
           <MDBNavbarBrand href='/'>
             <img
-              src='https://mdbootstrap.com/img/logo/mdb-transaprent-noshadows.webp'
-              height='30'
+              src='https://res.cloudinary.com/dycpjbdto/image/upload/c_scale,h_650,q_auto:best/v1708476141/2-removebg-preview_hvrakt.png'
+              height='200'
+              width='50%'
               alt=''
               loading='lazy'
             />
