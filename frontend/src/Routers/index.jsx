@@ -12,11 +12,14 @@ import CreateService from "../pages/CreateService"
 import Client from "../pages/client"
 import AdminDashboard from "../pages/AdminDashbored"
 import PendingServices from "../pages/PendingServices"
-import Service from "../pages/Service/Service"
+// import Service from "../pages/Service/Service"
+import PortFolio from "../pages/PortFolio"
+import Talk from "../pages/LetsTalk"
+import About from "../pages/About"
 export const router= createBrowserRouter(
 [
    {
-      path:"",
+      path:"/",
       element:<Home/>,
      
    },
@@ -35,7 +38,18 @@ export const router= createBrowserRouter(
         path:"service/provider",
         element: <ServiceProvider/>
     },
-
+    {
+      path:"/portfolio",
+      element: <PortFolio/>
+  },
+  {
+   path:"/letstalk",
+   element: <Talk/>
+},
+{
+   path:"/AboutUs",
+   element: <About/>
+},
     { 
         path:"/register",
 

@@ -8,6 +8,10 @@ import {
   MDBNavbarLink,
   MDBIcon,
   MDBCollapse,
+  MDBDropdown,
+  MDBDropdownToggle,
+  MDBDropdownMenu,
+  MDBDropdownItem
 } from 'mdb-react-ui-kit';
 
 const Navbar = () => {
@@ -18,7 +22,7 @@ const Navbar = () => {
 
       <MDBNavbar light bgColor='light'>
         <MDBContainer>
-          <MDBNavbarBrand href='#'>
+          <MDBNavbarBrand href='/'>
             <img
               src='https://mdbootstrap.com/img/logo/mdb-transaprent-noshadows.webp'
               height='30'
@@ -40,7 +44,7 @@ const Navbar = () => {
 <div>
 <MDBNavbar expand='lg' light bgColor='light'>
       <MDBContainer fluid>
-      <MDBNavbarLink active aria-current='page' href=''>
+      <MDBNavbarLink active aria-current='page' href='/'>
               Home
             </MDBNavbarLink>
         <MDBNavbarToggler
@@ -56,13 +60,22 @@ const Navbar = () => {
               Services
             </MDBNavbarLink>
            
-            <MDBNavbarLink href='/login'>Login</MDBNavbarLink>
-            <MDBNavbarLink href='#'>Lets Talk!</MDBNavbarLink>
-            <MDBNavbarLink href='#'>About us</MDBNavbarLink>
+            <MDBNavbarLink href='/portfolio'>PortFolio</MDBNavbarLink>
+            <MDBNavbarLink href='/letstalk'>Lets Talk!</MDBNavbarLink>
+            <MDBNavbarLink href='/AboutUs'>About us</MDBNavbarLink>
 
           </MDBNavbarNav>
         </MDBCollapse> 
-      
+              <MDBDropdown>
+                <MDBDropdownToggle tag='a' className='nav-link' role='button'>
+Login As:                </MDBDropdownToggle>
+                <MDBDropdownMenu>
+                  <MDBDropdownItem link>Action</MDBDropdownItem>
+                  <MDBDropdownItem link>Another action</MDBDropdownItem>
+                  <MDBDropdownItem link>Something else here</MDBDropdownItem>
+                </MDBDropdownMenu>
+              </MDBDropdown>
+
       </MDBContainer>
     </MDBNavbar>
     
