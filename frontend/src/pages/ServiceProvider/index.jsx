@@ -1,9 +1,9 @@
-import React, { useEffect } from "react";
+import  { useEffect } from "react";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { Container, Row, Col, Button, Image } from "react-bootstrap";
 
-import { setServices } from "../../services/redux/reducer/auth/serviceProvider";
+import { setServices } from "../../services/redux/reducer/serviceProvider";
 
 const ServiceProvider = () => {
   const dispatch = useDispatch();

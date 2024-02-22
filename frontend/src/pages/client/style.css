@@ -1,0 +1,49 @@
+.totalPriceButton {
+    background-color: navy;
+    color: white;
+    text-align: center;
+    font-size: 20px;
+    cursor: pointer;
+    margin-left: 20px;
+    width: 300px;
+  }
+  
+  .formContainer {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+  }
+  
+  .formInput {
+    width: 50%;
+    margin-bottom: 20px;
+    margin-left: 50px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 10px; 
+  }
+  
+  .serviceCard {
+    width: calc(33.33% - 20px); 
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .cardContainer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-left: -10px; 
+    margin-right: -10px;
+  }
+  
+  .serviceCard {
+    flex-basis: calc(33.33% - 20px);
+    margin-bottom: 20px;
+    margin-right: 10px; 
+  }

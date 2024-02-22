@@ -8,7 +8,10 @@ export const serviceProviderSlice = createSlice({
     setServices(state, action) {
       state.services = action.payload;
     },
+    addService(state, action) {
+      state.services = [...state.services, action.payload];
+    },
   },
 });
-export  const { setServices } = serviceProviderSlice.actions;
-export default  serviceProviderSlice.reducer;
+export const { setServices, addService } = serviceProviderSlice.actions;
+export default serviceProviderSlice.reducer;
