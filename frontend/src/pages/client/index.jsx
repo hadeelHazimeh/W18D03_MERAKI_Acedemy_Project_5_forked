@@ -93,7 +93,7 @@ const Client = () => {
       console.error("Error creating order:", error);
     }
   };
-
+//.......................................................................................
   const handleOrderPrice = () => {
     const totalOrderPrice = checkedServices.reduce((total, serviceId) => {
       const selectedService = services.find(
