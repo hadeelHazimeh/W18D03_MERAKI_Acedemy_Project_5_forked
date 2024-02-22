@@ -1,3 +1,4 @@
+// const { Query } = require("pg");
 const { pool } = require("../models/db");
 
 const createNewOrder = (req, res) => {
@@ -29,29 +30,52 @@ const createNewOrder = (req, res) => {
 };
 
 const createNewOrderServices = (req, res) => {
-  const { order_id, service_id } = req.body;
-  const query = `INSERT INTO orders_services (order_id,
-    service_id) VALUES ($1,$2) RETURNING *`;
-  const data = [order_id, service_id];
-  // service id :6,7, order_id :2
-  //
-  pool
-    .query(query, data)
+  const order_id = req.params.id;
+ const{service_package_id,service_ids} = req.body; // array
+
+  let service;
+   service_ids?service=service_ids:service=null
+  console.log(service_ids,service);
+   const data2= service_package_id
+    
+    let query
+   
+  if(service!=null){
+    console.log(req.body)
+    const data1= service.map((service_id) => `(${order_id}, ${service_id})`).join(', ');
+    query=`
+    INSERT INTO orders_services (order_id, service_id) 
+    VALUES ${data1}
+    RETURNING *`;
+    
+  }
+  else{
+    query=`INSERT INTO orders_services (order_id, service_package_id) 
+    VALUES (${order_id},${data2}) 
+    RETURNING *` 
+    
+  }
+  console.log(query)
+  pool.query(query)
     .then((result) => {
-      res.status(201).json({
+       res.status(201).json({
         success: true,
-        message: `new order-services are created`,
+        message: `your event plan is created`,
         result: result.rows,
       });
     })
     .catch((err) => {
+      console.error("Error creating order services:", err);
       res.status(500).json({
         success: false,
-        message: `Server error`,
+        message: "Server error",
         err: err,
       });
     });
 };
+
+
+
 
 const getAllOrders = (req, res) => {
   const query = `SELECT o.order_id, o.order_price, o.eventDate, o.place,
@@ -76,7 +100,7 @@ const getAllOrders = (req, res) => {
       }
     })
     .catch((err) => {
-      res.status(500).json({
+       res.status(500).json({
         success: false,
         message: "Server error",
         err: err,
@@ -85,44 +109,46 @@ const getAllOrders = (req, res) => {
 };
 //this function get the order  by id with all details including the userName (client)
 const getOrderById = (req, res) => {
-  const id = req.params.id;
+  const orderId = req.params.id;
 
-  const query = `SELECT o.user_id,
-  u.userName , 
-  o.order_id, o.order_price, o.eventDate, o.place,
-   os.service_id, s.service_name, s.details, s.price, s.image
-  FROM orders o
-  JOIN orders_services os ON o.order_id = os.order_id
-  JOIN services s ON os.service_id = s.service_id
-  JOIN users u ON o.user_id = u.user_id 
-  WHERE
-  o.order_id = $1
-  AND o.is_deleted = 0
-  AND os.is_deleted = 0;
-  
+  const query = `
+    SELECT o.order_id, o.order_price, o.eventDate, o.place, 
+           u.userName,
+           os.service_id, s.service_name, s.details, s.price, s.image,
+           sp.package_id, p.package_Name, p.Description, p.price AS package_price, p.image AS package_image
+    FROM orders o
+    JOIN users u ON o.user_id = u.user_id
+    LEFT JOIN orders_services os ON o.order_id = os.order_id
+    LEFT JOIN services s ON os.service_id = s.service_id
+    LEFT JOIN service_package sp ON os.service_package_id = sp.id
+    LEFT JOIN package p ON sp.package_id = p.package_id
+    WHERE o.order_id = $1
+      AND o.is_deleted = 0
+      AND os.is_deleted = 0;
   `;
-  const data = [id];
+  const data = [orderId];
 
-  pool
-    .query(query, data)
+  pool.query(query, data)
     .then((result) => {
       if (result.rows.length !== 0) {
         res.status(200).json({
           success: true,
-          message: `The order with id: ${id}`,
+          message: `Order details`,
           result: result.rows,
         });
       } else {
-        throw new Error("Error happened while getting the order");
+        throw new Error(`Order not found`);
       }
     })
     .catch((err) => {
+      console.error("Error fetching order details:", err);
       res.status(500).json({
         success: false,
         message: "Server error",
-        err: err,
+        err: err.message,
       });
     });
+  
 };
 
 module.exports = {
@@ -131,3 +157,6 @@ module.exports = {
   getAllOrders,
  getOrderById
 };
+
+
+
