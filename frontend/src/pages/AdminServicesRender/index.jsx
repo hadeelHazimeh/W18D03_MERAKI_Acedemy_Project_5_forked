@@ -7,13 +7,16 @@ import { setPackages,setPackagesName } from "../../services/redux/reducer/packag
 import Button from 'react-bootstrap/Button';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import Dropdown from 'react-bootstrap/Dropdown';
+import Swal from 'sweetalert2';
+
 function AdminServicesRender() {
   const dispatch=useDispatch()
     const { isLoggedIn,token } = useSelector((state) => state.auth);
    
     const { packages  } = useSelector((state) => state.packages);
     const [services, setServices] = useState([]);
-    const [packageNameAdd, setPackageNameAdd] = useState("");
+    const [messageForAddService, setMessageForAddService] = useState(false);
+    const [showAlert, setShowAlert] = useState(false);
 
   
     //-----------------------------
@@ -58,10 +61,13 @@ const callServices=()=>{
 
 }
     //-----------------------------
+    
+  
+const AddServiceToPackage=async (package_id,service_id)=>{
 
-const AddServiceToPackage=(package_id,service_id)=>{
-//console.log('hi', packageId,"  ",serviceId)
-axios
+    console.log("register")
+    try {
+      const result = await axios
       .post(
         "http://localhost:5000/service",
         { package_id,service_id} ,
@@ -69,12 +75,29 @@ axios
           headers: { Authorization: `Bearer ${token}` },
         }
       )
-      .then((result) => {
+      console.log("registerResult",result)
+      if (result.data.success) {
         console.log(result.data);
-      })
-      .catch((err) => {
-        console.log(err);
+        setMessageForAddService(true)
+
+        Swal.fire({
+          icon: 'success',
+          title: 'Success!',
+          text: "Service Added Successfully",
+          confirmButtonText: 'Hide'
+        });
+        
+      } else throw Error;
+    } catch (error) {
+      setMessageForAddService(false)
+
+      console.log(err);
+      Swal.fire({
+        icon: "error",
+        text: error.response.data.message,
       });
+
+    }
 }
 
     //-----------------------------
@@ -149,6 +172,7 @@ package_name}</MDBCardTitle>
               }}>{name.package_name }</Dropdown.Item>
              ) 
             })}
+
       </Dropdown.Menu>
     </Dropdown>
 
