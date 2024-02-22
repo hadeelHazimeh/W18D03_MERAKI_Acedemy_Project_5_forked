@@ -14,7 +14,7 @@ const dispatch=useDispatch()
           
         })
         .then((result) => {
-         console.log("services", result.data.result);
+         //console.log("services", result.data.result);
           
           dispatch(setPackages(result.data.result))
         })
