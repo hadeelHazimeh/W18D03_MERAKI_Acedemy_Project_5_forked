@@ -59,8 +59,22 @@ const callServices=()=>{
 }
     //-----------------------------
 
-const AddServiceToPackage=(packageId,serviceId)=>{
-console.log('hi', packageId,"  ",serviceId)
+const AddServiceToPackage=(package_id,service_id)=>{
+//console.log('hi', packageId,"  ",serviceId)
+axios
+      .post(
+        "http://localhost:5000/service",
+        { package_id,service_id} ,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      )
+      .then((result) => {
+        console.log(result.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
 }
 
     //-----------------------------
