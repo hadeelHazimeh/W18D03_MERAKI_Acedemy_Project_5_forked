@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import "./style.css";
 import axios from "axios";
 import { useSelector } from "react-redux";
+import Swal from 'sweetalert2';
+
 //import {isLoggedIn} from "../../services/redux/reducer/auth/index";
 import {
   MDBBtn,
@@ -27,9 +29,13 @@ const Register = () => {
   const [password, setPassword] = useState("");
   const[role, setRole] = useState("");
   const [message, setMessage] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
   const [status, setStatus] = useState(false);
   //....................................
+  
 
+  
+  
   const addNewUser = async () => {
     // e.preventDefault();
     console.log("register")
@@ -38,24 +44,36 @@ const Register = () => {
         name,
         email,
         password,
-        // role,
+         role,
       });
       console.log("registerResult",result)
       if (result.data.success) {
         
         setStatus(true);
-        setMessage(result.data.message);
+        Swal.fire({
+          icon: 'success',
+          title: 'Success!',
+          text: result.data.message,
+        });
+        
       } else throw Error;
     } catch (error) {
       setStatus(false);
-      if (error.response && error.response.data) {
-        return setMessage(error.response.data.message);
-      }
-      setMessage("Error happened while register, please try again");
+      Swal.fire({
+        icon: "error",
+        text: error.response.data.message,
+      });
+      // if (error.response && error.response.data) {
+      //   return setMessage(error.response.data.message);
+      // }
+      // setMessage("Error happened while register, please try again");
     }
   };
   //............................
-
+  const handleRadioChoice = (e) => {
+    setRole(e.target.value);
+    console.log(role, e.target.value);
+  };
   return (
     <div>
       <MDBContainer fluid>
@@ -107,22 +125,29 @@ const Register = () => {
                   <MDBRadio
                     name="inlineRadio"
                     id="inlineRadio1"
-                    value="option1"
+                    value="1"
                     label="Event Planner"
+                    checked={role==="admin"}//admin role 
+                    onChange={handleRadioChoice}
                     inline
                   />
                   <MDBRadio
                     name="inlineRadio"
                     id="inlineRadio2"
-                    value="option2"
+                    value="2"
                     label="Service Provider"
+                    checked={role==="serviceProvider"}//serviceProvider role 
+                    onChange={handleRadioChoice}
                     inline
                   />
                   <MDBRadio
                     name="inlineRadio"
                     id="inlineRadio3"
-                    value="option3"
+                    value="3"
                     label="Client"
+                    checked={role==="client"}//client role 
+                    onChange={handleRadioChoice}
+
                     inline
                   />
                 </MDBCol>
@@ -133,12 +158,10 @@ const Register = () => {
               addNewUser()}}>
                 Submit
               </MDBBtn>
-            </MDBCardBody>
+             </MDBCardBody>
           </MDBCard>
         </MDBRow>
-        {status
-              ? message && <div className="SuccessMessage">{message}</div>
-              : message && <div className="ErrorMessage">{message}</div>}
+        {/* {status ? {message}: <p>{errorMessage}</p>} */}
       </MDBContainer>
     </div>
   );
