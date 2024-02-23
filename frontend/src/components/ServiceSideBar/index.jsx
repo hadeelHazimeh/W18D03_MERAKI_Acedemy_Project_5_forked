@@ -7,9 +7,9 @@ import {
     CDBSidebarFooter,
   } from 'cdbreact';
   import { NavLink } from 'react-router-dom';
-  const ServiceProviderSideBar = () => {
+  const ServiceSideBar = () => {
       return (
-          <CDBSidebar /*  style={{backgroundColor:"white",color:"#ACDAD1"}} */ >
+          <CDBSidebar  /*  style={{backgroundColor:"white",color:"#ACDAD1"}} */ >
             <CDBSidebarHeader prefix={<i className="fa fa-bars" />}>Contrast</CDBSidebarHeader>
             <CDBSidebarContent>
               <CDBSidebarMenu>
@@ -33,4 +33,4 @@ import {
       );
     };
     
-    export default ServiceProviderSideBar;
+    export default ServiceSideBar;

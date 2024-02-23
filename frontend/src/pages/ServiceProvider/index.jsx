@@ -1,4 +1,4 @@
-import  { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -26,11 +26,28 @@ const ServiceProvider = () => {
   const [service_name, setService_name] = useState("");
   const [details, setDetails] = useState("");
   const [price, setPrice] = useState("");
-  const [image, setImage] = useState(null);
+  const [image, setImage] = useState("");
 
   const handleClose = () => setShowModal(false);
   const handleShow = () => setShowModal(true);
 
+  const uploadImage = (image) => {
+    const formData = new FormData();
+    formData.append("file", image[0]); // Assuming only one file is selected
+    formData.append("upload_preset", "amalhawwari"); // Your Cloudinary upload preset name
+    formData.append("cloud_name", "dhgpwshhe"); // Your Cloudinary cloud name
+  
+    axios
+      .post("https://api.cloudinary.com/v1_1/dhgpwshhe/image/upload", formData)
+      .then((response) => {
+        console.log(response.data);
+        // Handle the response as needed, e.g., set image URL state
+        setImage(response.data.url);
+      })
+      .catch((error) => {
+        console.error("Error uploading image:", error);
+      });
+  };
   const handeUpdateClick = (serviceId) => {
     setServiceId(serviceId);
     handleShow();
@@ -47,7 +64,7 @@ const ServiceProvider = () => {
       })
       .then((result) => {
         console.log(result);
-        dispatch(deleteServiceByID( id ));
+        dispatch(deleteServiceByID(id));
       })
       .catch((error) => {
         console.log(error);
@@ -116,7 +133,6 @@ const ServiceProvider = () => {
         <Container
           key={index}
           className="bg-white text-center py-3 mt-5 col-lg-8 mb-5"
-          
         >
           <Row>
             <Col lg={7}>
@@ -197,10 +213,13 @@ const ServiceProvider = () => {
             </Form.Group>
             <Form.Group className="mb-3" controlId="image">
               <Form.Label>Image</Form.Label>
-              <Form.Control
-                type="file"
-                onChange={(e) => setImage(e.target.value)}
-              />
+              <div>
+                <input
+                  type="file"
+                  onChange={(e) => uploadImage(e.target.files)}
+                />
+                {/* <img src={image} alt="uploaded image" /> */}
+              </div>
             </Form.Group>
           </Form>
         </Modal.Body>
