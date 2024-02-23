@@ -153,10 +153,44 @@ const updatePackageById = (req, res) => {
     });
 };
 
+//======================================================================
+
+//this function for getting all packages from packages services
+const getAllPackages = (req, res) => {
+  const query = `
+  SELECT *
+  FROM package 
+    `;
+
+  pool
+    .query(query)
+    .then((result) => {
+      if (result.rows.length === 0) {
+        res.status(404).json({
+          success: false,
+          message: `there is no packages available`,
+        });
+      } else {
+        res.status(200).json({
+          success: true,
+          message: "All the packages",
+          result: result.rows,
+        });
+      }
+    })
+    .catch((err) => {
+      res.status(500).json({
+        success: false,
+        message: "Server error",
+        err: err,
+      });
+    });
+};
 module.exports = {
   createNewPackage,
   createNewServicePackage,
   getAllPackagesServices,
   getAllServicesByPackageId,
   updatePackageById,
+  getAllPackages
 };

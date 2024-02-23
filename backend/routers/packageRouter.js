@@ -8,7 +8,8 @@ const {
   createNewServicePackage,
   getAllPackagesServices,
   getAllServicesByPackageId,
-  updatePackageById
+  updatePackageById,
+  getAllPackages
 } = require("../controllers/package");
 
 //this function for create a new package
@@ -34,4 +35,8 @@ packageRouter.get("/:id", getAllServicesByPackageId); //admin
 //endpoint /package/updatePackage/:id
 //id is for package
 packageRouter.put("/updatePackage/:id", authentication, updatePackageById); //admin
+// this function gets all the package
+//endpoint /package
+//id is for package
+packageRouter.get("/", getAllPackages); //admin
 module.exports = packageRouter;

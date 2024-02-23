@@ -11,13 +11,7 @@ export const packagesSlice = createSlice({
 
     },
     setPackagesName(state, action) {
-      state.packagesName=state.packages.map((pac,i)=>{
-//console.log('w', pac.package_name)
-        return pac.package_name
-      })
-state.packagesName=state.packagesName.filter((item,
-  index) => state.packagesName.indexOf(item) === index);
-  console.log('state', state.packagesName)
+      state.packagesName=action.payload
 
     },
   },

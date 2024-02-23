@@ -10,12 +10,26 @@ const Packages= () => {
   const { isLoggedIn,token } = useSelector((state) => state.auth);
 const dispatch=useDispatch()
   //-----------------------------
-  const filterPackages=()=>{
+  const getPackages=()=>{
+    axios
+    .get(`http://localhost:5000/package`)
+    .then((result) => {
+    
+      console.log('first', result.data.result)
 
+      dispatch(setPackagesName(result.data.result))
+
+    })
+    .catch((err) => {
+      
+      console.log(err)
+
+    });
   }
   //-----------------------------
 
   useEffect(() => {
+    getPackages()
       axios
         .get(`http://localhost:5000/package/servicePackage`, {
           
@@ -25,6 +39,7 @@ const dispatch=useDispatch()
           
           dispatch(setPackages(result.data.result))
           dispatch(setPackagesName(result.data.result))
+
         })
         .catch((err) => {
           
@@ -36,45 +51,8 @@ const dispatch=useDispatch()
   return (
     <div>
       <div style={{ display: 'flex', flexWrap: 'wrap', gap: '20px', margin:"20px"}}>
-    {packages.map((ele,i) => (
-     
-      <MDBCard key={i} style={{ maxWidth: '20rem' }}>
-       
-        <MDBCardBody>
-        <MDBCardImage
-            src={ele.image}
-            alt="..."
-            position="top"
-          />
-          <MDBCardTitle>{ele.
-package_name}</MDBCardTitle>
-{packagesName.map((name,i)=>{
-  if(ele.package_name===name){
-    return(<div key={i}>
-      {ele.service_name}
-    
-
-    </div>)
-  }
-})}
-      {/*     
-          <MDBCardText>
-            Price: ${service.price}
-            <br />
-            {service.description}
-          </MDBCardText>
-          <MDBDropdown group>
-        <MDBDropdownToggle color='primary'>Action</MDBDropdownToggle>
-        <MDBDropdownMenu>
-          <MDBDropdownItem link>Action</MDBDropdownItem>
-          <MDBDropdownItem link>Another action</MDBDropdownItem>
-          <MDBDropdownItem link>Something else here</MDBDropdownItem>
-        </MDBDropdownMenu>
-      </MDBDropdown> */}
-     
-        </MDBCardBody> 
-      </MDBCard>
-    ))}
+        
+      
     </div>
     </div>
   )
