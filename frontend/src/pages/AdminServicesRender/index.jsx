@@ -13,14 +13,31 @@ function AdminServicesRender() {
   const dispatch=useDispatch()
     const { isLoggedIn,token } = useSelector((state) => state.auth);
    
-    const { packages  } = useSelector((state) => state.packages);
+    const { packages,packagesName  } = useSelector((state) => state.packages);
     const [services, setServices] = useState([]);
     const [messageForAddService, setMessageForAddService] = useState(false);
     const [showAlert, setShowAlert] = useState(false);
 
-  
     //-----------------------------
+    const getPackages=()=>{
+      axios
+      .get(`http://localhost:5000/package`)
+      .then((result) => {
+      
+        console.log('first', result.data.result)
   
+        dispatch(setPackagesName(result.data.result))
+  
+      })
+      .catch((err) => {
+        
+        console.log(err)
+  
+      });
+    }
+    //-----------------------------
+    //-----------------------------
+/*   
 const callPackages=()=>{
   axios
   .get(`http://localhost:5000/package/servicePackage`, {
@@ -30,7 +47,6 @@ const callPackages=()=>{
    //console.log("services", result.data.result);
     
     dispatch(setPackages(result.data.result))
-    dispatch(setPackagesName(result.data.result))
 
 
   })
@@ -39,7 +55,7 @@ const callPackages=()=>{
     console.log(err)
 
   });
-}
+} */
     //-----------------------------
 
 const callServices=()=>{
@@ -104,14 +120,14 @@ const AddServiceToPackage=async (package_id,service_id)=>{
 
     useEffect(() => {
       callServices()
-      callPackages()
+      getPackages()
       }, []);
     //...............................
   return (
     <> <div>
     <div style={{ display: 'flex', flexWrap: 'wrap', gap: '20px', margin:"20px"}}>
-    {packages.map((ele,i) => (
-      <MDBCard key={i} style={{ maxWidth: '20rem' }}>
+    {packagesName.map((ele,i) => (
+      <MDBCard style={{ maxWidth: '20rem' }} key={i} >
        
         <MDBCardBody>
         <MDBCardImage
@@ -143,7 +159,7 @@ package_name}</MDBCardTitle>
 <div style={{ display: 'flex', flexWrap: 'wrap', gap: '20px' , margin:"20px"}}>
  
     {services.map((service,i) => (
-      <MDBCard key={i} style={{ maxWidth: '20rem' }}>
+      <MDBCard key={i} style={{ maxWidth: '' }}>
         <MDBCardBody>
         <MDBCardImage
             src={service.image}
@@ -151,7 +167,7 @@ package_name}</MDBCardTitle>
             position="top"
           />
          
-          <MDBCardTitle>{service.name}</MDBCardTitle>
+          <MDBCardTitle>{service.service_name}</MDBCardTitle>
           <MDBCardText>
             Price: ${service.price}
             <br />
