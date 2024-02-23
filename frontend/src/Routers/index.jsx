@@ -21,6 +21,7 @@ import PortFolio from "../pages/PortFolio"
 import Talk from "../pages/LetsTalk"
 import About from "../pages/About"
 import Navbar from "../components/Navbar"
+import ServiceProviderSideBar from "../components/serviceProviderSideBar"
 
 export const router= createBrowserRouter(
 [
@@ -40,7 +41,9 @@ export const router= createBrowserRouter(
   },
     {
         path:"service/provider",
-        element: <ServiceProvider/>
+        element: <><ServiceProviderSideBar/>
+        <ServiceProvider/>
+        </>
     },
     {
       path:"/portfolio",

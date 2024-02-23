@@ -1,4 +1,4 @@
-import  { useEffect } from "react";
+import  { useEffect, useState } from "react";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -15,7 +15,6 @@ import {
   updateServiceById,
   deleteServiceByID,
 } from "../../services/redux/reducer/serviceProvider";
-
 
 const ServiceProvider = () => {
   const dispatch = useDispatch();
@@ -117,6 +116,7 @@ const ServiceProvider = () => {
         <Container
           key={index}
           className="bg-white text-center py-3 mt-5 col-lg-8 mb-5"
+          
         >
           <Row>
             <Col lg={7}>
