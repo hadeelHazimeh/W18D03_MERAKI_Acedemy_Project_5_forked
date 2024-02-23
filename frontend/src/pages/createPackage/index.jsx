@@ -51,7 +51,7 @@ const CreatePackage = () => {
       const order = await axios.get(
         `http://localhost:5000/orders/search_1/${orderId}`
       );
-      console.log("Detailsorder", order);
+      console.log("order", order);
       setOrderDetails(order.data.result[0]);
       // setSelectedServices(order.data.result);
       // console.log("SelectedServices", order.data.result);
@@ -73,7 +73,7 @@ const CreatePackage = () => {
           headers: { Authorization: `Bearer ${token}` },
         }
       );
-      console.log(orderResult.data.result[0]);
+      console.log("orderResult",orderResult.data.result[0]);
       setOrderId(orderResult.data.result[0].order_id);
      
       //finding the selected packages to set the price 
@@ -101,7 +101,7 @@ const CreatePackage = () => {
         }
       );
 
-      console.log(orderPackageResult.data);
+      console.log("orderPackageResult",orderPackageResult.data);
       // setStatus(true);
       Swal.fire({
         icon: "success",
@@ -110,6 +110,11 @@ const CreatePackage = () => {
       });
       setShowPreview(true);
     } catch (error) {
+      //setStatus(false);
+      Swal.fire({
+        icon: "error",
+        text: error.response.data.message,
+      });
       console.error("Error creating order:", error);
     }
   };
@@ -178,9 +183,9 @@ const CreatePackage = () => {
           ))}
         </div>
         <MDBBtn type="submit" className="totalPriceButton">
-          Submit your plan
+        Submit your plan
         </MDBBtn>
-      
+        </form>
 
       {showPreview ? (
         <div className="d-flex justify-content-end">
@@ -218,7 +223,7 @@ const CreatePackage = () => {
           <Button onClick={() => setModalShow(false)}>Close</Button>
         </Modal.Footer>
       </Modal>
-      </form>
+      
     </div>
   );
 };
