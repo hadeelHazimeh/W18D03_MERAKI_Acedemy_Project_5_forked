@@ -56,7 +56,7 @@ const getAllPackagesServices = (req, res) => {
     SELECT * FROM service_package
     RIGHT OUTER JOIN package ON package.package_id = service_package.package_id
     LEFT OUTER JOIN services ON services.service_id = service_package.service_id
-    ORDER BY service_package.package_id DESC;
+    ORDER BY package.package_name DESC;
     `;
 
   pool

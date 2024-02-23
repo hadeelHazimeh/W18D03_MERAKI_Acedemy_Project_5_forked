@@ -15,7 +15,10 @@ export const packagesSlice = createSlice({
 //console.log('w', pac.package_name)
         return pac.package_name
       })
-//console.log('state', state.packagesName)
+state.packagesName=state.packagesName.filter((item,
+  index) => state.packagesName.indexOf(item) === index);
+  console.log('state', state.packagesName)
+
     },
   },
 });

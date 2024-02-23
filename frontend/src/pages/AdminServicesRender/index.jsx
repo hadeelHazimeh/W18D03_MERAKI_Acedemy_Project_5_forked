@@ -65,11 +65,10 @@ const callServices=()=>{
   
 const AddServiceToPackage=async (package_id,service_id)=>{
 
-    console.log("register")
     try {
       const result = await axios
       .post(
-        "http://localhost:5000/service",
+        "http://localhost:5000/package/create/servicePackage",
         { package_id,service_id} ,
         {
           headers: { Authorization: `Bearer ${token}` },

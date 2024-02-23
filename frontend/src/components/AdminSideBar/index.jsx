@@ -15,8 +15,8 @@ const AdminSideBar = () => {
             <CDBSidebarMenu>
               <NavLink to="pending/Services"><CDBSidebarMenuItem icon="th-large">Pending Services</CDBSidebarMenuItem></NavLink>
              <NavLink to={"packages"}> <CDBSidebarMenuItem icon="sticky-note">Components</CDBSidebarMenuItem></NavLink>
-             <NavLink to={"Services"}> <CDBSidebarMenuItem icon="credit-card" iconType="solid">
-                Metrics
+             <NavLink to={"Services"}> <CDBSidebarMenuItem icon="th-large" iconType="solid">
+                Services
               </CDBSidebarMenuItem></NavLink>
             </CDBSidebarMenu>
           </CDBSidebarContent>
