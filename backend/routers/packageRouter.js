@@ -20,7 +20,7 @@ packageRouter.post("/create", createNewPackage); //admin
 //this function for create a new package
 //endpoint=>/package/create/servicePackage
 //body=> { service_id,package_id }
-packageRouter.post("/create/servicePackage",authentication, createNewServicePackage); //admin
+packageRouter.post("/create/servicePackage/:package_id",authentication, createNewServicePackage); //admin
 
 //this function for create a new package
 //endpoint=>/package/servicePackage
