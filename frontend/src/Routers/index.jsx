@@ -21,6 +21,7 @@ import PortFolio from "../pages/PortFolio"
 import Talk from "../pages/LetsTalk"
 import About from "../pages/About"
 import Navbar from "../components/Navbar"
+import ServiceSideBar from "../components/ServiceSideBar"
 
 export const router= createBrowserRouter(
 [
@@ -40,7 +41,14 @@ export const router= createBrowserRouter(
   },
     {
         path:"service/provider",
-        element: <ServiceProvider/>
+        element: <>
+        <div style={{height:"100vh",display:"grid",gridTemplateColumns:"0.5fr 4fr"}}>
+        <ServiceSideBar/>
+        <div className="d-flex flex-column">
+        <ServiceProvider/>
+        </div>
+        </div>
+        </>
     },
     {
       path:"/portfolio",
