@@ -3,11 +3,6 @@ const { pool } = require("../models/db");
 
 const createNewOrder = (req, res) => {
 
-  const { order_price, eventDate, event_name, place, status } = req.body;
-  const user_id = req.token.userId;
-
-  const data = [order_price, user_id, eventDate,event_name, place, status];
-
   const { order_price, event_name,eventDate,place, status } = req.body;
   const user_id = req.token.userId;
 
