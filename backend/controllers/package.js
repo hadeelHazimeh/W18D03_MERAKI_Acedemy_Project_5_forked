@@ -11,7 +11,7 @@ const createNewPackage = (req, res) => {
       console.log(result.rows);
       res.status(200).json({
         success: true,
-        message: "package created successfully",
+        message: "your package created successfully",
         result: result.rows[0],
       });
     })
@@ -27,16 +27,22 @@ const createNewPackage = (req, res) => {
 //======================================================================
 //this function for get all package with service details
 const createNewServicePackage = (req, res) => {
-  const { service_id, package_id } = req.body;
-  const value = [service_id, package_id];
-  const query = `INSERT INTO service_package ( service_id,package_id) VALUES ($1,$2) RETURNING *;`;
+  const package_id = req.params.id;
+
+  const { service_ids } = req.body;
+  const data1= service_ids.map((service_id) => `(${package_id}, ${service_id})`).join(', ');
+  query=`
+  INSERT INTO service_package  (service_id,package_id) 
+  VALUES ${data1}
+  RETURNING *`;
+
   pool
-    .query(query, value)
+    .query(query)
     .then((result) => {
       console.log(result.rows);
       res.status(200).json({
         success: true,
-        message: "service_package created successfully",
+        message: "Your package created successfully",
         result: result.rows[0],
       });
     })
