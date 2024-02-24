@@ -62,7 +62,13 @@ const getServiceByName = (req, res) => {
 // End Point : GET /service
 const getAllServices = (req, res) => {
   pool
+
     .query("SELECT * FROM services WHERE services.is_deleted=0 order by service_id desc")
+
+    .query(
+      "SELECT * FROM services WHERE services.is_deleted=0 order by service_id desc"
+    )
+
     .then((result) => {
       if (result.rows.length === 0) {
         res.status(404).json({
@@ -175,7 +181,10 @@ const updateServiceById = (req, res) => {
 // this function to delete a service By id
 // EndPoint : GET /service/:id
 const deleteServiceById = (req, res) => {
-  const {id} = req.params;
+
+
+  const { id } = req.params;
+>
   const userId = req.token.userId;
   console.log(id);
   pool
@@ -233,7 +242,14 @@ const deleteServiceById = (req, res) => {
 const getServiceByProvider = (req, res) => {
   const id = req.token.userId;
   pool
+
     .query(`SELECT * FROM services WHERE provider =$1 AND is_deleted=0 order by service_id desc`, [id])
+
+    .query(
+      `SELECT * FROM services WHERE provider =$1 AND is_deleted=0 order by service_id desc`,
+      [id]
+    )
+
     .then((result) => {
       if (result.rows.length === 0) {
         res.status(404).json({
@@ -293,6 +309,56 @@ const updateService = (req, res) => {
     });
 };
 
+
+// this function to get All orders  of a service provider
+// EndPoint : GET /service/orders/all
+// this function for service provider
+const getAllOrdersOfProvider = (req, res) => {
+  const id = req.token.userId;
+  pool
+    .query(
+      `SELECT
+  users.userName,
+  services.service_name,
+  services.image,
+  services.price,
+  orders.eventDate,
+  orders.place
+FROM
+  orders
+JOIN
+  orders_services ON orders.order_id = orders_services.order_id
+JOIN
+  services ON orders_services.service_id = services.service_id
+JOIN
+  users ON services.provider = users.user_id
+WHERE
+  users.user_id = $1`,
+      [id]
+    )
+    .then((result) => {
+      if (!result.rowCount) {
+        return res.status(404).json({
+          success: false,
+          message: "No orders yet",
+        });
+      }
+      res.status(200).json({
+        success: true,
+        message: `All Order for service provider`,
+        orders: result.rows,
+      });
+    })
+    .catch((err) => {
+      res.status(500).json({
+        success: false,
+        message: "Server error",
+        err: err.message,
+      });
+    });
+};
+
+
 module.exports = {
   createService,
   getAllServices,
@@ -303,5 +369,6 @@ module.exports = {
   getPendingService,
   getServiceByProvider,
   updateService,
+  getAllOrdersOfProvider,
 };
 
