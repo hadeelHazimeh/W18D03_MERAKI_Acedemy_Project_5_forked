@@ -186,6 +186,7 @@ const CreatePackage = () => {
                   label="Select"
                   checked={checkedPackages === Package.package_id}
                   onChange={() => handleCheckboxChange(Package.package_id)}
+                
                 />
               </MDBCardBody>
             </MDBCard>
