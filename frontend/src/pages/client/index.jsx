@@ -14,8 +14,6 @@ import {
 import {Button,Modal,Nav} from "react-bootstrap";
 
 
-  MDBCardImage,
-} from "mdb-react-ui-kit";
 import { Button, Modal, Nav } from "react-bootstrap";
 
 

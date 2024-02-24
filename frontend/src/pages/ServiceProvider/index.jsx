@@ -84,7 +84,6 @@ const ServiceProvider = () => {
         console.log(result);
 
         dispatch(deleteServiceByID( id ));
-=======
         dispatch(deleteServiceByID(id));
 
       })
@@ -205,6 +204,7 @@ const ServiceProvider = () => {
                   </div>
                 </div>
               </div>
+              
             </Col>
           </Row>
         </Container>
