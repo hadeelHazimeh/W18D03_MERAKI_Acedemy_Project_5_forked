@@ -15,6 +15,7 @@ import {
   updateServiceById,
   deleteServiceByID,
 } from "../../services/redux/reducer/serviceProvider";
+import './style.css';
 
 const ServiceProvider = () => {
   const dispatch = useDispatch();
@@ -132,21 +133,22 @@ const ServiceProvider = () => {
       {serviceProvider.map((service, index) => (
         <Container
           key={index}
-          className="bg-white text-center py-3 mt-5 col-lg-8 mb-5"
+          className=" text-center py-3 mt-5 col-lg-8 mb-1 service-container"
         >
           <Row>
-            <Col lg={7}>
+            <Col lg={7} className="d-flex justify-content-center align-items-center">
               <div className="left-images">
                 <Image
                   src={service.image}
                   alt={service.service_name}
                   fluid
-                  width={"70%"}
+                  width={"90%"}
                   height={"50%"}
+                  className="service-image"
                 />
               </div>
             </Col>
-            <Col lg={4} className="mt-5" style={{ fontSize: "1.2rem" }}>
+            <Col lg={4} className="mt-3 ms-5 service-details">
               <div className="right-content mt-3">
                 <h4 className="right-content mb-3 fw-bolder">
                   {service.service_name}
@@ -154,8 +156,8 @@ const ServiceProvider = () => {
                 <p>{service.details}</p>
                 <div className="total">
                   <h4>status: {service.status}</h4>
-                  <h4>price: $ {service.price}</h4>
-                  <div className="main-border-button">
+                  <h4 className="service-price">price: $ {service.price}</h4>
+                  <div className="main-border-button service-buttons">
                     <Button
                       variant="dark"
                       className="mt-3 mx-1 "
@@ -165,7 +167,7 @@ const ServiceProvider = () => {
                     </Button>
                     <Button
                       variant="dark"
-                      className="mt-3 mx-1 "
+                      className="mt-3 ms-3 "
                       onClick={() => deleteService(service.service_id)}
                     >
                       Delete
@@ -227,7 +229,7 @@ const ServiceProvider = () => {
           <Button variant="secondary" onClick={handleClose}>
             Close
           </Button>
-          <Button variant="primary" onClick={updateService}>
+          <Button  onClick={updateService} style={{backgroundColor: "#00A3AF !important" }}>
             Save Changes
           </Button>
         </Modal.Footer>

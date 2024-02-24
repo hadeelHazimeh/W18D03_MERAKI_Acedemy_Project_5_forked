@@ -41,9 +41,9 @@ CREATE TABLE events (
 CREATE TABLE services (
     service_id SERIAL NOT NULL,
     service_name VARCHAR (255),
-    details VARCHAR (255),
+    details TEXT,
     price INT,
-    image VARCHAR (255),
+    image TEXT,
     status VARCHAR (255) DEFAULT 'pending',
     provider INT,
     is_deleted SMALLINT DEFAULT 0,
