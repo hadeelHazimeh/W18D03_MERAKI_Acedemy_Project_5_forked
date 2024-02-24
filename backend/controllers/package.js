@@ -27,12 +27,12 @@ const createNewPackage = (req, res) => {
 //======================================================================
 //this function for get all package with service details
 const createNewServicePackage = (req, res) => {
-  const package_id = req.params.id;
+  const {package_id} = req.params;
 
   const { service_ids } = req.body;
   const data1= service_ids.map((service_id) => `(${package_id}, ${service_id})`).join(', ');
   query=`
-  INSERT INTO service_package  (service_id,package_id) 
+  INSERT INTO service_package  (package_id,service_id) 
   VALUES ${data1}
   RETURNING *`;
 
@@ -47,11 +47,13 @@ const createNewServicePackage = (req, res) => {
       });
     })
     .catch((err) => {
+      console.log(service_ids,package_id);
       res.status(500).json({
         success: false,
         message: "Server error",
         err: err,
       });
+      console.log('err', err)
     });
 };
 //======================================================================

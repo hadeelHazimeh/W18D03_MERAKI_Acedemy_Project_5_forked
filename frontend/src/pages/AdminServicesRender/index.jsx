@@ -11,60 +11,71 @@ import Swal from 'sweetalert2';
 import Modal from "react-bootstrap/Modal";
 
 function AdminServicesRender() {
-  const [modalShow, setModalShow] = useState(false);
+  const [showPrice, setShowPrice] = useState(false);
 
+  const [modalShow, setModalShow] = useState(false);
+const [package_id, setPackageId] = useState(null)
   const dispatch=useDispatch()
     const { isLoggedIn,token } = useSelector((state) => state.auth);
    
     const { packages,packagesName  } = useSelector((state) => state.packages);
     const [services, setServices] = useState([]);
     const [messageForAddService, setMessageForAddService] = useState(false);
-    const [showAlert, setShowAlert] = useState(false);
+    const [packageInfo, setPackageInfo] = useState({price:0,
+      package_Name:"",
+      Description:"",
+      image:"",
+      event:"test"
+    });
+    const [checkedServices, setCheckedServices] = useState([]);
+    const [ClickedPrice, setClickedPrice] = useState(false);
 
     //-----------------------------
 
   //..................................................................................
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setOrderData({ ...orderData, [name]: value });
+    setPackageInfo({ ...packageInfo, [name]: value });
   };
   //...................................................................................
-  const handleSubmitOrder = async (e) => {
+  const handleSubmitPackage = async (e) => {
     e.preventDefault();
     //loader
     try {
-      const orderResult = await axios.post(
-        `http://localhost:5000/orders/create`,
-        orderData,
-        {
-          headers: { Authorization: `Bearer ${token}` },
-        }
+      const packageResult = await axios.post(
+        `http://localhost:5000/package/create`,
+        {packageInfo},
+
       );
-      console.log(orderResult.data.result[0]);
-     setOrderId(orderResult.data.result[0].order_id)
+      console.log(packageResult.data.result);
+      console.log(1111,packageResult.data.result.package_id);
+
+     setPackageId(packageResult.data.result.package_id)
       //selected services with the created order
-      const orderServiceResult = await axios.post(
+      //""
+      const packageServiceResult = await axios.post(
         
-        `http://localhost:5000/orders/orderService/${orderResult.data.result[0].order_id}`,
+        `http://localhost:5000/package/create/servicePackage/${packageResult.data.result.package_id}`,
         { service_ids: checkedServices },
         {
           headers: { Authorization: `Bearer ${token}` },
         }
       );
 
-      console.log(orderServiceResult.data);
-      setStatus(true);
+      console.log(packageServiceResult.data);
+      //setStatus(true);
       Swal.fire({
         icon: "success",
         title: "Success!",
-        text: orderServiceResult.data.message,
-      });
+        text: packageServiceResult.data.message,
+      });  
     } catch (error) {
       console.error("Error creating order:", error);
+      console.log(package_id,1212);
     }
   };
 
-  const handleOrderPrice = () => {
+  const handlePackagePrice = () => {
     const totalOrderPrice = checkedServices.reduce((total, serviceId) => {
       const selectedService = services.find(
         (service) => service.service_id === serviceId
@@ -73,7 +84,7 @@ function AdminServicesRender() {
       return total + selectedService.price;
     }, 0);
     console.log("total price", totalOrderPrice);
-    setOrderData({ ...orderData, order_price: totalOrderPrice });
+    setPackageInfo({ ...packageInfo, price: totalOrderPrice });
     setClickedPrice(true);
   };
 
@@ -95,15 +106,15 @@ function AdminServicesRender() {
   //..........................................................................................
 
 
-  const getOrderDetails = async (orderId) => {
+  const getPackageDetails = async (package_id) => {
     try {
-      const order = await axios.get(`http://localhost:5000/orders/search_1/${orderId}`);
-      console.log("Detailsorder",order)
-      setOrderDetails(order.data.result[0]);
+      const packageService = await axios.get(`http://localhost:5000/package/${package_id}`);
+      console.log("Detailsorder",packageService)
+      setPackageInfo(packageService.data.result[0]);
 
-      // setModalShow(true);
+      setModalShow(true);
     } catch (error) {
-      console.error("Error getting order details:", error);
+      console.error("Error getting package details:", error);
     }
   };
 
@@ -184,32 +195,28 @@ const AddServiceToPackage=async (package_id,service_id)=>{
     <h1>
       create  <a>package</a> 
     </h1>
-    {/* onSubmit={handleSubmitOrder} */}
-    <form >
+    
+    <form onSubmit={handleSubmitPackage}  >
     <MDBRow className="formInput">
         <MDBInput
           label="Package Name"
           type="text"
-          id="Package Name"
-          name="Package Name"
-          //value={orderData.place}
-          //onChange={handleInputChange}
+          id="package_Name"
+          name="package_Name"
+          value={packageInfo.package_Name}
+          onChange={handleInputChange}
         />
       </MDBRow>
-      <MDBRow className="formInput">
-        <MDBInput
-          label="Place"
-          type="text"
-          id="place"
-          name="place"
-          // value={orderData.place}
-          // onChange={handleInputChange}
-        />
-      </MDBRow>
+
       <MDBRow rows={4} className="formInput">
-      <MDBInput wrapperClass='mb-4' textarea id='form4Example3' rows={4} label='Details' />
+      <MDBInput wrapperClass='mb-4'  label="Description"
+          type="text"
+          id="Description"
+          name="Description"
+       value={packageInfo.Description}
+        onChange={handleInputChange} />
       </MDBRow>
-      <MDBRow  className="formInput">
+       <MDBRow  className="formInput">
       <div className="mb-3">
               <label htmlFor="image" className="form-label">
                 Image
@@ -221,11 +228,11 @@ const AddServiceToPackage=async (package_id,service_id)=>{
                 onChange={(e) => setImage(e.target.files[0])}
               />
             </div>
-      </MDBRow>
+      </MDBRow> 
 
       <div className="cardContainer">
-        {services.map((service) => (
-          <MDBCard className="serviceCard">
+        {services.map((service,i) => (
+          <MDBCard key={i} className="serviceCard">
             <MDBCardBody>
             <MDBCardImage
             src={service.image}
@@ -243,17 +250,17 @@ const AddServiceToPackage=async (package_id,service_id)=>{
 
               <MDBCheckbox
                 label="Select"
-               // checked={checkedServices.includes(service.service_id)}
-                // onChange={() => handleCheckboxChange(service.service_id)}
+               checked={checkedServices.includes(service.service_id)}
+                 onChange={() => handleCheckboxChange(service.service_id)}
               />
             </MDBCardBody>
           </MDBCard>
         ))}
       </div>
 
-      {true ? (
+      {showPrice ? (
         <>
-          <MDBBtn className="totalPriceButton" //onClick={handleOrderPrice}
+          <MDBBtn className="totalPriceButton" onClick={handlePackagePrice}
           >
             calculate the total Price
           </MDBBtn>
@@ -262,22 +269,22 @@ const AddServiceToPackage=async (package_id,service_id)=>{
         <></>
       )}
 
-      {true ? (
+      {ClickedPrice ? (
         <>
           <MDBRow className="mb-4">
-            <p>Total Price: JD{/*  {orderData.order_price} */}</p>
+            <p>Total Price: {packageInfo.price} JD</p>
           </MDBRow>
         </>
       ) : (
         <></>
       )}
 
-      <MDBBtn type="submit"   className="totalPriceButton">Submit your plan</MDBBtn>
+      <MDBBtn type="submit"   className="totalPriceButton">Submit your Package</MDBBtn>
     </form>
     
     <MDBBtn onClick={() => {setModalShow(true)
-    console.log("orderData.order_id",orderData)
-    //getOrderDetails(orderId)
+    console.log("orderData.order_id",packageInfo)
+    getPackageDetails(package_id)
   
   
   }
@@ -289,23 +296,23 @@ const AddServiceToPackage=async (package_id,service_id)=>{
      
       
       className="totalPriceButton">
-        Preview the Order
+        Preview the package
       </MDBBtn>
 
       <Modal show={modalShow} onHide={() => setModalShow(false)}>
         <Modal.Header closeButton>
-          <Modal.Title>Your EVENT is now planned</Modal.Title>
+          <Modal.Title>Your package is now Ready</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-        {true && (
+{/*         {packageInfo && (
     <div>
-{/*               <p>Event Date: {orderDetails.eventDate}</p>
+             <p>Event Date: {orderDetails.eventDate}</p>
       <p>Place: {orderDetails.place}</p>
       <p>Total Price: JD {orderDetails.order_price}</p>
-      <p>Services:</p> */}
+      <p>Services:</p> 
       
     </div>
-  )}
+  )} */}
 
         </Modal.Body>
         <Modal.Footer>
