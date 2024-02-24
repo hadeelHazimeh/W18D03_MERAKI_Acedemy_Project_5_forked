@@ -1,4 +1,4 @@
-import  { useEffect } from "react";
+import { useEffect } from "react";
 import {
   MDBInput,
   MDBBtn,
@@ -8,23 +8,38 @@ import {
   MDBCardTitle,
   MDBCardText,
   MDBCheckbox,
+  MDBCardImage
 } from "mdb-react-ui-kit";
+import {Button,Modal,Nav} from "react-bootstrap";
+
+
 import { useSelector } from "react-redux";
 import axios from "axios";
 import { useState } from "react";
+import Swal from "sweetalert2";
 
+import "./style.css";
 //.....................................
 
 const Client = () => {
   // const { isLoggedIn } = useSelector((state) => state.auth);
-  const [status, setStatus] = useState(false);
+  const [showPrice, setShowPrice] = useState(false);
+  const [ClickedPrice, setClickedPrice] = useState(false);
   const token = useSelector((state) => state.auth.token);
   const [services, setServices] = useState([]);
-   const [checkedServices, setCheckedServices] = useState([]);
+  const [status, setStatus] = useState(false);
+  const [checkedServices, setCheckedServices] = useState([]);
+ 
+  const [modalShow, setModalShow] = useState(false);
+  const [showPreview, setShowPreview] = useState(false);
+  const [orderDetails, setOrderDetails] = useState(null);
+  const [SelectedServices, setSelectedServices] = useState([]);
+  const [orderId, setOrderId] = useState("");
   const [orderData, setOrderData] = useState({
     order_price: 0,
     eventDate: "",
     place: "",
+    event_name:""
   });
 
   //...................................................................................
@@ -47,19 +62,9 @@ const Client = () => {
   };
   //...................................................................................
   const handleSubmitOrder = async (e) => {
-     e.preventDefault();
+    e.preventDefault();
     //loader
     try {
-      //reduce HOF to calculate the total order price as summation of checked services
-      const totalOrderPrice = checkedServices.reduce((total, serviceId) => {
-        const selectedService = services.find(
-          (service) => service.service_id === serviceId
-        );
-
-        return total + selectedService.price;
-      }, 0);
-      console.log("total price", totalOrderPrice);
-      setOrderData({ ...orderData, order_price: totalOrderPrice });
       const orderResult = await axios.post(
         `http://localhost:5000/orders/create`,
         orderData,
@@ -68,7 +73,7 @@ const Client = () => {
         }
       );
       console.log(orderResult.data.result[0]);
-
+      setOrderId(orderResult.data.result[0].order_id);
       //selected services with the created order
       const orderServiceResult = await axios.post(
         `http://localhost:5000/orders/orderService/${orderResult.data.result[0].order_id}`,
@@ -78,15 +83,43 @@ const Client = () => {
         }
       );
 
-     console.log(orderServiceResult.data);
+      console.log(orderServiceResult.data);
+      setStatus(true);
+      Swal.fire({
+        icon: "success",
+        title: "Success!",
+        text: orderServiceResult.data.message,
+      });
+      setShowPreview(true);
     } catch (error) {
+      // setStatus(false);
+      // Swal.fire({
+      //   icon: "error",
+      //   text: error.response.data.message
+      // });
       console.error("Error creating order:", error);
     }
+  };
+//.......................................................................................
+  const handleOrderPrice = (e) => {
+    e.preventDefault();
+    const totalOrderPrice = checkedServices.reduce((total, serviceId) => {
+      const selectedService = services.find(
+        (service) => service.service_id === serviceId
+      );
+
+      return total + selectedService.price;
+    }, 0);
+    console.log("total price", totalOrderPrice);
+    setOrderData({ ...orderData, order_price: totalOrderPrice });
+    setClickedPrice(true);
   };
 
   //.........................................................................................
 
   const handleCheckboxChange = (serviceId) => {
+    //reduce HOF to calculate the total order price as summation of checked services
+
     console.log("checkedServices", checkedServices, "serviceId", serviceId);
     if (checkedServices.includes(serviceId)) {
       // Remove serviceId if already checked
@@ -94,27 +127,58 @@ const Client = () => {
     } else {
       // Add serviceId if not checked
       setCheckedServices([...checkedServices, serviceId]);
+
+      setShowPrice(true);
     }
   };
   //..........................................................................................
 
+  const getOrderDetails = async (orderId) => {
+    try {
+      const order = await axios.get(
+        `http://localhost:5000/orders/search_1/${orderId}`
+      );
+      console.log("Detailsorder", order);
+      setOrderDetails(order.data.result[0]);
+      setSelectedServices(order.data.result);
+      console.log("SelectedServices", order.data.result);
+
+      // setModalShow(true);
+    } catch (error) {
+      console.error("Error getting order details:", error);
+    }
+  };
+
+  //..........................................................................................
+
   return (
-    <div>
-      <h1>
-        Plan your event by <a>services</a> or choose from our <a>packages</a>
-      </h1>
-      <form onSubmit={handleSubmitOrder}>
-        <MDBRow className="mb-4">
+    <div className="formContainer">
+      <h2>Plan your event by these services or choose from our <span><Nav.Link href="CreatePackage">Packages</Nav.Link></span></h2>
+
+     
+      <form >
+      <MDBRow className="formInput">
+          <MDBInput
+            label="Event name"
+            type="text"
+            id="event_name"
+            name="event_name"
+            value={orderData.event_name}
+            onChange={handleInputChange}
+          />
+        </MDBRow>
+        <MDBRow className="formInput">
           <MDBInput
             label="Event Date"
             type="date"
             id="eventDate"
+            className="formInput"
             name="eventDate"
             value={orderData.eventDate}
             onChange={handleInputChange}
           />
         </MDBRow>
-        <MDBRow className="mb-4">
+        <MDBRow className="formInput">
           <MDBInput
             label="Place"
             type="text"
@@ -124,16 +188,21 @@ const Client = () => {
             onChange={handleInputChange}
           />
         </MDBRow>
+       
 
-
-        <div style={{ display: "flex", flexWrap: "wrap", gap: "20px" }}>
+        <div className="cardContainer">
           {services.map((service) => (
-            <MDBCard>
+            <MDBCard className="serviceCard">
               <MDBCardBody>
-                <MDBCardTitle>name: {service.service_name}</MDBCardTitle>
-
+                <MDBCardTitle> Service name: {service.service_name}</MDBCardTitle>
+                <MDBCardImage
+            src={service.image}
+            alt="..."
+            position="top"
+            className="cardImg"
+          />
                 <MDBCardText>
-                  {service.image}
+                  {/* {service.image} */}
                   Price: JD {service.price}
                   <br />
                   description: {service.details}
@@ -148,16 +217,87 @@ const Client = () => {
             </MDBCard>
           ))}
         </div>
-        <MDBRow className="mb-4">
-          <p>Total Price: JD {orderData.order_price}</p>
-        </MDBRow>
+
+       
+      
+  {}
         
-        <MDBRow className="mb-4">
-          <MDBBtn className="mb-4" type="submit" block>
-            Submit your plan
-          </MDBBtn>
-        </MDBRow>
       </form>
+
+      {showPreview ? (
+    <div className="d-flex justify-content-end">
+      <MDBBtn
+        onClick={() => {
+          setModalShow(true);
+          console.log("orderData.order_id", orderData);
+          getOrderDetails(orderId);
+        }}
+        className="totalPriceButton"
+      >
+        Preview the Order
+      </MDBBtn>
+    </div>
+  ) : (
+    <>
+    
+    <div className="price">
+      {showPrice ? (
+          <>
+          <div >
+            <MDBBtn className="totalPriceButton"  onClick={handleOrderPrice}>
+             {ClickedPrice ?<p> Total Price :{orderData.order_price}</p>: "calculate the total Price"} 
+            </MDBBtn></div>
+            <MDBBtn  onClick={handleSubmitOrder} 
+        className="totalPriceButton" color='dark'>
+          Submit your plan
+        </MDBBtn>
+          </>
+        ) : (
+          <></>
+        )}
+
+{/* {ClickedPrice ? (
+          <>
+            <MDBRow className="mb-4">
+              <p>Total Price: JD {orderData.order_price}</p>
+            </MDBRow>
+          </>
+        ) : (
+          <></>
+        )} */}
+</div>
+    
+    </>
+  )}
+
+      <Modal show={modalShow} onHide={() => setModalShow(false)}>
+        <Modal.Header closeButton>
+          <Modal.Title>Your EVENT is now planned</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          {orderDetails && (
+            <div>
+              <p>Event: {orderDetails.event_name}</p>
+              <p>Event Date: {orderDetails.eventdate}</p>
+              <p>Place: {orderDetails.place}</p>
+              <p>Total Price: JD {orderDetails.order_price}</p>
+
+              <p>Selected Services:</p>
+              <ul>
+                {SelectedServices.map((service) => (
+                  <li>
+                    <p>Name: {service.service_name}</p>
+                    <p>Details: {service.details}</p>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+        </Modal.Body>
+        <Modal.Footer>
+          <Button onClick={() => setModalShow(false)}>Close</Button>
+        </Modal.Footer>
+      </Modal>
     </div>
   );
 };

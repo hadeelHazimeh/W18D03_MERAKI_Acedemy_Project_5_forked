@@ -12,11 +12,16 @@ import CreateService from "../pages/CreateService"
 import Client from "../pages/client"
 import AdminDashboard from "../pages/AdminDashbored"
 import PendingServices from "../pages/PendingServices"
+
+import CreatePackage from "../pages/createPackage"
+import AdminServicesRender from "../pages/AdminServicesRender"
+
 // import Service from "../pages/Service/Service"
 import PortFolio from "../pages/PortFolio"
 import Talk from "../pages/LetsTalk"
 import About from "../pages/About"
 import Navbar from "../components/Navbar"
+
 export const router= createBrowserRouter(
 [
    {
@@ -89,12 +94,23 @@ export const router= createBrowserRouter(
             element:<PendingServices/>
          },{
             path:"packages",
-            element:<Packages/>
-        },
+            element:<Packages/>,
+            children:[
+            {   path:"pending/Services",
+            element:<PendingServices/>}
+
+            ]
+        },  {
+         path:"Services",
+         element:<AdminServicesRender/>
+      },
       ]
    },
 
-    
+    {
+      path:"createPackage",
+      element:<CreatePackage/>
+    }
 
 ]
 
