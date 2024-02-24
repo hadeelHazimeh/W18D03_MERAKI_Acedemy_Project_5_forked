@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { setPackages,setPackagesName } from "../../services/redux/reducer/packages";
 const Packages= () => {
-  const [filterElement, setFilterElement] = useState({index:0})
+
   const { packages, packagesName} = useSelector((state) => state.packages);
 
   const { isLoggedIn,token } = useSelector((state) => state.auth);
