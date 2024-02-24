@@ -93,13 +93,13 @@ const getServiceByProviderId = (req, res) => {
     .query(`SELECT * FROM services WHERE provider =$1 AND is_deleted=0`, [id])
     .then((result) => {
       if (result.rows.length === 0) {
-        res.status(404).json({
+        return res.status(404).json({
           success: false,
 
           message: `No Services Found for this provider ${id}!`,
         });
       }
-      res.status(200).json({
+       return res.status(200).json({
         success: true,
         message: `All the services`,
         services: result.rows,

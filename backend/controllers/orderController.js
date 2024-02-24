@@ -2,14 +2,14 @@
 const { pool } = require("../models/db");
 
 const createNewOrder = (req, res) => {
-  const { order_price, eventDate, place, status } = req.body;
+  const { order_price, eventDate, event_name, place, status } = req.body;
   const user_id = req.token.userId;
 
-  const data = [order_price, user_id, eventDate, place, status];
+  const data = [order_price, user_id, eventDate,event_name, place, status];
 
   pool
     .query(
-      `INSERT INTO orders (order_price, user_id, eventDate, place,status) VALUES ($1,$2,$3,$4,$5) 
+      `INSERT INTO orders (order_price, user_id, event_name ,eventDate, place,status) VALUES ($1,$2,$3,$4,$5,$6) 
     RETURNING * `,
       data
     )
