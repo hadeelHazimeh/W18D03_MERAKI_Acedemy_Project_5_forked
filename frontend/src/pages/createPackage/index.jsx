@@ -186,11 +186,13 @@ const CreatePackage = () => {
                   label="Select"
                   checked={checkedPackages === Package.package_id}
                   onChange={() => handleCheckboxChange(Package.package_id)}
+
                   style={{
                     position: "absolute",
                     bottom: "20px", 
                     left: "20px",
                   }}
+
                 />
               </MDBCardBody>
             </MDBCard>

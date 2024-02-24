@@ -62,9 +62,13 @@ const getServiceByName = (req, res) => {
 // End Point : GET /service
 const getAllServices = (req, res) => {
   pool
+
+    .query("SELECT * FROM services WHERE services.is_deleted=0 order by service_id desc")
+
     .query(
       "SELECT * FROM services WHERE services.is_deleted=0 order by service_id desc"
     )
+
     .then((result) => {
       if (result.rows.length === 0) {
         res.status(404).json({
@@ -177,7 +181,10 @@ const updateServiceById = (req, res) => {
 // this function to delete a service By id
 // EndPoint : GET /service/:id
 const deleteServiceById = (req, res) => {
+
+
   const { id } = req.params;
+>
   const userId = req.token.userId;
   console.log(id);
   pool
@@ -235,10 +242,14 @@ const deleteServiceById = (req, res) => {
 const getServiceByProvider = (req, res) => {
   const id = req.token.userId;
   pool
+
+    .query(`SELECT * FROM services WHERE provider =$1 AND is_deleted=0 order by service_id desc`, [id])
+
     .query(
       `SELECT * FROM services WHERE provider =$1 AND is_deleted=0 order by service_id desc`,
       [id]
     )
+
     .then((result) => {
       if (result.rows.length === 0) {
         res.status(404).json({
@@ -298,6 +309,7 @@ const updateService = (req, res) => {
     });
 };
 
+
 // this function to get All orders  of a service provider
 // EndPoint : GET /service/orders/all
 // this function for service provider
@@ -346,6 +358,7 @@ WHERE
     });
 };
 
+
 module.exports = {
   createService,
   getAllServices,
@@ -358,3 +371,4 @@ module.exports = {
   updateService,
   getAllOrdersOfProvider,
 };
+

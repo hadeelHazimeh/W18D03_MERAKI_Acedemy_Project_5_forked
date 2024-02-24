@@ -1,4 +1,91 @@
 .totalPriceButton {
+
+    background-color: red;
+    
+    text-align: center;
+    font-size: large;
+    cursor: pointer;
+    margin-left: 20px;
+    width: 300px;
+  }
+  h2 {
+    color: black;
+    white-space: nowrap; 
+    text-align: center;
+}
+
+h2 a {
+    display: inline;
+}
+
+h2 span {
+    display: inline-block; 
+  color: #00A3AF;
+font-weight: bold;}
+  .cardImg{
+
+
+
+  }
+  .btn-primary {
+    background-color: #00A3AF !important; 
+     color: red; 
+    text-align: center !important;
+    font-size: 20px !important;
+    cursor: pointer !important;
+    margin: auto !important;
+    width: 300px;
+  }
+  .price{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    row-gap: 10px;
+    margin-top: 5%;
+  }
+
+  .formContainer {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+  }
+  
+  .formInput {
+    width: 40%;
+    margin-bottom: 20px;
+    margin-left: 50px;
+    /* border: 1px solid #ccc; */
+    /* border-radius: 4px; */
+    padding: 10px; 
+  }
+  
+  .serviceCard {
+    width: calc(33.33% - 30px); 
+    /* background-color: #F3F1EC; */
+    background-color: #F3F1EC !important;
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .cardContainer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-left: -10px; 
+    margin-right: -10px;
+  }
+  
+  .serviceCard {
+    flex-basis: calc(33.33% - 20px);
+    margin-bottom: 20px;
+    margin-right: 10px; 
+  }
+=======
   background-color: red;
  font-family: 'Arial', Courier, monospace !important;
   text-align: center;
@@ -111,3 +198,4 @@ background-color: #00a3af !important;
 .modal-footer {
   background-color: #f3f1ec;
 }
+
