@@ -11,12 +11,14 @@ import Swal from 'sweetalert2';
 import Modal from "react-bootstrap/Modal";
 
 function AdminServicesRender() {
+  const [packageDetails, setPackageDetails] = useState(null);
   const [showPrice, setShowPrice] = useState(false);
 
   const [modalShow, setModalShow] = useState(false);
 const [package_id, setPackageId] = useState(null)
   const dispatch=useDispatch()
     const { isLoggedIn,token } = useSelector((state) => state.auth);
+  
    
     const { packages,packagesName  } = useSelector((state) => state.packages);
     const [services, setServices] = useState([]);
@@ -109,8 +111,8 @@ const [package_id, setPackageId] = useState(null)
   const getPackageDetails = async (package_id) => {
     try {
       const packageService = await axios.get(`http://localhost:5000/package/${package_id}`);
-      console.log("Detailsorder",packageService)
-      setPackageInfo(packageService.data.result[0]);
+      console.log("Detailsorder",packageService.data.result)
+      setPackageDetails(packageService.data.result[0]);
 
       setModalShow(true);
     } catch (error) {
@@ -304,15 +306,21 @@ const AddServiceToPackage=async (package_id,service_id)=>{
           <Modal.Title>Your package is now Ready</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-{/*         {packageInfo && (
+      {packageDetails && (
     <div>
-             <p>Event Date: {orderDetails.eventDate}</p>
-      <p>Place: {orderDetails.place}</p>
-      <p>Total Price: JD {orderDetails.order_price}</p>
+           "",
+      :"",
+      image:"",
+      event:"test"
+             <p> package Name: {packageDetails. package_Name}</p>
+      <p>Description: {packageDetails.Description}</p>
+      <p>Total Price:  {packageDetails.price}JD</p>
+      <p>event {packageDetails.event}</p>
+
       <p>Services:</p> 
       
     </div>
-  )} */}
+  )} 
 
         </Modal.Body>
         <Modal.Footer>
