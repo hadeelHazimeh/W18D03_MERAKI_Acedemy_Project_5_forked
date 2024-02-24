@@ -7,7 +7,8 @@ const Home = () => {
         type="video/mp4"
       />
     </video>
-   
+
+    <div className="slider_scroll_down icon-down"></div>
     </div>
     
     
