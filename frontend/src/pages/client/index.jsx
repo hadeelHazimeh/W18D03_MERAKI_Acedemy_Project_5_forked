@@ -8,6 +8,7 @@ import {
   MDBCardTitle,
   MDBCardText,
   MDBCheckbox,
+  MDBCardImage
 } from "mdb-react-ui-kit";
 import {Button,Modal,Nav} from "react-bootstrap";
 
@@ -38,6 +39,7 @@ const Client = () => {
     order_price: 0,
     eventDate: "",
     place: "",
+    event_name:""
   });
 
   //...................................................................................
@@ -91,15 +93,16 @@ const Client = () => {
       setShowPreview(true);
     } catch (error) {
       // setStatus(false);
-      Swal.fire({
-        icon: "error",
-        text: error.response.data.message,
-      });
+      // Swal.fire({
+      //   icon: "error",
+      //   text: error.response.data.message
+      // });
       console.error("Error creating order:", error);
     }
   };
 //.......................................................................................
-  const handleOrderPrice = () => {
+  const handleOrderPrice = (e) => {
+    e.preventDefault();
     const totalOrderPrice = checkedServices.reduce((total, serviceId) => {
       const selectedService = services.find(
         (service) => service.service_id === serviceId
@@ -150,10 +153,20 @@ const Client = () => {
 
   return (
     <div className="formContainer">
-      <h1>
-        Plan your event by <a>services</a> or choose from our <Nav.Link href="CreatePackage">Packeges</Nav.Link>
-      </h1>
-      <form onSubmit={handleSubmitOrder}>
+      <h2>Plan your event by these services or choose from our <span><Nav.Link href="CreatePackage">Packages</Nav.Link></span></h2>
+
+     
+      <form >
+      <MDBRow className="formInput">
+          <MDBInput
+            label="Event name"
+            type="text"
+            id="event_name"
+            name="event_name"
+            value={orderData.event_name}
+            onChange={handleInputChange}
+          />
+        </MDBRow>
         <MDBRow className="formInput">
           <MDBInput
             label="Event Date"
@@ -175,15 +188,21 @@ const Client = () => {
             onChange={handleInputChange}
           />
         </MDBRow>
+       
 
         <div className="cardContainer">
           {services.map((service) => (
             <MDBCard className="serviceCard">
               <MDBCardBody>
-                <MDBCardTitle>name: {service.service_name}</MDBCardTitle>
-
+                <MDBCardTitle> Service name: {service.service_name}</MDBCardTitle>
+                <MDBCardImage
+            src={service.image}
+            alt="..."
+            position="top"
+            className="cardImg"
+          />
                 <MDBCardText>
-                  {service.image}
+                  {/* {service.image} */}
                   Price: JD {service.price}
                   <br />
                   description: {service.details}
@@ -199,29 +218,10 @@ const Client = () => {
           ))}
         </div>
 
-        {showPrice ? (
-          <>
-            <MDBBtn className="totalPriceButton" onClick={handleOrderPrice}>
-              calculate the total Price
-            </MDBBtn>
-          </>
-        ) : (
-          <></>
-        )}
-
-        {ClickedPrice ? (
-          <>
-            <MDBRow className="mb-4">
-              <p>Total Price: JD {orderData.order_price}</p>
-            </MDBRow>
-          </>
-        ) : (
-          <></>
-        )}
-
-        <MDBBtn type="submit" className="totalPriceButton">
-          Submit your plan
-        </MDBBtn>
+       
+      
+  {}
+        
       </form>
 
       {showPreview ? (
@@ -238,7 +238,36 @@ const Client = () => {
       </MDBBtn>
     </div>
   ) : (
-    <></>
+    <>
+    
+    <div className="price">
+      {showPrice ? (
+          <>
+          <div >
+            <MDBBtn className="totalPriceButton"  onClick={handleOrderPrice}>
+             {ClickedPrice ?<p> Total Price :{orderData.order_price}</p>: "calculate the total Price"} 
+            </MDBBtn></div>
+            <MDBBtn  onClick={handleSubmitOrder} 
+        className="totalPriceButton" color='dark'>
+          Submit your plan
+        </MDBBtn>
+          </>
+        ) : (
+          <></>
+        )}
+
+{/* {ClickedPrice ? (
+          <>
+            <MDBRow className="mb-4">
+              <p>Total Price: JD {orderData.order_price}</p>
+            </MDBRow>
+          </>
+        ) : (
+          <></>
+        )} */}
+</div>
+    
+    </>
   )}
 
       <Modal show={modalShow} onHide={() => setModalShow(false)}>
@@ -248,6 +277,7 @@ const Client = () => {
         <Modal.Body>
           {orderDetails && (
             <div>
+              <p>Event: {orderDetails.event_name}</p>
               <p>Event Date: {orderDetails.eventdate}</p>
               <p>Place: {orderDetails.place}</p>
               <p>Total Price: JD {orderDetails.order_price}</p>

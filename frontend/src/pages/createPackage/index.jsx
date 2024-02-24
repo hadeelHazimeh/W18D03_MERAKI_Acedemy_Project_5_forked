@@ -8,6 +8,7 @@ import {
   MDBCardBody,
   MDBCardTitle,
   MDBCardText,
+  MDBCardImage,
   MDBCheckbox,
 } from "mdb-react-ui-kit";
 import { useSelector } from "react-redux";
@@ -160,11 +161,19 @@ const CreatePackage = () => {
         <div className="cardContainer">
           {packages.map((Package) => (
             <MDBCard className="serviceCard">
+              
               <MDBCardBody>
                 <MDBCardTitle>name: {Package.package_name}</MDBCardTitle>
 
                 <MDBCardText>
-                  {Package.image}
+                  {/* {Package.image} */}
+                  
+
+                  <MDBCardImage
+            src={Package.image}
+            alt="..."
+            position="top"
+          />
                   <br />
                   <br />
                   description: {Package.description}
@@ -182,24 +191,25 @@ const CreatePackage = () => {
             </MDBCard>
           ))}
         </div>
-        <MDBBtn type="submit" className="totalPriceButton">
+        
+        <MDBBtn type="submit"  color='dark'>
         Submit your plan
         </MDBBtn>
         </form>
 
       {showPreview ? (
         <div className="d-flex justify-content-end">
-          <MDBBtn
-            onClick={() => {
-              setModalShow(true);
-              console.log("orderData", orderData);
-              getOrderDetails(orderId);
-            }}
-            className="totalPriceButton"
-          >
-            Preview the Order
-          </MDBBtn>
-        </div>
+        <MDBBtn
+          onClick={() => {
+            setModalShow(true);
+            console.log("orderData", orderData);
+            getOrderDetails(orderId);
+          }}
+          className="totalPriceButton"
+        >
+          Preview the Order
+        </MDBBtn>
+      </div>
       ) : (
         <></>
       )}
