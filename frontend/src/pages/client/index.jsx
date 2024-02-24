@@ -154,13 +154,14 @@ const Client = () => {
 
   return (
     <div className="formContainer">
+<div style={{margin:"1rem"}}>
       <h2>
-        Plan your event by these services or choose from our{" "}
+        Plan your event using these services or choose from our{" "}
         <span>
           <Nav.Link href="CreatePackage">Packages</Nav.Link>
         </span>
-      </h2>
-
+      </h2></div>
+<h6 style={{marginTop: "1rem", borderTop: "1px solid #00a3af", padding: "1rem 0 0 0"}}> Fill the information please </h6>
       <form>
         <MDBRow className="formInput">
           <MDBInput
@@ -207,7 +208,7 @@ const Client = () => {
                     }}
                   >
                     {" "}
-                    {service.service_name}
+                    <strong>{service.service_name}</strong>
                   </p>
                 </MDBCardTitle>
                 <br />
@@ -233,17 +234,26 @@ const Client = () => {
                   </p>
                   <p
                     style={{
-                      textAlign: "justify",
-                      lineHeight: "2",
-                      borderBottom: "1px solid #00A3AF",
-                      fontFamily: "Merriweather",
+                      
+                      textAlign:"justify",
+                                        fontFamily:"Crimson",
+                      margin:"auto",
+                      padding:"auto",
+                      wordSpacing: "normal"
                     }}
                   >
                     <strong>Description:</strong>{" "}
-                    <span style={{ display: "inline" }}>{service.details}</span>
+                    <span style={{ display: "inline", fontFamily:"Crimson" ,textAlign:"justify"}}>{service.details}</span>
                   </p>
+                  <br/>
                 </MDBCardText>
-<div className="checkBox">
+                 <div className="checkBox" style={{
+                  fontFamily:"Raleway",
+                  fontWeight:"bold",
+                    position: "absolute",
+                    bottom: "15px", 
+                    left: "20px",
+                    }}>
                 <MDBCheckbox
                   label="Select"
                   checked={checkedServices.includes(service.service_id)}
