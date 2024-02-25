@@ -139,7 +139,9 @@ export const router= createBrowserRouter(
 
     {
       path:"createPackage",
-      element:<CreatePackage/>
+      element:<>
+      <Navbar/>
+      <CreatePackage/></>
     }
 
 ]
