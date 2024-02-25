@@ -26,7 +26,7 @@ const [package_id, setPackageId] = useState(null)
     const [packageInfo, setPackageInfo] = useState({price:0,
       package_Name:"",
       Description:"",
-      image:"https://img.freepik.com/free-photo/happy-birthday-with-realistic-balloons_24972-2211.jpg?t=st=1708884413~exp=1708888013~hmac=fc2d32c5931e8ef35bb3642a2925ba2b836eadd77df5c5e2818fd5632df21df0&w=996",
+      image:"https://img.freepik.com/free-photo/golden-wedding-rings-white-rose-from-wedding-bouquet_8353-10467.jpg?t=st=1708894712~exp=1708898312~hmac=88a045ef1febe83a218d4547fff924e9c284a124b419edbe42db68da3d6ae6e5&w=996",
     });
     const [checkedServices, setCheckedServices] = useState([]);
     const [ClickedPrice, setClickedPrice] = useState(false);
