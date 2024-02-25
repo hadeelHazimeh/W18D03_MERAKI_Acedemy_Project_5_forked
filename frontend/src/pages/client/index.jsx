@@ -236,8 +236,7 @@ const Client = () => {
                   <p
                     style={{
                       textAlign: "justify",
-                      lineHeight: "2",
-                      borderBottom: "1px solid #00A3AF",
+                     paddingBottom:"10px",
                       fontFamily: "Merriweather",
                     }}
                   >
@@ -245,7 +244,18 @@ const Client = () => {
                     <span style={{ display: "inline" }}>{service.details}</span>
                   </p>
                 </MDBCardText>
-<div className="checkBox">
+<div className="checkBox"
+style={{
+  fontFamily:"Raleway",
+  fontWeight:"bold",
+    position: "absolute",
+    bottom: "15px", 
+    left: "20px",
+    }}
+
+>
+
+  
                 <MDBCheckbox
                   label="Select"
                   checked={checkedServices.includes(service.service_id)}
