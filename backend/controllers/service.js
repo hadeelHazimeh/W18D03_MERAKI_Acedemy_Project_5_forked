@@ -246,12 +246,14 @@ const getServiceByProvider = (req, res) => {
 
           message: `No Services Found for this provider ${id}!`,
         });
+      }else {
+        res.status(200).json({
+          success: true,
+          message: `All the services`,
+          services: result.rows,
+        });
       }
-      res.status(200).json({
-        success: true,
-        message: `All the services`,
-        services: result.rows,
-      });
+     
     })
     .catch((err) => {
       res.status(500).json({

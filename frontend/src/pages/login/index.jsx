@@ -17,6 +17,7 @@ import {
   setLogin,
   setUserId,
   setLogout,
+  setUserName,
 } from "../../services/redux/reducer/auth";
 //==================================
 const Login = () => {
@@ -42,6 +43,8 @@ const Login = () => {
         dispatch(setLogin(result.data.token));
 
         dispatch(setUserId(result.data.userId));
+        dispatch(setUserName(result.data.username));
+        console.log(result.data.username, "userName");
       } else throw Error;
     } catch (error) {
       if (error.response && error.response.data) {

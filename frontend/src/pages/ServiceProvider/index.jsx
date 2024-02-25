@@ -24,6 +24,7 @@ const ServiceProvider = () => {
   const serviceProvider = useSelector(
     (state) => state.serviceProvider.services
   );
+  
   const [showModal, setShowModal] = useState(false);
   const [serviceId, setServiceId] = useState("");
   const [service_name, setService_name] = useState("");
