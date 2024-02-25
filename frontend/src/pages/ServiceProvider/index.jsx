@@ -1,5 +1,4 @@
 
-import  { useEffect} from "react";
 
 
 import { useEffect, useState } from "react";
@@ -38,7 +37,6 @@ const ServiceProvider = () => {
   const [details, setDetails] = useState("");
   const [price, setPrice] = useState("");
 
-  const [image, setImage] = useState(null);
 
   const [image, setImage] = useState("");
 
@@ -83,8 +81,7 @@ const ServiceProvider = () => {
       .then((result) => {
         console.log(result);
 
-        dispatch(deleteServiceByID( id ));
-=======
+
         dispatch(deleteServiceByID(id));
 
       })
@@ -175,6 +172,7 @@ const ServiceProvider = () => {
                   {service.service_name}
                 </h4>
                 <p>{service.details}</p>
+                </div>
                 <div className="total">
                   <h4>status: {service.status}</h4>
 
@@ -196,7 +194,6 @@ const ServiceProvider = () => {
 
                       className="mt-3 mx-1 "
 
-                      className="mt-3 ms-3 "
 
                       onClick={() => deleteService(service.service_id)}
                     >
@@ -267,7 +264,7 @@ const ServiceProvider = () => {
             Close
           </Button>
 
-          <Button variant="primary" onClick={updateService}>
+          <Button variant="primary" onClick={updateService}></Button>
 
           <Button  onClick={updateService} style={{backgroundColor: "#00A3AF !important" }}>
 

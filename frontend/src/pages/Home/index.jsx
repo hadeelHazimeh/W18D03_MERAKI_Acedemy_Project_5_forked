@@ -24,6 +24,7 @@ const Home = () => {
     <div className="slider_scroll_down icon-down"></div>
 
     </div>
+    </div>
 
   );
 };
