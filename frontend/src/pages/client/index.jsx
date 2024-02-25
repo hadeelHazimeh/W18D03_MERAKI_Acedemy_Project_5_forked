@@ -17,9 +17,11 @@ import axios from "axios";
 import { useState } from "react";
 import Swal from "sweetalert2";
 
-import "./style.css";
+import "./style.css"
+//.....................................
 
 const Client = () => {
+  // const { isLoggedIn } = useSelector((state) => state.auth);
   const [showPrice, setShowPrice] = useState(false);
   const [ClickedPrice, setClickedPrice] = useState(false);
   const token = useSelector((state) => state.auth.token);
@@ -39,9 +41,10 @@ const Client = () => {
     place: "",
   });
 
+  //...................................................................................
   useEffect(() => {
     axios
-      .get("http://localhost:5000/service")
+      .get(`http://localhost:5000/service`)
       .then((services) => {
         console.log("services", services.data);
         setServices(services.data.services);
@@ -51,16 +54,18 @@ const Client = () => {
       });
   }, []);
 
+  //..................................................................................
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setOrderData({ ...orderData, [name]: value });
   };
-
+  //...................................................................................
   const handleSubmitOrder = async (e) => {
     e.preventDefault();
+    //loader
     try {
       const orderResult = await axios.post(
-        "http://localhost:5000/orders/create",
+        `http://localhost:5000/orders/create`,
         orderData,
         {
           headers: { Authorization: `Bearer ${token}` },
@@ -68,6 +73,7 @@ const Client = () => {
       );
       console.log(orderResult.data.result[0]);
       setOrderId(orderResult.data.result[0].order_id);
+      //selected services with the created order
       const orderServiceResult = await axios.post(
         `http://localhost:5000/orders/orderService/${orderResult.data.result[0].order_id}`,
         { service_ids: checkedServices },
@@ -85,10 +91,15 @@ const Client = () => {
       });
       setShowPreview(true);
     } catch (error) {
+      // setStatus(false);
+      // Swal.fire({
+      //   icon: "error",
+      //   text: error.response.data.message
+      // });
       console.error("Error creating order:", error);
     }
   };
-
+  //.......................................................................................
   const handleOrderPrice = (e) => {
     e.preventDefault();
     const totalOrderPrice = checkedServices.reduce((total, serviceId) => {
@@ -103,14 +114,23 @@ const Client = () => {
     setClickedPrice(true);
   };
 
+  //.........................................................................................
+
   const handleCheckboxChange = (serviceId) => {
+    //reduce HOF to calculate the total order price as summation of checked services
+
+    console.log("checkedServices", checkedServices, "serviceId", serviceId);
     if (checkedServices.includes(serviceId)) {
+      // Remove serviceId if already checked
       setCheckedServices(checkedServices.filter((id) => id !== serviceId));
     } else {
+      // Add serviceId if not checked
       setCheckedServices([...checkedServices, serviceId]);
+
       setShowPrice(true);
     }
   };
+  //..........................................................................................
 
   const getOrderDetails = async (orderId) => {
     try {
@@ -122,14 +142,19 @@ const Client = () => {
       setOrderDetails(order.data.result[0]);
 
       setSelectedServices(order.data.result);
+      console.log("SelectedServices", order.data.result);
+
+      // setModalShow(true);
     } catch (error) {
       console.error("Error getting order details:", error);
     }
   };
 
+  //..........................................................................................
+
   return (
     <div className="formContainer">
-      <div style={{margin:"1rem"}}>
+      <div >
       <h2>
         Plan your event using these services or choose from our{" "}
         <span>
@@ -171,10 +196,10 @@ const Client = () => {
           />
         </MDBRow>
 
-        <div className="cardContainer">
+        <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between' }}>
           {services.map((service) => (
-            <MDBCard className="serviceCard">
-              <MDBCardBody style={{ marginBottom: "0" }}>
+            <MDBCard  style={{ width: 'calc(33.33% - 20px)', marginBottom: '20px',backgroundColor:"#f3f1ec" }}>
+              <MDBCardBody>
                 <MDBCardTitle>
                   <p
                     style={{
@@ -211,8 +236,8 @@ const Client = () => {
                   <p
                     style={{
                       textAlign: "justify",
-                      
-                      
+                      lineHeight: "2",
+                      borderBottom: "1px solid #00A3AF",
                       fontFamily: "Merriweather",
                     }}
                   >
@@ -220,25 +245,19 @@ const Client = () => {
                     <span style={{ display: "inline" }}>{service.details}</span>
                   </p>
                 </MDBCardText>
-                <div className="checkBox"
-                style={{
-                  fontFamily:"Raleway",
-                  fontWeight:"bold",
-                    position: "absolute",
-                    bottom: "15px", 
-                    left: "20px",
-                    }}>
-                  <MDBCheckbox
-                   
-                    label="Select"
-                    checked={checkedServices.includes(service.service_id)}
-                    onChange={() => handleCheckboxChange(service.service_id)}
-                  />
-                </div>
+<div className="checkBox">
+                <MDBCheckbox
+                  label="Select"
+                  checked={checkedServices.includes(service.service_id)}
+                  onChange={() => handleCheckboxChange(service.service_id)}
+                  
+                /></div>
               </MDBCardBody>
             </MDBCard>
           ))}
         </div>
+
+        {}
       </form>
 
       {showPreview ? (
@@ -282,6 +301,16 @@ const Client = () => {
             ) : (
               <></>
             )}
+
+            {/* {ClickedPrice ? (
+          <>
+            <MDBRow className="mb-4">
+              <p>Total Price: JD {orderData.order_price}</p>
+            </MDBRow>
+          </>
+        ) : (
+          <></>
+        )} */}
           </div>
         </>
       )}
@@ -293,6 +322,9 @@ const Client = () => {
         <Modal.Body className="modalshowing">
           {orderDetails && (
             <div>
+              {/* <p> <strong></strong> <span>{orderDetails.event_name}</span></p>
+             <strong> </strong><span>{}</span> */}
+              {/* <strong></strong>: <p>{orderDetails.eventdate}</p> */}
               <p>
                 {" "}
                 <strong> Event: </strong> {orderDetails.event_name}
