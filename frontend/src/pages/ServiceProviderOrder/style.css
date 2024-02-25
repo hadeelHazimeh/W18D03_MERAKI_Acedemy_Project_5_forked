@@ -1,0 +1,40 @@
+.custom-datatable {
+  border: 1px solid #ccc;
+}
+
+.custom-datatable th,
+.custom-datatable td {
+  border: 1px solid #ccc;
+}
+
+.custom-datatable th {
+  background-color: #f2f2f2;
+}
+
+td{
+  text-align: center;
+}
+
+.p-column-title {
+  margin: auto;
+}
+
+.p-paginator {
+  gap: 5px;
+}
+
+.p-paginator-page {
+  border-radius:50%;
+  margin-left:   3px;
+  margin-right: 3px;
+  height: 19px;
+  width: 19px;
+  background-color: #5d5959f5;
+  color: white;
+}
+.p-highlight {
+
+  border: #5d5959f5 1px  solid !important;
+  background-color: white !important;
+  color: #5d5959f5  !important;
+}
