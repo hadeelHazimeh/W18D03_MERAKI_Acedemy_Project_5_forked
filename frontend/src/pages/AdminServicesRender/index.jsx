@@ -175,7 +175,7 @@ const callServices=()=>{
       }, []);
     //...............................
   return (
-    <> <div className="formContainer">
+    <> <div  className="formContainer">
        <div className="row justify-content-center">
    <h2 className="mb-4 animated fadeIn" style={{fontWeight: "bold", textAlign:"start", marginLeft:"20px",backgroundColor:"F3F1EC"}}>Create Package</h2>
     
@@ -227,12 +227,12 @@ const callServices=()=>{
         {services.map((service,i) => (
           <MDBCard key={i}  style={{ width: 'calc(33.33% - 20px)', marginBottom: '20px',backgroundColor:"#f3f1ec" }} className="serviceCard">
             <MDBCardBody>
-            <MDBCardImage
+            <MDBCardImage style={{marginBottom:"10px"}}
             src={service.image}
             alt="..."
             position="top"
           />
-              <MDBCardTitle>name: {service.service_name}</MDBCardTitle>
+              <MDBCardTitle style={{marginBottom:"10px"}} >{service.service_name}</MDBCardTitle>
 
               <MDBCardText>
               
@@ -240,12 +240,22 @@ const callServices=()=>{
                 <br />
                 description: {service.details}
               </MDBCardText>
+              <div className="checkBox"
+style={{
+  fontFamily:"Raleway",
+  fontWeight:"bold",
+    position: "absolute",
+    bottom: "15px", 
+    left: "20px",
+    }}
 
-              <MDBCheckbox
+>
+              <MDBCheckbox 
                 label="Select"
                checked={checkedServices.includes(service.service_id)}
                  onChange={() => handleCheckboxChange(service.service_id)}
               />
+              </div>
             </MDBCardBody>
           </MDBCard>
         ))}
