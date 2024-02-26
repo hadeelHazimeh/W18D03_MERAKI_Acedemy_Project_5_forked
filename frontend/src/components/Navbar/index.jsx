@@ -13,9 +13,19 @@ import {
   MDBDropdownMenu,
   MDBDropdownItem
 } from 'mdb-react-ui-kit';
-
+import {
+ seRole
+} from "../../services/redux/reducer/auth";
+import { useSelector } from 'react-redux';
 const Navbar = () => {
+  
   const [openNavSecond, setOpenNavSecond] = useState(false);
+  const [hideLogin,setHideLogin]=useState(false)
+  const role = useSelector((state) => state.auth.role);
+   console.log(role)
+  //  if(role==="3"){
+  //  setHideLogin(true)
+  //  }
   return (
     
     <div>
@@ -57,20 +67,27 @@ const Navbar = () => {
             <MDBNavbarLink href='/portfolio'>PortFolio</MDBNavbarLink>
             <MDBNavbarLink href='/letstalk'>Lets Talk!</MDBNavbarLink>
             <MDBNavbarLink href='/AboutUs'>About Us</MDBNavbarLink>
+            {role==="3"?<><MDBNavbarLink href='/AboutUs'>About Us</MDBNavbarLink></>:<>
             <MDBNavbarLink href='/login' style={{color:'#469da3'}}>
+          
                 <strong>Are You Vendor?</strong>
               </MDBNavbarLink>
               <MDBDropdown>
                 <MDBDropdownToggle tag='a' className='nav-link' role='button' style={{color:'#469da3'}}>
-<strong>Login As: </strong>               </MDBDropdownToggle>
+              <strong>Login As: </strong>               </MDBDropdownToggle>
                 <MDBDropdownMenu>
                   <MDBDropdownItem  href='/login' link>Event Planner</MDBDropdownItem>
                   <MDBDropdownItem href='/login' link>Client</MDBDropdownItem>
                 </MDBDropdownMenu>
               </MDBDropdown>
+            </>}
+
           </MDBNavbarNav>
         </MDBCollapse>
+        
         </div>
+      
+          
       </MDBContainer>
     </MDBNavbar>
 

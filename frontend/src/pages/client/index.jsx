@@ -8,12 +8,15 @@ import {
   MDBCardTitle,
   MDBCardText,
   MDBCheckbox,
-  MDBCardImage,
-} from "mdb-react-ui-kit";
-import { Button, Modal, Nav } from "react-bootstrap";
 
-import { useSelector } from "react-redux";
+  MDBCardImage
+} from "mdb-react-ui-kit";
+import {Button,Modal,Nav} from "react-bootstrap";
+
+
+
 import axios from "axios";
+import { useSelector } from "react-redux";
 import { useState } from "react";
 import Swal from "sweetalert2";
 

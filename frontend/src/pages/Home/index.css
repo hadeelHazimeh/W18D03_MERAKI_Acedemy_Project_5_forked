@@ -77,15 +77,18 @@ h3{
     text-align: left;
     font-family:'Quattrocento',Georgia,"Times New Roman",serif ;
 }
+
+
 .text-muted{
-    text-align:left;
+    text-align:center;
     color:#666;
     font-family: 'Quattrocento',Georgia,"Times New Roman",serif;
     line-height: 2.7em;
     font-size:17px;
 }
 .Link{
-    text-align:right !important;
+
+    text-align:left !important;
     color:#555454;
     font-family: "Crimson Pro", Sans-serif !important;
     line-height: 2.7em;

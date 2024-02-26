@@ -11,6 +11,24 @@ import Swal from 'sweetalert2';
 import Modal from "react-bootstrap/Modal";
 
 function AdminServicesRender() {
+  const [image, setImage] = useState("");
+
+const [ url, setUrl ] = useState("");
+const uploadImage = async (image) => {
+  try {
+      const formData = new FormData();
+      formData.append("file", image);
+      formData.append("upload_preset", "amalhawwari"); 
+      formData.append("cloud_name", "dhgpwshhe");
+  
+      const response = await axios.post("https://api.cloudinary.com/v1_1/dhgpwshhe/image/upload", formData);
+   
+      return response.data.url;
+  } catch (error) {
+      console.error("Error uploading image:", error);
+      throw error;
+  }
+};
   const [packageDetails, setPackageDetails] = useState(null);
   const [showPrice, setShowPrice] = useState(false);
 
@@ -26,7 +44,7 @@ const [package_id, setPackageId] = useState(null)
     const [packageInfo, setPackageInfo] = useState({price:0,
       package_Name:"",
       Description:"",
-      image:"https://img.freepik.com/free-photo/golden-wedding-rings-white-rose-from-wedding-bouquet_8353-10467.jpg?t=st=1708894712~exp=1708898312~hmac=88a045ef1febe83a218d4547fff924e9c284a124b419edbe42db68da3d6ae6e5&w=996",
+      image:"",
     });
     const [checkedServices, setCheckedServices] = useState([]);
     const [ClickedPrice, setClickedPrice] = useState(false);
@@ -43,9 +61,10 @@ const [package_id, setPackageId] = useState(null)
     e.preventDefault();
     //loader
     try {
+      const imageUrl = await uploadImage(image);
       const packageResult = await axios.post(
         `http://localhost:5000/package/create`,
-       packageInfo,
+       {...packageInfo,image:imageUrl},
       );
 
 
@@ -148,46 +167,7 @@ const callServices=()=>{
   });
 
 }
-    //-----------------------------
-    
-  
-const AddServiceToPackage=async (package_id,service_id)=>{
-
-    try {
-      const result = await axios
-      .post(
-        "http://localhost:5000/package/create/servicePackage",
-        { package_id,service_id} ,
-        {
-          headers: { Authorization: `Bearer ${token}` },
-        }
-      )
-      console.log("registerResult",result)
-      if (result.data.success) {
-        console.log(result.data);
-        setMessageForAddService(true)
-
-        Swal.fire({
-          icon: 'success',
-          title: 'Success!',
-          text: "Service Added Successfully",
-          confirmButtonText: 'Hide'
-        });
-        
-      } else throw Error;
-    } catch (error) {
-      setMessageForAddService(false)
-
-      console.log(err);
-      Swal.fire({
-        icon: "error",
-        text: error.response.data.message,
-      });
-
-    }
-}
-
-    //-----------------------------
+ 
 
 
     useEffect(() => {
@@ -196,8 +176,8 @@ const AddServiceToPackage=async (package_id,service_id)=>{
     //...............................
   return (
     <> <div className="formContainer">
-    <h1>
-      create  <a>package</a> 
+    <h1  style={{marginTop: "1rem", borderBottom: "1px solid #00a3af", padding: "1rem 0 0 0"}}>
+      create package
     </h1>
     
     <form >
@@ -286,49 +266,6 @@ const AddServiceToPackage=async (package_id,service_id)=>{
       <MDBBtn onClick={handleSubmitPackage}   className="totalPriceButton">Submit your Package</MDBBtn>
     </form>
     
-    <MDBBtn onClick={() => {setModalShow(true)
-    console.log("orderData.order_id",packageInfo)
-    getPackageDetails(package_id)
-  
-  
-  }
-    
-  
-  
-  
-  } 
-     
-      
-      className="totalPriceButton">
-        Preview the package
-      </MDBBtn>
-
-      <Modal show={modalShow} onHide={() => setModalShow(false)}>
-        <Modal.Header closeButton>
-          <Modal.Title>Your package is now Ready</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-      {packageDetails && (
-    <div>
-           "",
-      :"",
-      image:"",
-      event:"test"
-             <p> package Name: {packageDetails. package_Name}</p>
-      <p>Description: {packageDetails.Description}</p>
-      <p>Total Price:  {packageDetails.price}JD</p>
-      <p>event {packageDetails.event}</p>
-
-      <p>Services:</p> 
-      
-    </div>
-  )} 
-
-        </Modal.Body>
-        <Modal.Footer>
-          <Button onClick={() => setModalShow(false)}>Close</Button>
-        </Modal.Footer>
-      </Modal>
     
   </div></>
   )

@@ -65,7 +65,7 @@ const getAllServices = (req, res) => {
  
   pool
     .query(
-      "SELECT * FROM services WHERE services.is_deleted=0 order by service_id desc;"
+      "SELECT * FROM services WHERE services.is_deleted=0 AND status='confirmed' order by service_id desc;"
     )
 
     .then((result) => {
