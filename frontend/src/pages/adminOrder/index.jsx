@@ -8,6 +8,7 @@ import axios from 'axios';
 import { MDBBadge, MDBBtn, MDBTable, MDBTableHead, MDBTableBody } from 'mdb-react-ui-kit';
 
 export default function OrdersTable() {
+    
     const [orders, setOrders] = useState([])
     const getAllOrders=()=>{
         //http://localhost:5000/orders/allOrders axios

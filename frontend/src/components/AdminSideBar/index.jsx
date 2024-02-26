@@ -28,6 +28,9 @@ const AdminSideBar = () => {
               <NavLink to={"orders"}> <CDBSidebarMenuItem icon="shopping-bag" iconType="solid">
                 All Orders
               </CDBSidebarMenuItem></NavLink>
+              <NavLink to={""}> <CDBSidebarMenuItem icon="sign-out-alt" iconType="solid">
+                Log Out
+              </CDBSidebarMenuItem></NavLink>
             </CDBSidebarMenu>
           </CDBSidebarContent>
          
