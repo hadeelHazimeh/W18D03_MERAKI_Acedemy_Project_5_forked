@@ -31,9 +31,9 @@ const Client = () => {
   const [services, setServices] = useState([]);
   const [status, setStatus] = useState(false);
   const [checkedServices, setCheckedServices] = useState([]);
-
   const [modalShow, setModalShow] = useState(false);
   const [showPreview, setShowPreview] = useState(false);
+ 
   const [orderDetails, setOrderDetails] = useState(null);
   const [SelectedServices, setSelectedServices] = useState([]);
   const [orderId, setOrderId] = useState("");
@@ -201,7 +201,7 @@ const Client = () => {
 
         <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between' }}>
           {services.map((service) => (
-            <MDBCard  style={{ width: 'calc(33.33% - 20px)', marginBottom: '20px',backgroundColor:"#f3f1ec" }}>
+            <MDBCard   style={{ width: 'calc(50% - 20px)', marginBottom: '20px',backgroundColor:"#f3f1ec" }}>
               <MDBCardBody>
                 <MDBCardTitle>
                   <p
@@ -215,12 +215,12 @@ const Client = () => {
                     {service.service_name}
                   </p>
                 </MDBCardTitle>
-                <br />
+               
                 <MDBCardImage
                   src={service.image}
                   alt="..."
                   position="top"
-                  className="cardImg"
+                  
                 />
 
                 <MDBCardText>
@@ -244,7 +244,7 @@ const Client = () => {
                     }}
                   >
                     <strong>Description:</strong>{" "}
-                    <span style={{ display: "inline" }}>{service.details}</span>
+                    <span >{service.details}</span>
                   </p>
                 </MDBCardText>
 <div className="checkBox"
@@ -281,7 +281,8 @@ style={{
               console.log("orderData", orderData);
               getOrderDetails(orderId);
             }}
-            className="totalPriceButton"
+            // className="totalPriceButton"
+            style={{fontWeight:"bold"}}
             color="dark"
           >
             Preview the Order
@@ -293,8 +294,9 @@ style={{
             {showPrice ? (
               <>
                 <MDBBtn
-                  className="totalPriceButton"
+                  // className="totalPriceButton"
                   color="dark"
+                  style={{fontWeight:"bold"}}
                   onClick={handleOrderPrice}
                 >
                   {ClickedPrice ? (
@@ -305,7 +307,8 @@ style={{
                 </MDBBtn>
                 <MDBBtn
                   onClick={handleSubmitOrder}
-                  className="totalPriceButton"
+                  // className="totalPriceButton"
+                  style={{width:"20%",fontWeight:"bold"}}
                   color="dark"
                 >
                   Submit your plan
@@ -315,15 +318,6 @@ style={{
               <></>
             )}
 
-            {/* {ClickedPrice ? (
-          <>
-            <MDBRow className="mb-4">
-              <p>Total Price: JD {orderData.order_price}</p>
-            </MDBRow>
-          </>
-        ) : (
-          <></>
-        )} */}
           </div>
         </>
       )}
@@ -335,9 +329,7 @@ style={{
         <Modal.Body className="modalshowing">
           {orderDetails && (
             <div>
-              {/* <p> <strong></strong> <span>{orderDetails.event_name}</span></p>
-             <strong> </strong><span>{}</span> */}
-              {/* <strong></strong>: <p>{orderDetails.eventdate}</p> */}
+              
               <p>
                 {" "}
                 <strong> Event: </strong> {orderDetails.event_name}
@@ -378,7 +370,9 @@ style={{
           )}
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="dark" onClick={() => setModalShow(false)}>
+          <Button variant="dark" 
+          style={{width:"20%",fontWeight:"bold"}}
+          onClick={() => setModalShow(false)}>
             Close
           </Button>
         </Modal.Footer>

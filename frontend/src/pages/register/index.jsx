@@ -4,7 +4,8 @@ import "./style.css";
 import axios from "axios";
 import { useSelector } from "react-redux";
 import Swal from "sweetalert2";
-import register from "../../assets/register.png";
+ import register from "../../assets/register.png";
+import register2 from "../../assets/register2.jpg"
 //import {isLoggedIn} from "../../services/redux/reducer/auth/index";
 import {
   MDBBtn,
@@ -187,7 +188,7 @@ const Register = () => {
               </span>
             </h1>
             <img
-              src="https://swankeventsboston.com/wp-content/uploads/2019/07/swank-events-boston-gallery-4.png"
+              src={register2}
               class="register-form-image"
               alt="Registration Image"
             ></img>
