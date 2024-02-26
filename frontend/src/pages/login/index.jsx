@@ -44,6 +44,10 @@ const Login = () => {
 
         dispatch(setUserId(result.data.userId));
         dispatch(seRole(result.data.role))
+        if(result.data.role===1){
+          navigate("/admin/dashboard/pending/Services")
+        }
+        
       } else throw Error;
     } catch (error) {
       if (error.response && error.response.data) {
