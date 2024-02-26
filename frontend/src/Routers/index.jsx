@@ -17,12 +17,17 @@ import CreatePackage from "../pages/createPackage"
 import AdminServicesRender from "../pages/AdminServicesRender"
 
 // import Service from "../pages/Service/Service"
-import PortFolio from "../pages/PortFolio"
+// import PortFolio from "../pages/PortFolio"
 import Talk from "../pages/LetsTalk"
 import About from "../pages/About"
 import Navbar from "../components/Navbar"
+
 import ServiceSideBar from "../components/ServiceSideBar"
+
+import OrdersTable from "../pages/adminOrder"
+
 import ServiceProviderOrders from "../pages/ServiceProviderOrder"
+
 
 export const router= createBrowserRouter(
 [
@@ -67,7 +72,7 @@ export const router= createBrowserRouter(
       path:"/portfolio",
       element: 
       <> <Navbar/>
-      <PortFolio/>
+      {/* <PortFolio/> */}
       </>
   },
   {
@@ -132,13 +137,18 @@ export const router= createBrowserRouter(
         },  {
          path:"Services",
          element:<AdminServicesRender/>
+      },{
+         path:"orders",
+         element:<OrdersTable/>
       },
       ]
    },
 
     {
       path:"createPackage",
-      element:<CreatePackage/>
+      element:<>
+      <Navbar/>
+      <CreatePackage/></>
     }
 
 ]

@@ -36,6 +36,10 @@ export const authSlice = createSlice({
            state.userName=""
            localStorage.clear()
           },
+          seRole:(state, action)=>{
+           state.role=action.payload
+           localStorage.setItem("role", action.payload);
+          }
     },
   });
   
@@ -52,7 +56,9 @@ export const authSlice = createSlice({
     setLogin,
     setUserId,
     setLogout,
-    setUserName
+    setUserName,
+    seRole
+
   } = authSlice.actions; 
   
   export default authSlice.reducer;

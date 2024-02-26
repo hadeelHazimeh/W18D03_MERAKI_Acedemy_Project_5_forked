@@ -26,8 +26,7 @@ const [package_id, setPackageId] = useState(null)
     const [packageInfo, setPackageInfo] = useState({price:0,
       package_Name:"",
       Description:"",
-      image:"",
-      event:"test"
+      image:"https://img.freepik.com/free-photo/golden-wedding-rings-white-rose-from-wedding-bouquet_8353-10467.jpg?t=st=1708894712~exp=1708898312~hmac=88a045ef1febe83a218d4547fff924e9c284a124b419edbe42db68da3d6ae6e5&w=996",
     });
     const [checkedServices, setCheckedServices] = useState([]);
     const [ClickedPrice, setClickedPrice] = useState(false);
@@ -46,9 +45,10 @@ const [package_id, setPackageId] = useState(null)
     try {
       const packageResult = await axios.post(
         `http://localhost:5000/package/create`,
-        {packageInfo},
-
+       packageInfo,
       );
+
+
       console.log(packageResult.data.result);
       console.log(1111,packageResult.data.result.package_id);
 
@@ -77,7 +77,9 @@ const [package_id, setPackageId] = useState(null)
     }
   };
 
-  const handlePackagePrice = () => {
+  const handlePackagePrice = (e) => {
+    e.preventDefault();
+
     const totalOrderPrice = checkedServices.reduce((total, serviceId) => {
       const selectedService = services.find(
         (service) => service.service_id === serviceId
@@ -198,7 +200,7 @@ const AddServiceToPackage=async (package_id,service_id)=>{
       create  <a>package</a> 
     </h1>
     
-    <form onSubmit={handleSubmitPackage}  >
+    <form >
     <MDBRow className="formInput">
         <MDBInput
           label="Package Name"
@@ -281,7 +283,7 @@ const AddServiceToPackage=async (package_id,service_id)=>{
         <></>
       )}
 
-      <MDBBtn type="submit"   className="totalPriceButton">Submit your Package</MDBBtn>
+      <MDBBtn onClick={handleSubmitPackage}   className="totalPriceButton">Submit your Package</MDBBtn>
     </form>
     
     <MDBBtn onClick={() => {setModalShow(true)

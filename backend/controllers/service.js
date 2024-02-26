@@ -9,7 +9,7 @@ const createService = (req, res) => {
   pool
     .query(
       `INSERT INTO services (service_name, details, price, image, provider)
-       VALUES ($1,  $2, $3, $4, $5) RETURNING *`,
+       VALUES ($1, $2, $3, $4, $5) RETURNING *`,
       [service_name, details, price, image, provider]
     )
     .then((result) => {
@@ -22,7 +22,7 @@ const createService = (req, res) => {
     .catch((err) => {
       res.status(500).json({
         success: false,
-        massage: "Server error",
+        message: "Server error",
         err: err.message,
       });
     });
@@ -61,20 +61,23 @@ const getServiceByName = (req, res) => {
 //this function to get All service from the database
 // End Point : GET /service
 const getAllServices = (req, res) => {
+
+ 
   pool
     .query(
-      "SELECT * FROM services WHERE services.is_deleted=0 order by service_id desc"
+      "SELECT * FROM services WHERE services.is_deleted=0 order by service_id desc;"
     )
+
     .then((result) => {
       if (result.rows.length === 0) {
         res.status(404).json({
           success: false,
-          message: `No Services Found!`,
+          message: "No Services Found!",
         });
       }
       res.status(200).json({
         success: true,
-        message: `All the services`,
+        message: "All the services",
         services: result.rows,
       });
     })
@@ -92,7 +95,7 @@ const getAllServices = (req, res) => {
 const getServiceByProviderId = (req, res) => {
   const id = req.params.id;
   pool
-    .query(`SELECT * FROM services WHERE provider =$1 AND is_deleted=0`, [id])
+    .query(`SELECT * FROM services WHERE provider =$1 AND is_deleted=0;`, [id])
     .then((result) => {
       if (result.rows.length === 0) {
         return res.status(404).json({
@@ -118,7 +121,7 @@ const getServiceByProviderId = (req, res) => {
 
 const getPendingService = (req, res) => {
   const pending = req.query.status;
-  const query = "SELECT * FROM services WHERE status = $1 AND is_deleted=0";
+  const query = `SELECT * FROM services WHERE status = $1 AND is_deleted=0;`;
   const data = [pending];
 
   pool
@@ -149,7 +152,7 @@ const updateServiceById = (req, res) => {
   const id = req.params.service_id;
   let { status } = req.body;
 
-  const query = `UPDATE services SET status = COALESCE($1,status) WHERE service_id=$2 AND is_deleted = 0  RETURNING *`;
+  const query = `UPDATE services SET status = COALESCE($1,status) WHERE service_id=$2 AND is_deleted = 0  RETURNING *;`;
   const data = [status || null, id];
   pool
     .query(query, data)
@@ -178,11 +181,12 @@ const updateServiceById = (req, res) => {
 // EndPoint : GET /service/:id
 const deleteServiceById = (req, res) => {
   const { id } = req.params;
+
   const userId = req.token.userId;
   console.log(id);
   pool
     .query(
-      "UPDATE services SET is_deleted=1 WHERE service_id=$1 AND status='pending' AND provider =$2 RETURNING * ",
+      "UPDATE services SET is_deleted=1 WHERE service_id=$1 AND status='pending' AND provider =$2 RETURNING * ;",
       [id, userId]
     )
     .then((result) => {
@@ -196,7 +200,7 @@ const deleteServiceById = (req, res) => {
       } else {
         pool
           .query(
-            "SELECT * FROM services WHERE service_id=$1 AND provider =$2",
+            "SELECT * FROM services WHERE service_id=$1 AND provider =$2;",
             [id, userId]
           )
           .then((result) => {
@@ -236,7 +240,7 @@ const getServiceByProvider = (req, res) => {
   const id = req.token.userId;
   pool
     .query(
-      `SELECT * FROM services WHERE provider =$1 AND is_deleted=0 order by service_id desc`,
+      `SELECT * FROM services WHERE provider =$1 AND is_deleted=0 order by service_id desc;`,
       [id]
     )
     .then((result) => {
@@ -274,7 +278,7 @@ const updateService = (req, res) => {
     .query(
       `UPDATE services 
      SET service_name = $1, details = $2, price = $3, image = $4
-     WHERE service_id = $5 RETURNING *`,
+     WHERE service_id = $5 RETURNING *;`,
       [service_name, details, price, image, id]
     )
     .then((result) => {
@@ -335,7 +339,7 @@ WHERE
       }
       res.status(200).json({
         success: true,
-        message: `All Order for service provider`,
+        message: "All Order for service provider",
         orders: result.rows,
       });
     })

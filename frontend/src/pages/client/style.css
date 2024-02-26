@@ -4,14 +4,14 @@
   text-align: center;
   font-size: large;
   cursor: pointer;
-  margin-left: 20px;
+  margin-left: 35% !important;
   width: 300px;
 }
 h2 {
-  color: black;
+  color: rgb(178, 43, 43);
   font-family: "Raleway", Courier, monospace;
-  white-space: nowrap;
-  text-align: center;
+  white-space: nowrap; 
+  /* text-align: center; */
 }
 
 h2 a {
@@ -73,21 +73,21 @@ background-color: #00a3af !important;
   background-color: #f3f1ec !important;
   /* padding-bottom: :0px; */
   margin-bottom: 20px;
-  border: 1px solid #ddd;
+  /* border: 1px solid #ddd; */
   border-radius: 8px;
   overflow: hidden;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); */
 }
 
 .cardContainer {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
+ flex-direction: row;
+  row-gap: 2000px;
 }
 
 .serviceCard {
-  flex-basis: calc(33.33% - 20px);
-  margin-bottom: 20px;
+  flex-basis: calc(33.33% - 20px) ;
+  margin-bottom: 20px ;
   margin-right: 10px;
 }
 

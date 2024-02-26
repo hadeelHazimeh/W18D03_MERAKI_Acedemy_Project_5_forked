@@ -16,6 +16,7 @@ const createNewPackage = (req, res) => {
       });
     })
     .catch((err) => {
+      console.log('err', err)
       res.status(500).json({
         success: false,
         message: "Server error",

@@ -16,7 +16,7 @@ import Swal from "sweetalert2";
 import { Button, Modal, Nav } from "react-bootstrap";
 const CreatePackage = () => {
   const [packages, setPackages] = useState([]);
-
+  const [showSubmit,setShowSubmit]=useState(false)
   const [checkedPackages, setCheckedPackages] = useState(null);
   const token = useSelector((state) => state.auth.token);
   const [modalShow, setModalShow] = useState(false);
@@ -37,6 +37,10 @@ const CreatePackage = () => {
         setPackages(packages.data.result);
       })
       .catch((err) => {
+        Swal.fire({
+          icon: "error",
+          text: err.response.data.message
+        });
         console.log(err);
       });
   }, []);
@@ -59,6 +63,10 @@ const CreatePackage = () => {
 
       // setModalShow(true);
     } catch (error) {
+      Swal.fire({
+        icon: "error",
+        text: error.response.data.message
+      });
       console.error("Error getting order details:", error);
     }
   };
@@ -114,7 +122,7 @@ const CreatePackage = () => {
       //setStatus(false);
       Swal.fire({
         icon: "error",
-        text: error.response.data.message,
+        text: error.response.data.message
       });
       console.error("Error creating order:", error);
     }
@@ -130,12 +138,14 @@ const CreatePackage = () => {
       setCheckedPackages(packageId);
 
     }
+    setShowSubmit(true)
   };
 
   //......................................................................
   return (
     <div className="formContainer">
-      <form onSubmit={handleSubmitOrder}>
+      <h6 style={{marginTop: "1rem", borderTop: "1px solid #00a3af", padding: "1rem 0 0 0"}}> Fill the information please </h6>
+      <form>
         <MDBRow className="formInput">
           <MDBInput
             label="Event Date"
@@ -158,9 +168,9 @@ const CreatePackage = () => {
           />
         </MDBRow>
 
-        <div className="cardContainer">
+        <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between' }}>
           {packages.map((Package) => (
-            <MDBCard className="serviceCard">
+            <MDBCard  style={{ width: 'calc(33.33% - 20px)', marginBottom: '20px',backgroundColor:"#f3f1ec" }}>
               
               <MDBCardBody>
                 <MDBCardTitle>name: {Package.package_name}</MDBCardTitle>
@@ -181,21 +191,43 @@ const CreatePackage = () => {
                   Price: JD {Package.price}
                   <br />
                 </MDBCardText>
+                <div className="checkBox"
+style={{
+  fontFamily:"Raleway",
+  fontWeight:"bold",
+    position: "absolute",
+    bottom: "15px", 
+    left: "20px",
+    }}
 
+>
                 <MDBCheckbox
                   label="Select"
                   checked={checkedPackages === Package.package_id}
                   onChange={() => handleCheckboxChange(Package.package_id)}
-                
+
+                  // style={{
+                  //   position: "absolute",
+                  //   bottom: "20px", 
+                  //   left: "20px",
+                  // }}
+
                 />
+                </div>
               </MDBCardBody>
             </MDBCard>
           ))}
         </div>
-        
-        <MDBBtn type="submit"  color='dark'>
-        Submit your plan
-        </MDBBtn>
+
+        {showSubmit? <><div>
+        <MDBBtn
+                  onClick={handleSubmitOrder}
+                  className="totalPriceButton"
+                  style={{marginLeft: "35%"}}
+                  color="dark"
+                >
+                  Submit your plan
+                </MDBBtn></div></>:<></>}
         </form>
 
       {showPreview ? (
