@@ -182,7 +182,7 @@ const ServiceProvider = () => {
                     </Button>
                   </div>
                 </div>
-              </div>
+              
             </Col>
           </Row>
         </Container>
