@@ -17,7 +17,7 @@ import CreatePackage from "../pages/createPackage"
 import AdminServicesRender from "../pages/AdminServicesRender"
 
 // import Service from "../pages/Service/Service"
-import PortFolio from "../pages/PortFolio"
+// import PortFolio from "../pages/PortFolio"
 import Talk from "../pages/LetsTalk"
 import About from "../pages/About"
 import Navbar from "../components/Navbar"
@@ -72,7 +72,7 @@ export const router= createBrowserRouter(
       path:"/portfolio",
       element: 
       <> <Navbar/>
-      <PortFolio/>
+      {/* <PortFolio/> */}
       </>
   },
   {
