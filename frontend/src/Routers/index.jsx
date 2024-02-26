@@ -24,6 +24,11 @@ import Navbar from "../components/Navbar"
 
 import ServiceSideBar from "../components/ServiceSideBar"
 
+import OrdersTable from "../pages/adminOrder"
+
+import ServiceProviderOrders from "../pages/ServiceProviderOrder"
+
+
 export const router= createBrowserRouter(
 [
    {
@@ -51,6 +56,18 @@ export const router= createBrowserRouter(
         </div>
         </>
     },
+    {
+        path:"service/provider/orders",
+        element: <>
+        <div style={{height:"100vh",display:"grid",gridTemplateColumns:"0.5fr 4fr"}}>
+        <ServiceSideBar/>
+        <div className="d-flex flex-column">
+        <ServiceProviderOrders/>
+        </div>
+        </div>
+        </>
+    },
+
     {
       path:"/portfolio",
       element: 
@@ -81,7 +98,15 @@ export const router= createBrowserRouter(
 
  {
         path: "/service/provider/create",
-        element: <CreateService/>
+        element: <>
+        <div style={{height:"100vh",display:"grid",gridTemplateColumns:"0.5fr 4fr"}}>
+        <ServiceSideBar/>
+        <div className="d-flex flex-column">
+        <CreateService/>
+        </div>
+        </div>
+        </>
+
 
 
      },
@@ -112,13 +137,18 @@ export const router= createBrowserRouter(
         },  {
          path:"Services",
          element:<AdminServicesRender/>
+      },{
+         path:"orders",
+         element:<OrdersTable/>
       },
       ]
    },
 
     {
       path:"createPackage",
-      element:<CreatePackage/>
+      element:<>
+      <Navbar/>
+      <CreatePackage/></>
     }
 
 ]

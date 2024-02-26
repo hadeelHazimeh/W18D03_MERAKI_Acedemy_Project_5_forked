@@ -80,8 +80,8 @@ const createNewOrderServices = (req, res) => {
 
 
 const getAllOrders = (req, res) => {
-  const query = `SELECT 
-  o.order_id, 
+  const query = ` SELECT o.order_id, 
+
   o.order_price, 
 
   o.event_name,
@@ -92,7 +92,9 @@ const getAllOrders = (req, res) => {
   s.service_name, 
   s.details, 
   s.price, 
-  s.image
+  s.image,
+u.userName,
+u.email
 FROM 
   orders o
   JOIN orders_services os ON o.order_id = os.order_id
