@@ -14,6 +14,7 @@ import {
 // i want to import logo(3).png from assests
 import Logo from "../../assets/logo (3).png"
 import "./style.css"
+import Navbar from "../../components/Navbar"
 
 
 
@@ -38,10 +39,11 @@ function Login() {
 
   return (
     <>
-      <MDBContainer className="my-4">
+    {/* <Navbar/> */}
+      <MDBContainer className="my-5 pt-4">
         <MDBCard>
           <MDBRow className="g-0">
-            <MDBCol md="6">
+            <MDBCol md="6" className="log-img" >
               <MDBCardImage
                 src={Logo}
                 alt="login form"
