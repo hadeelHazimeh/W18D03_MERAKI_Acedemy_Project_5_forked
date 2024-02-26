@@ -73,6 +73,11 @@ letter-spacing: 4px;
 #pacific{
  border-radius:  999px 999px 0 0;
 }
+h3{
+    text-align: left;
+    font-family:'Quattrocento',Georgia,"Times New Roman",serif ;
+}
+
 
 .text-muted{
     text-align:center;
@@ -82,6 +87,7 @@ letter-spacing: 4px;
     font-size:17px;
 }
 .Link{
+
     text-align:left !important;
     color:#555454;
     font-family: "Crimson Pro", Sans-serif !important;

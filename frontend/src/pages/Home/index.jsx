@@ -112,6 +112,7 @@ const Home = () => {
               />
             </div>
 
+
             <div className="col-lg-6 d-flex flex-column align-items-center justify-content-center">
               <h3 className="font-weight-bold">Onsite Production</h3>
 <br/>
@@ -122,6 +123,8 @@ const Home = () => {
                 Venue to manage onsite expectations Guest & Timeline Management
                 throughout the experience Overseeing cleanup & load out of all.
               </p>
+            
+
               <p className="Link" >
                 <a href="#" class="text-decoration-none" style={{color:'#555454'}}>
                 CONTACT US TO GET STARTED
