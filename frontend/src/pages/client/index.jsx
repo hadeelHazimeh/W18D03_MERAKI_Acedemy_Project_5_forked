@@ -42,6 +42,7 @@ const Client = () => {
     event_name: "",
     eventDate: "",
     place: "",
+    phone:""
   });
 
   //...................................................................................
@@ -74,7 +75,7 @@ const Client = () => {
           headers: { Authorization: `Bearer ${token}` },
         }
       );
-      console.log(orderResult.data.result[0]);
+      console.log(orderResult.data);
       setOrderId(orderResult.data.result[0].order_id);
       //selected services with the created order
       const orderServiceResult = await axios.post(
@@ -198,7 +199,16 @@ const Client = () => {
             onChange={handleInputChange}
           />
         </MDBRow>
-
+        <MDBRow className="formInput">
+          <MDBInput
+            label="phone"
+            type="text"
+            id="phone"
+            name="phone"
+            value={orderData.phone}
+            onChange={handleInputChange}
+          />
+            </MDBRow>
         <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between' }}>
           {services.map((service) => (
             <MDBCard   style={{ width: 'calc(50% - 20px)', marginBottom: '20px',backgroundColor:"#f3f1ec" }}>
@@ -296,7 +306,7 @@ style={{
                 <MDBBtn
                   // className="totalPriceButton"
                   color="dark"
-                  style={{fontWeight:"bold"}}
+                  style={{fontWeight:"bold",width:"30%"}}
                   onClick={handleOrderPrice}
                 >
                   {ClickedPrice ? (
@@ -308,7 +318,7 @@ style={{
                 <MDBBtn
                   onClick={handleSubmitOrder}
                   // className="totalPriceButton"
-                  style={{width:"20%",fontWeight:"bold"}}
+                  style={{width:"30%",fontWeight:"bold"}}
                   color="dark"
                 >
                   Submit your plan
@@ -336,12 +346,17 @@ style={{
               </p>
               <p>
                 {" "}
+                <strong> Phone number: </strong> {orderDetails.phone}
+              </p>
+              <p>
+                {" "}
                 <strong> Event Planner: </strong> {orderDetails.username}
               </p>
               <p>
                 {" "}
                 <strong> Event Date: </strong> {orderDetails.eventdate}
               </p>
+              
               <p>
                 {" "}
                 <strong>Place:</strong> {orderDetails.place}{" "}

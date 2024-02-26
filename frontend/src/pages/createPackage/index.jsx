@@ -42,6 +42,7 @@ const CreatePackage = () => {
     event_name: "",
     eventDate: "",
     place: "",
+    phone:""
   });
   const dispatch = useDispatch();
   const [serviceInfo, setServiceInfo] = useState({
@@ -215,6 +216,16 @@ const CreatePackage = () => {
             onChange={handleInputChange}
           />
         </MDBRow>
+        <MDBRow className="formInput">
+          <MDBInput
+            label="phone"
+            type="text"
+            id="phone"
+            name="phone"
+            value={orderData.phone}
+            onChange={handleInputChange}
+          />
+            </MDBRow>
 
         {/* cards */}
         <div
@@ -223,7 +234,7 @@ const CreatePackage = () => {
             flexWrap: "wrap",
             justifyContent: "space-between",
           }}
-          //  style={{ display: 'flex', flexWrap: 'wrap',marginLeft:"20px",marginRight:"20px",gap:"20px" }}
+          
         >
           {packagesName.map((ele, i) => (
             <MDBCard
@@ -231,7 +242,7 @@ const CreatePackage = () => {
               // style={{ maxWidth: "29rem" }}
               style={{
                 width: "calc(50% - 20px)",
-                // marginBottom: "20px",
+                 marginBottom: "50px",
                 backgroundColor: "#f3f1ec",
               }}
             >
@@ -337,6 +348,7 @@ const CreatePackage = () => {
         </div>
       </div>
       <form>
+
         {showSubmit ? (
           <>
             <div>
@@ -413,6 +425,10 @@ const CreatePackage = () => {
               <p>
                 {" "}
                 <strong> Event Planner: </strong> {orderDetails.username}
+              </p>
+              <p>
+                {" "}
+                <strong> Phone number: </strong> {orderDetails.phone}
               </p>
               <p>
                 {" "}
