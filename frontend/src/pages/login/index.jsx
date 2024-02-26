@@ -56,7 +56,11 @@ const Login = () => {
         if(result.data.role===1){
           navigate("/admin/dashboard/pending/Services")
         }
-        
+        else if(result.data.role===2){
+          navigate("/service/provider")
+         }
+         else if(result.data.role===3)
+         {navigate("/client")}
       } else throw Error;
     } catch (error) {
       if (error.response && error.response.data) {
