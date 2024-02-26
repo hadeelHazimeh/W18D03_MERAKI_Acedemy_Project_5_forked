@@ -6,14 +6,17 @@ import {
   CDBSidebarMenuItem,
   CDBSidebarFooter,
 } from 'cdbreact';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from "react-redux";
 import {MDBIcon} from "mdb-react-ui-kit"
-
+import { setLogout } from '../../services/redux/reducer/auth';
+import { useNavigate } from 'react-router-dom';
 import { NavLink } from 'react-router-dom';
 const AdminSideBar = () => {
   const name = useSelector(
     (state) => state.auth.userName
   );
+  const dispatch=useDispatch()
+  const navigate =useNavigate()
     return (
         <CDBSidebar style={{ backgroundColor: "#302B2B" }}>
           
@@ -28,7 +31,10 @@ const AdminSideBar = () => {
               <NavLink to={"orders"}> <CDBSidebarMenuItem icon="shopping-bag" iconType="solid">
                 All Orders
               </CDBSidebarMenuItem></NavLink>
-              <NavLink to={""}> <CDBSidebarMenuItem icon="sign-out-alt" iconType="solid">
+              <NavLink to={""}> <CDBSidebarMenuItem icon="sign-out-alt" iconType="solid" onClick={()=>{
+                dispatch(setLogout())
+                navigate("/login")
+              }} >
                 Log Out
               </CDBSidebarMenuItem></NavLink>
             </CDBSidebarMenu>
