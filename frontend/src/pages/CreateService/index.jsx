@@ -49,9 +49,9 @@ const CreateService = () => {
 
     return (
         <div className="container">
-            <div className="row justify-content-center">
+            <div className="row justify-content-center col-10 mx-auto">
                 <div className="col-md-9 pt-5">
-                    <h2 className="mb-4 animated fadeIn" style={{fontWeight: "bold"}}>Create Service</h2>
+                    <h2 className="mb-4 animated fadeIn " style={{fontWeight: "bold", textAlign:"center" }}>Create Service</h2>
                     <div className="form-wrapper mt-5"  style={{ backgroundColor: "#F3F1EC", padding: "20px", border: "1px solid #ddd", borderRadius: "5px", width: "", height: "auto" }}>
                         <form>
                             <div className="mb-3">
