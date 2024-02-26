@@ -70,6 +70,7 @@ const ServiceProvider = () => {
       .then((result) => {
         console.log(result);
 
+
         dispatch(deleteServiceByID(id));
       })
       .catch((error) => {
@@ -182,7 +183,6 @@ const ServiceProvider = () => {
                     </Button>
                   </div>
                 </div>
-              
             </Col>
           </Row>
         </Container>
