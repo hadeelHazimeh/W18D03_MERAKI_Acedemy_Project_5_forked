@@ -73,3 +73,21 @@ letter-spacing: 4px;
 #pacific{
  border-radius:  999px 999px 0 0;
 }
+
+.text-muted{
+    text-align:center;
+    color:#666;
+    font-family: 'Quattrocento',Georgia,"Times New Roman",serif;
+    line-height: 2.7em;
+    font-size:17px;
+}
+.Link{
+    text-align:left !important;
+    color:#555454;
+    font-family: "Crimson Pro", Sans-serif !important;
+    line-height: 2.7em;
+    font-size:17px;
+    letter-spacing: 2px;
+    font-weight: bold;
+
+}

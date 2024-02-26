@@ -15,10 +15,8 @@ import {Button,Modal,Nav} from "react-bootstrap";
 
 
 
-import { Button, Modal, Nav } from "react-bootstrap";
-
-import { useSelector } from "react-redux";
 import axios from "axios";
+import { useSelector } from "react-redux";
 import { useState } from "react";
 import Swal from "sweetalert2";
 
