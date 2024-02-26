@@ -16,11 +16,41 @@ import Logo from "../../assets/logo (3).png"
 import "./style.css"
 
 
+import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
+import "./style.css";
+import {
+  setLogin,
+  setUserId,
+  setLogout,
+  seRole
+} from "../../services/redux/reducer/auth";
+//==================================
+const Login = () => {
+  const dispatch = useDispatch();
 
-function Login() {
+
+
+
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
+
+
+        dispatch(setUserId(result.data.userId));
+        dispatch(seRole(result.data.role))
+        if(result.data.role===1){
+          navigate("/admin/dashboard/pending/Services")
+        }
+        
+      } else throw Error;
+    } catch (error) {
+      if (error.response && error.response.data) {
+        return setErrorMessage(error.response.data.message);
+      }
+      setErrorMessage("Error happened while Login, please try again");
+    }
 
   const handleLoginClick = () => {
     axios
@@ -34,6 +64,7 @@ function Login() {
       .catch((err) => {
         console.log(err);
       });
+
   };
 
   return (

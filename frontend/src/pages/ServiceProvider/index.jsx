@@ -1,3 +1,4 @@
+
 import { useEffect, useState } from "react";
 
 import axios from "axios";
@@ -29,6 +30,7 @@ const ServiceProvider = () => {
   const [service_name, setService_name] = useState("");
   const [details, setDetails] = useState("");
   const [price, setPrice] = useState("");
+
   const [image, setImage] = useState("");
 
   const handleClose = () => setShowModal(false);
@@ -67,6 +69,7 @@ const ServiceProvider = () => {
       })
       .then((result) => {
         console.log(result);
+
         dispatch(deleteServiceByID(id));
       })
       .catch((error) => {
@@ -156,6 +159,7 @@ const ServiceProvider = () => {
                   {service.service_name}
                 </h4>
                 <p>{service.details}</p>
+                </div>
                 <div className="total">
                   <h4>status: {service.status}</h4>
                   <h4 className="service-price">price: $ {service.price}</h4>
@@ -169,7 +173,9 @@ const ServiceProvider = () => {
                     </Button>
                     <Button
                       variant="dark"
+
                       className="mt-3 ms-3 "
+
                       onClick={() => deleteService(service.service_id)}
                     >
                       Delete
@@ -231,6 +237,7 @@ const ServiceProvider = () => {
           <Button variant="secondary" onClick={handleClose}>
             Close
           </Button>
+
           <Button  onClick={updateService} style={{backgroundColor: "#00A3AF !important" }}>
             Save Changes
           </Button>

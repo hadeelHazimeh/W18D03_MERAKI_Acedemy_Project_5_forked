@@ -23,7 +23,11 @@ import About from "../pages/About"
 import Navbar from "../components/Navbar"
 
 import ServiceSideBar from "../components/ServiceSideBar"
+
+import OrdersTable from "../pages/adminOrder"
+
 import ServiceProviderOrders from "../pages/ServiceProviderOrder"
+
 
 export const router= createBrowserRouter(
 [
@@ -133,6 +137,9 @@ export const router= createBrowserRouter(
         },  {
          path:"Services",
          element:<AdminServicesRender/>
+      },{
+         path:"orders",
+         element:<OrdersTable/>
       },
       ]
    },

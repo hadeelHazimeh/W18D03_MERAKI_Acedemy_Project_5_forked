@@ -61,10 +61,13 @@ const getServiceByName = (req, res) => {
 //this function to get All service from the database
 // End Point : GET /service
 const getAllServices = (req, res) => {
+
+ 
   pool
     .query(
       "SELECT * FROM services WHERE services.is_deleted=0 order by service_id desc;"
     )
+
     .then((result) => {
       if (result.rows.length === 0) {
         res.status(404).json({
@@ -178,6 +181,7 @@ const updateServiceById = (req, res) => {
 // EndPoint : GET /service/:id
 const deleteServiceById = (req, res) => {
   const { id } = req.params;
+
   const userId = req.token.userId;
   console.log(id);
   pool
