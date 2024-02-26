@@ -8,7 +8,16 @@ import {
   MDBInput,
   MDBCheckbox,
 } from "mdb-react-ui-kit";
+
+// i want to import logo(3).png from assests
+import Logo from "../../assets/logo (3).png"
+
+import Navbar from "../../components/Navbar"
+
+
+
 import { useNavigate } from "react-router-dom";
+
 
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
@@ -58,6 +67,21 @@ const Login = () => {
   };
 
   return (
+
+    <>
+    {/* <Navbar/> */}
+      <MDBContainer className="my-5 pt-4">
+        <MDBCard>
+          <MDBRow className="g-0">
+            <MDBCol md="6" className="log-img" >
+              <MDBCardImage
+                src={Logo}
+                alt="login form"
+                style={{ height: "560px" }}
+                className="rounded-start w-100"
+              />
+            </MDBCol>
+
     <div>
       {/* login form */}
       <MDBContainer fluid className="p-3 my-5 h-custom">
@@ -87,6 +111,7 @@ const Login = () => {
               size="lg"
               onChange={(e) => setPassword(e.target.value)}
             />
+
 
             <div className="text-center text-md-start mt-4 pt-2">
               <MDBBtn
