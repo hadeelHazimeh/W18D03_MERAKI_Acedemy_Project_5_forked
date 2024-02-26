@@ -10,13 +10,22 @@ import {
   MDBCardText,
   MDBCardImage,
   MDBCheckbox,
+  MDBRipple ,
+  MDBCardHeader,MDBListGroup,
+  MDBListGroupItem
 } from "mdb-react-ui-kit";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { setPackages,setPackagesName } from "../../services/redux/reducer/packages";
 import Swal from "sweetalert2";
 import { Button, Modal, Nav } from "react-bootstrap";
+//import { setPackagesName } from "../../services/redux/reducer/packages";
 const CreatePackage = () => {
-  const [packages, setPackages] = useState([]);
+  //const [packages, setPackages] = useState([]);
+  
+
+
   const [showSubmit,setShowSubmit]=useState(false)
+  const { packages, packagesName} = useSelector((state) => state.packages);
   const [checkedPackages, setCheckedPackages] = useState(null);
   const token = useSelector((state) => state.auth.token);
   const [modalShow, setModalShow] = useState(false);
@@ -29,19 +38,47 @@ const CreatePackage = () => {
     eventDate: "",
     place: "",
   });
-  useEffect(() => {
+  const dispatch=useDispatch()
+const [serviceInfo, setServiceInfo] = useState({service_name:"",
+price:0,
+description:"",
+image:""
+})
+const getPackages=()=>{
+  axios
+  .get(`http://localhost:5000/package`)
+  .then((result) => {
+  
+    console.log('first', result.data.result)
+
+     dispatch(setPackagesName(result.data.result))
+
+  })
+  .catch((err) => {
+    
+    console.log(err)
+
+  });
+}
+//-----------------------------
+
+useEffect(() => {
+  //getPackages()
     axios
-      .get(`http://localhost:5000/package/servicePackage`)
-      .then((packages) => {
-        console.log("packages", packages.data.result);
-        setPackages(packages.data.result);
+      .get(`http://localhost:5000/package/servicePackage`, {
+        
+      })
+      .then((result) => {
+        getPackages()
+        console.log("result.data",result.data.result)
+        dispatch(setPackages(result.data.result))
+        
+
       })
       .catch((err) => {
-        Swal.fire({
-          icon: "error",
-          text: err.response.data.message
-        });
-        console.log(err);
+        
+        console.log(err)
+
       });
   }, []);
   //......................................................................................
@@ -144,9 +181,10 @@ const CreatePackage = () => {
   //......................................................................
   return (
     <div className="formContainer">
+      
       <h6 style={{marginTop: "1rem", borderTop: "1px solid #00a3af", padding: "1rem 0 0 0"}}> Fill the information please </h6>
-      <form>
-        <MDBRow className="formInput">
+      <div>
+      <MDBRow className="formInput">
           <MDBInput
             label="Event Date"
             type="date"
@@ -167,58 +205,67 @@ const CreatePackage = () => {
             onChange={handleInputChange}
           />
         </MDBRow>
-
-        <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between' }}>
-          {packages.map((Package) => (
-            <MDBCard  style={{ width: 'calc(33.33% - 20px)', marginBottom: '20px',backgroundColor:"#f3f1ec" }}>
-              
-              <MDBCardBody>
-                <MDBCardTitle>name: {Package.package_name}</MDBCardTitle>
-
-                <MDBCardText>
-                  {/* {Package.image} */}
+      <div style={{ display: 'flex', flexWrap: 'wrap' ,alignContent:"center", gap: '20px', margin:"20px"}}>
+   
+   {packagesName.map((ele,i) => (
+     <MDBCard key={i} style={{ maxWidth: '25rem' }}>
+      
+       <MDBCardBody>
+       <MDBCardImage
+           src={ele.image}
+           alt="..."
+           position="top"
+         />
+         <MDBCardTitle>{ele.
+package_name}</MDBCardTitle>
+<MDBCardText>
+           
+           
+           {ele.description}
+           <br />
+           Price: ${ele.price}
+         </MDBCardText>
+         <MDBCard>
+          
+         <MDBCardHeader style={{fontSize:"20px"}}>services</MDBCardHeader>
+           {packages.map((pac,i)=>{
+             if(ele.package_name===pac.package_name){
+               return(<div key={i}>
                   
 
-                  <MDBCardImage
-            src={Package.image}
-            alt="..."
-            position="top"
-          />
-                  <br />
-                  <br />
-                  description: {Package.description}
-                  <br />
-                  Price: JD {Package.price}
-                  <br />
-                </MDBCardText>
-                <div className="checkBox"
-style={{
-  fontFamily:"Raleway",
-  fontWeight:"bold",
-    position: "absolute",
-    bottom: "15px", 
-    left: "20px",
-    }}
+     <MDBListGroup style={{ minWidth: '22rem' }} light>
+     <MDBRipple>
+       <MDBListGroupItem onClick={()=>{setModalShow(true)
+          setServiceInfo(pac)}} style={{cursor: "pointer"}}
+           href='#' action noBorders  aria-current='false' className='px-3'>
+       {pac.service_name}
+       </MDBListGroupItem>
+      
+     </MDBRipple>
 
->
-                <MDBCheckbox
-                  label="Select"
-                  checked={checkedPackages === Package.package_id}
-                  onChange={() => handleCheckboxChange(Package.package_id)}
+     </MDBListGroup>
 
-                  // style={{
-                  //   position: "absolute",
-                  //   bottom: "20px", 
-                  //   left: "20px",
-                  // }}
+  </div>)
+             }
+           })}
+           
+     </MDBCard>
+       </MDBCardBody> 
+     </MDBCard>
+   ))}
+   </div> 
 
-                />
-                </div>
-              </MDBCardBody>
-            </MDBCard>
-          ))}
-        </div>
 
+      </div>
+      <form>
+        
+      
+
+
+
+
+
+        
         {showSubmit? <><div>
         <MDBBtn
                   onClick={handleSubmitOrder}
@@ -229,6 +276,23 @@ style={{
                   Submit your plan
                 </MDBBtn></div></>:<></>}
         </form>
+
+        <Modal show={modalShow} onHide={() => setModalShow(false)}>
+        <Modal.Header closeButton>
+          <Modal.Title>{serviceInfo.service_name}</Modal.Title>
+        </Modal.Header>
+        <Modal.Body className="modalshowing">
+         <img src={serviceInfo.image} fluid /> 
+        <h5><span style={{fontWeight:"bold"}}>Price: </span> {serviceInfo.price}</h5>
+        <p>{serviceInfo.description}</p>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="dark" onClick={() => setModalShow(false)}>
+            Close
+          </Button>
+        </Modal.Footer>
+      </Modal>
+    
 
       {showPreview ? (
         <div className="d-flex justify-content-end">
@@ -247,7 +311,7 @@ style={{
         <></>
       )}
 
-      <Modal show={modalShow} onHide={() => setModalShow(false)}>
+      {/* <Modal show={modalShow} onHide={() => setModalShow(false)}>
         <Modal.Header closeButton>
           <Modal.Title>Your EVENT is now planned</Modal.Title>
         </Modal.Header>
@@ -265,7 +329,7 @@ style={{
         <Modal.Footer>
           <Button onClick={() => setModalShow(false)}>Close</Button>
         </Modal.Footer>
-      </Modal>
+      </Modal> */}
       
     </div>
   );
