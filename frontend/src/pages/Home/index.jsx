@@ -106,7 +106,7 @@ const Home = () => {
             <div className="col-lg-6 mb-4 mb-lg-0 d-flex align-items-center justify-content-center">
               <img
                 id="pacific"
-                src="https://adornmentevents.com/wp-content/uploads/gallery2023-lodge-60-683x1024.jpg"
+                src="https://adornmentevents.com/wp-content/uploads/gallery2023-coast-5.jpg"
                 className="img-fluid"
                 alt=""
               />
@@ -124,7 +124,7 @@ const Home = () => {
                 throughout the experience Overseeing cleanup & load out of all.
               </p>
             
-
+<br/>
               <p className="Link" >
                 <a href="#" class="text-decoration-none" style={{color:'#555454'}}>
                 CONTACT US TO GET STARTED
