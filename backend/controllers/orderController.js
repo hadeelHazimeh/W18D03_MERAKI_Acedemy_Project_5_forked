@@ -2,10 +2,12 @@
 const { pool } = require("../models/db");
 
 const createNewOrder = (req, res) => {
-  const { order_price, eventDate, event_name, place, status } = req.body;
+
+  const { order_price, event_name,eventDate,place, status } = req.body;
   const user_id = req.token.userId;
 
-  const data = [order_price, user_id, eventDate,event_name, place, status];
+  const data = [order_price, user_id,event_name, eventDate, place, status];
+
 
   pool
     .query(
@@ -78,16 +80,21 @@ const createNewOrderServices = (req, res) => {
 
 
 const getAllOrders = (req, res) => {
-  const query = `SELECT 
-  o.order_id, 
+  const query = ` SELECT o.order_id, 
+
   o.order_price, 
+
+  o.event_name,
+
   o.eventDate, 
   o.place,
   os.service_id, 
   s.service_name, 
   s.details, 
   s.price, 
-  s.image
+  s.image,
+u.userName,
+u.email
 FROM 
   orders o
   JOIN orders_services os ON o.order_id = os.order_id
@@ -129,6 +136,10 @@ const getOrderById = (req, res) => {
     o.order_id, 
     o.order_price, 
     o.eventDate, 
+
+
+    o.event_name,
+
     o.place, 
     u.userName,
     os.service_id, 

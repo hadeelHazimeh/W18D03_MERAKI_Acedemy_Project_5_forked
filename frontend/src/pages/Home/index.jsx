@@ -1,8 +1,10 @@
+
 import "./index.css";
 
 const Home = () => {
   return (
     <div className="home">
+
       <div className="video-container">
         <video className="video-background" autoPlay muted controls loop>
           <source
@@ -29,6 +31,7 @@ const Home = () => {
             </strong>
           </h5>
           <br />
+
 
           <p className="card-text">
             Our creativity, attention to detail, and passion for planning <br />
@@ -121,6 +124,7 @@ const Home = () => {
       </div>
       <footer></footer>
     </div>
+
   );
 };
 

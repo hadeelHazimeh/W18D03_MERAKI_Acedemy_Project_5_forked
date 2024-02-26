@@ -1,0 +1,4 @@
+.modal-backdrop
+{
+    --bs-backdrop-bg: rgb(0 0 0 / 30%) !important;
+}
