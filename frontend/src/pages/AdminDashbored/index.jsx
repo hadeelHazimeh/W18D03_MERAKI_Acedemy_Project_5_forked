@@ -5,7 +5,8 @@ const AdminDashboard = () => {
   return (
     <> <div style={{height:"100vh",display:"grid",gridTemplateColumns:"0.5fr 4fr"}}>
     <AdminSideBar/>
-        <Outlet/>
+    <div> <Outlet/></div>
+       
     
     </div>
    
