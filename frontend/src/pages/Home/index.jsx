@@ -1,3 +1,4 @@
+
 import Carousel from "react-bootstrap/Carousel";
 import "./index.css";
 const Home = () => {
@@ -11,21 +12,25 @@ const Home = () => {
             type="video/mp4"
           />
         </video>
-      </div>
+       </div>
 
-    <div style={{objectFit:"contain"}}>
+         <div style={{objectFit:"contain"}}>
       <video className="w-100" autoPlay loop muted>
       <source
         src="https://mdbootstrap.com/img/video/animation-intro.mp4"
         type="video/mp4"
       />
-    </video>
+     </video>
 
-    <div className="slider_scroll_down icon-down"></div>
 
     </div>
-    </div>
+    
 
+     <div className="slider_scroll_down icon-down"></div>
+
+
+    
+     </div>
   );
 };
 

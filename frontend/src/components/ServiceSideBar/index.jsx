@@ -1,36 +1,45 @@
+import React from 'react';
 import {
-    CDBSidebar,
-    CDBSidebarContent,
-    CDBSidebarHeader,
-    CDBSidebarMenu,
-    CDBSidebarMenuItem,
-    CDBSidebarFooter,
-  } from 'cdbreact';
-  import { NavLink } from 'react-router-dom';
-  const ServiceSideBar = () => {
-      return (
-          <CDBSidebar  /*  style={{backgroundColor:"white",color:"#ACDAD1"}} */ >
-            <CDBSidebarHeader prefix={<i className="fa fa-bars" />}>Contrast</CDBSidebarHeader>
-            <CDBSidebarContent>
-              <CDBSidebarMenu>
-                <NavLink to="pending/Services"><CDBSidebarMenuItem icon="th-large">Pending Services</CDBSidebarMenuItem></NavLink>
-               <NavLink to={"packages"}> <CDBSidebarMenuItem icon="sticky-note">Components</CDBSidebarMenuItem></NavLink>
-               <NavLink to={"Services"}> <CDBSidebarMenuItem icon="credit-card" iconType="solid">
-                  Metrics
-                </CDBSidebarMenuItem></NavLink>
-              </CDBSidebarMenu>
-            </CDBSidebarContent>
-    
-            <CDBSidebarFooter style={{ textAlign: 'center' }}>
-              <div
-                className="sidebar-btn-wrapper"
-                style={{padding: '20px 5px'}}
-              >
-                Sidebar Footer
-              </div>
-            </CDBSidebarFooter>
-          </CDBSidebar>
-      );
-    };
-    
-    export default ServiceSideBar;
+  CDBSidebar,
+  CDBSidebarContent,
+  CDBSidebarHeader,
+  CDBSidebarMenu,
+  CDBSidebarMenuItem,
+} from 'cdbreact';
+import { NavLink } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+
+const ServiceSideBar = () => {
+  const navigate = useNavigate();
+  const serviceProviderName = useSelector(
+    (state) => state.auth.userName
+  );
+
+  const handleMyServicesClick = () => {
+    navigate('/service/provider');
+  };
+
+  const handleMyOrdersClick = () => {
+    navigate('/service/provider/orders');
+  };
+
+  const handleCreateServiceClick = () => {
+    navigate('/service/provider/create');
+  };
+
+  return (
+    <CDBSidebar style={{ backgroundColor: "#302B2B" }} >
+      <CDBSidebarHeader prefix={<i className="fa fa-bars" />}>Hello {serviceProviderName}</CDBSidebarHeader>
+      <CDBSidebarContent>
+        <CDBSidebarMenu>
+          <NavLink to="" onClick={handleMyServicesClick}><CDBSidebarMenuItem icon="cogs">My Services</CDBSidebarMenuItem></NavLink>
+          <NavLink to="#" onClick={handleMyOrdersClick}><CDBSidebarMenuItem icon="shopping-cart">My Orders</CDBSidebarMenuItem></NavLink>
+          <NavLink to="#" onClick={handleCreateServiceClick}><CDBSidebarMenuItem icon="plus">Create Service</CDBSidebarMenuItem></NavLink>
+        </CDBSidebarMenu>
+      </CDBSidebarContent>
+    </CDBSidebar>
+  );
+};
+
+export default ServiceSideBar;

@@ -1,14 +1,20 @@
-import React, { useState, useEffect } from "react";
-import {
-  MDBContainer,
-  MDBCol,
-  MDBRow,
-  MDBBtn,
-  MDBIcon,
-  MDBInput,
-  MDBCheckbox,
-} from "mdb-react-ui-kit";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import {
+  MDBBtn,
+  MDBContainer,
+  MDBCard,
+  MDBCardBody,
+  MDBCardImage,
+  MDBRow,
+  MDBCol,
+  MDBInput,
+} from "mdb-react-ui-kit";
+// i want to import logo(3).png from assests
+import Logo from "../../assets/logo (3).png"
+import "./style.css"
+
 
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
@@ -22,25 +28,15 @@ import {
 //==================================
 const Login = () => {
   const dispatch = useDispatch();
+
+
+
+
+
   const [email, setEmail] = useState("");
-  const [message, setMessage] = useState("");
-  const [errorMessage, setErrorMessage] = useState("");
   const [password, setPassword] = useState("");
-  const [status, setStatus] = useState(false);
-  const navigate =useNavigate();
-  //================handlelogin
-  const login = async (e) => {
-    e.preventDefault();
-    try {
-      const result = await axios.post("http://localhost:5000/users/login", {
-        email,
-        password,
-      });
-      console.log("result", result.data);
-      if (result.data) {
-        setStatus(true);
-        setMessage(result.data.message);
-        dispatch(setLogin(result.data.token));
+  const navigate = useNavigate();
+
 
         dispatch(setUserId(result.data.userId));
         dispatch(seRole(result.data.role))
@@ -55,76 +51,90 @@ const Login = () => {
       }
       setErrorMessage("Error happened while Login, please try again");
     }
+
+  const handleLoginClick = () => {
+    axios
+      .post("http://localhost:5000/users/login", { email, password })
+      .then((response) => {
+        console.log(response);
+        const token = response.data.token;
+        localStorage.setItem("token", token);
+        navigate("/");
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+
   };
 
   return (
-    <div>
-      {/* login form */}
-      <MDBContainer fluid className="p-3 my-5 h-custom">
-        <MDBRow>
-          <MDBCol col="10" md="6">
-            <img
-              src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.webp"
-              class="img-fluid"
-              alt="Sample image"
-            />
-          </MDBCol>
+    <>
+      <MDBContainer className="my-4">
+        <MDBCard>
+          <MDBRow className="g-0">
+            <MDBCol md="6">
+              <MDBCardImage
+                src={Logo}
+                alt="login form"
+                style={{ height: "560px" }}
+                className="rounded-start w-100"
+              />
+            </MDBCol>
 
-          <MDBCol col="4" md="6">
-            <MDBInput
-              wrapperClass="mb-4"
-              label="Email address"
-              id="formControlLg"
-              type="email"
-              size="lg"
-              onChange={(e) => setEmail(e.target.value)}
-            />
-            <MDBInput
-              wrapperClass="mb-4"
-              label="Password"
-              id="formControlLg"
-              type="password"
-              size="lg"
-              onChange={(e) => setPassword(e.target.value)}
-            />
-
-            <div className="text-center text-md-start mt-4 pt-2">
-              <MDBBtn
-                className="mb-0 px-5"
-                size="lg"
-                onClick={(e) => {
-                  login(e);
-                }}
-              >
-                Login
-              </MDBBtn>
-              <p className="small fw-bold mt-2 pt-1 mb-2">
-                Don't have an account?
-                <span
-                  className="link-danger"
-                  onClick={() => navigate("/register")} // Navigate to register page
-                  style={{ cursor: "pointer" }}
+            <MDBCol md="6" className="mt-5">
+              <MDBCardBody className="d-flex flex-column">
+                <h5
+                  className="fw-normal my-4 pb-3"
+                  style={{ letterSpacing: "1px" }}
                 >
-                  Register
-                </span>
-              </p>
-            </div>
-          </MDBCol>
+                  Sign into your account
+                </h5>
 
-          {status ? <p>{message}</p> : <p>{errorMessage}</p>}
-        </MDBRow>
+                <MDBInput
+                  wrapperClass="mb-4"
+                  label="Email address"
+                  id="formControlLg"
+                  type="email"
+                  size="lg"
+                  onChange={(e) => {
+                    setEmail(e.target.value);
+                  }}
+                />
+                <MDBInput
+                  wrapperClass="mb-4"
+                  label="Password"
+                  id="formControlLg"
+                  type="password"
+                  size="lg"
+                  onChange={(e) => {
+                    setPassword(e.target.value);
+                  }}
+                />
 
-        <div
-          className="d-flex flex-column flex-md-row text-center text-md-start 
-      justify-content-between py-4 px-4 px-xl-5 bg-primary"
-        >
-          <div className="text-white mb-3 mb-md-0">
-            Copyright © 2024. All rights reserved.
-          </div>
-        </div>
+                <MDBBtn
+                  className="mb-4 px-5"
+                  color="dark"
+                  size="lg"
+                  onClick={handleLoginClick}
+                >
+                  Login
+                </MDBBtn>
+                <a className="small text-muted" href="#!">
+                  Forgot password?
+                </a>
+                <p className="mb-5 pb-lg-2 pt-3" style={{ color: "#393f81" }}>
+                  Don't have an account?{" "}
+                  <a href="register" style={{ color: "#393f81" }}>
+                    Register here
+                  </a>
+                </p>
+              </MDBCardBody>
+            </MDBCol>
+          </MDBRow>
+        </MDBCard>
       </MDBContainer>
-    </div>
+    </>
   );
-};
+}
 
 export default Login;

@@ -1,8 +1,5 @@
 
-
-
 import { useEffect, useState } from "react";
-
 
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
@@ -20,31 +17,24 @@ import {
   updateServiceById,
   deleteServiceByID,
 } from "../../services/redux/reducer/serviceProvider";
-
-
-
 import './style.css';
-
 
 const ServiceProvider = () => {
   const dispatch = useDispatch();
   const serviceProvider = useSelector(
     (state) => state.serviceProvider.services
   );
+  
   const [showModal, setShowModal] = useState(false);
   const [serviceId, setServiceId] = useState("");
   const [service_name, setService_name] = useState("");
   const [details, setDetails] = useState("");
   const [price, setPrice] = useState("");
 
-
   const [image, setImage] = useState("");
-
 
   const handleClose = () => setShowModal(false);
   const handleShow = () => setShowModal(true);
-
-
 
   const uploadImage = (image) => {
     const formData = new FormData();
@@ -63,7 +53,6 @@ const ServiceProvider = () => {
         console.error("Error uploading image:", error);
       });
   };
-
   const handeUpdateClick = (serviceId) => {
     setServiceId(serviceId);
     handleShow();
@@ -73,7 +62,7 @@ const ServiceProvider = () => {
   const deleteService = (id) => {
     console.log("serviceId", id);
     axios
-      .delete(`http://localhost:5000/service/${id}`, {
+    .delete(`http://localhost:5000/service/${id}`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
@@ -81,9 +70,7 @@ const ServiceProvider = () => {
       .then((result) => {
         console.log(result);
 
-
         dispatch(deleteServiceByID(id));
-
       })
       .catch((error) => {
         console.log(error);
@@ -175,13 +162,8 @@ const ServiceProvider = () => {
                 </div>
                 <div className="total">
                   <h4>status: {service.status}</h4>
-
-                  <h4>price: $ {service.price}</h4>
-                  <div className="main-border-button">
-
                   <h4 className="service-price">price: $ {service.price}</h4>
                   <div className="main-border-button service-buttons">
-
                     <Button
                       variant="dark"
                       className="mt-3 mx-1 "
@@ -192,8 +174,7 @@ const ServiceProvider = () => {
                     <Button
                       variant="dark"
 
-                      className="mt-3 mx-1 "
-
+                      className="mt-3 ms-3 "
 
                       onClick={() => deleteService(service.service_id)}
                     >
@@ -242,12 +223,6 @@ const ServiceProvider = () => {
             </Form.Group>
             <Form.Group className="mb-3" controlId="image">
               <Form.Label>Image</Form.Label>
-
-              <Form.Control
-                type="file"
-                onChange={(e) => setImage(e.target.value)}
-              />
-
               <div>
                 <input
                   type="file"
@@ -255,7 +230,6 @@ const ServiceProvider = () => {
                 />
                 {/* <img src={image} alt="uploaded image" /> */}
               </div>
-
             </Form.Group>
           </Form>
         </Modal.Body>
@@ -264,10 +238,7 @@ const ServiceProvider = () => {
             Close
           </Button>
 
-          <Button variant="primary" onClick={updateService}></Button>
-
           <Button  onClick={updateService} style={{backgroundColor: "#00A3AF !important" }}>
-
             Save Changes
           </Button>
         </Modal.Footer>

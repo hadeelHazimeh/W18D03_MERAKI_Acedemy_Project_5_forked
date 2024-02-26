@@ -1,0 +1,8 @@
+.totalPriceButton {
+    
+    text-align: center;
+    font-size: large;
+    cursor: pointer;
+    margin-left: 70% !important;
+    width: 300px;
+  }
