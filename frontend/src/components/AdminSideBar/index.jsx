@@ -18,7 +18,7 @@ const AdminSideBar = () => {
   const dispatch=useDispatch()
   const navigate =useNavigate()
     return (
-        <CDBSidebar style={{ backgroundColor: "#302B2B" }}>
+        <CDBSidebar style={{ backgroundColor: "#302B2B"  }}>
           
           <CDBSidebarHeader prefix={<i className="fa fa-bars" />}>Hello {name}</CDBSidebarHeader>
           <CDBSidebarContent>

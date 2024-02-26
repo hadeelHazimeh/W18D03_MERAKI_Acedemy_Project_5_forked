@@ -9,7 +9,7 @@ import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import Dropdown from 'react-bootstrap/Dropdown';
 import Swal from 'sweetalert2';
 import Modal from "react-bootstrap/Modal";
-
+import "./style.css"
 function AdminServicesRender() {
   const [image, setImage] = useState("");
 
@@ -176,13 +176,12 @@ const callServices=()=>{
     //...............................
   return (
     <> <div className="formContainer">
-    <h1  style={{marginTop: "1rem", borderBottom: "1px solid #00a3af", padding: "1rem 0 0 0"}}>
-      create package
-    </h1>
+       <div className="row justify-content-center">
+   <h2 className="mb-4 animated fadeIn" style={{fontWeight: "bold", textAlign:"start", marginLeft:"20px",backgroundColor:"F3F1EC"}}>Create Package</h2>
     
     <form >
-    <MDBRow className="formInput">
-        <MDBInput
+    <MDBRow style={{marginLeft:"3px"}} className="formInput">
+        <MDBInput 
           label="Package Name"
           type="text"
           id="package_Name"
@@ -192,20 +191,30 @@ const callServices=()=>{
         />
       </MDBRow>
 
-      <MDBRow rows={4} className="formInput">
-      <MDBInput wrapperClass='mb-4'  label="Description"
+      <MDBRow style={{marginLeft:"3px"}}  rows={4} className="formInput">
+      <textarea placeholder="Description"
+        className="form-control"
+      rows="5"
+         label="Description"
           type="text"
           id="Description"
           name="Description"
        value={packageInfo.Description}
-        onChange={handleInputChange} />
+        onChange={handleInputChange}
+      />
+{/*       <MDBInput style={{height:"150px"}} wrapperClass='mb-3'  label="Description"
+          type="text"
+          id="Description"
+          name="Description"
+       value={packageInfo.Description}
+        onChange={handleInputChange} /> */}
       </MDBRow>
        <MDBRow  className="formInput">
       <div className="mb-3">
               <label htmlFor="image" className="form-label">
                 Image
               </label>
-              <input
+              <input style={{width:"100%"}}
                 type="file"
                 className="form-control"
                 id="image"
@@ -214,9 +223,9 @@ const callServices=()=>{
             </div>
       </MDBRow> 
 
-      <div className="cardContainer">
+      <div  style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between' ,width:"100%"}}>
         {services.map((service,i) => (
-          <MDBCard key={i} className="serviceCard">
+          <MDBCard key={i}  style={{ width: 'calc(33.33% - 20px)', marginBottom: '20px',backgroundColor:"#f3f1ec" }} className="serviceCard">
             <MDBCardBody>
             <MDBCardImage
             src={service.image}
@@ -244,10 +253,15 @@ const callServices=()=>{
 
       {showPrice ? (
         <>
-          <MDBBtn className="totalPriceButton" onClick={handlePackagePrice}
-          >
-            calculate the total Price
-          </MDBBtn>
+                                    <button
+                                type="button"
+                                className="btn btn-dark"
+                                onClick={handlePackagePrice}
+                                style={{width:"15%",margin:"8px"}}
+                            >
+                                 calculate the total Price
+                            </button><br/>
+
         </>
       ) : (
         <></>
@@ -256,17 +270,24 @@ const callServices=()=>{
       {ClickedPrice ? (
         <>
           <MDBRow className="mb-4">
-            <p>Total Price: {packageInfo.price} JD</p>
+            <p style={{margin:"8px", borderBottom:"solid black", display:"inline-block"}}> <span style={{fontWeight:"bold"}}>Total Price: </span> {packageInfo.price}<span style={{fontWeight:"bold"}}> JD</span></p>
           </MDBRow>
         </>
       ) : (
         <></>
       )}
 
-      <MDBBtn onClick={handleSubmitPackage}   className="totalPriceButton">Submit your Package</MDBBtn>
+{/*       <MDBBtn   className="totalPriceButton">Submit your Package</MDBBtn> */}
+      <button
+                                type="button"
+                                className="btn btn-dark"
+                                onClick={handleSubmitPackage} style={{width:"15%",margin:"8px"}}
+                            >
+                               Create
+                            </button>
     </form>
     
-    
+    </div>
   </div></>
   )
 }

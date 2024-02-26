@@ -1,0 +1,140 @@
+.animated {
+    animation-duration: 1s;
+    animation-fill-mode: both;
+    animation-timing-function: ease-in-out;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+.fadeIn {
+    animation-name: fadeIn;
+}
+.totalPriceButton {
+    background-color: rgb(238, 230, 230);
+  
+    text-align: center;
+    font-size: large;
+    cursor: pointer;
+    margin-left: 35% !important;
+    width: 300px;
+  }
+  h2 {
+    font-family: "Raleway", Courier, monospace;
+    white-space: nowrap; 
+    /* text-align: center; */
+  }
+  
+ 
+  
+  h2 span {
+    display: inline-block;
+    color: #00a3af;
+    font-weight: bold;
+  }
+  .cardImg {
+    margin-bottom: 20px;
+  }
+  .animated {
+    animation-duration: 1s;
+    animation-fill-mode: both;
+    animation-timing-function: ease-in-out;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+.fadeIn {
+    animation-name: fadeIn;
+}
+
+  /* .checkBox{
+  margin-top: 0px !important;
+  background-color: #00a3af !important;
+  
+  } */
+  .btn-primary {
+    background-color: #00a3af !important;
+    color: red;
+  
+    text-align: center !important;
+    font-size: 20px !important;
+    cursor: pointer !important;
+    margin: auto !important;
+    width: 300px;
+  }
+  .price {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    row-gap: 10px;
+    margin-top: 5%;
+  }
+  
+  .formContainer {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: white;
+    border-radius: 8px;
+  }
+  
+  .formInput {
+    width: 40%;
+    margin-bottom: 20px;
+    margin-left: 50px;
+    /* border: 1px solid #ccc; */
+    /* border-radius: 4px; */
+    padding: 10px;
+  }
+  
+  .serviceCard {
+    width: calc(33.33% - 30px);
+    /* background-color: #F3F1EC; */
+    background-color: #f3f1ec !important;
+    /* padding-bottom: :0px; */
+    margin-bottom: 20px;
+    /* border: 1px solid #ddd; */
+    border-radius: 8px;
+    overflow: hidden;
+    /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); */
+  }
+  
+ 
+  .serviceCard {
+    flex-basis: calc(33.33% - 20px) ;
+    margin-bottom: 20px ;
+    margin-right: 10px;
+  }
+  
+  .modal-header {
+    background-color: #00a3af;
+    color: white;
+  }
+  
+  .modal-body p {
+    padding: 5px;
+  
+    border-bottom: solid 1px #00a3af;
+  }
+  
+  .modal-footer {
+    background-color: #f3f1ec;
+  }
+  

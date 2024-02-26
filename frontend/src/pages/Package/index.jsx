@@ -51,10 +51,10 @@ const dispatch=useDispatch()
           
         })
         .then((result) => {
-         
+          getPackages()
           
           dispatch(setPackages(result.data.result))
-          getPackages()
+         
 
         })
         .catch((err) => {
