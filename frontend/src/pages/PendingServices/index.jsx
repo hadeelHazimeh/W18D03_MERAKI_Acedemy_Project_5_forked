@@ -68,8 +68,8 @@ const PendingServices = () => {
     return (
         <>
 <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between' ,margin:"30px"}}>
-          {pendingServices.map((service) => (
-            <MDBCard  style={{ width: 'calc(30.33% - 20px)', marginBottom: '30px',backgroundColor:"#f3f1ec",margin:"10px",  }}>
+          {pendingServices.map((service,i) => (
+            <MDBCard key={i} style={{ width: 'calc(30.33% - 20px)', marginBottom: '30px',backgroundColor:"#f3f1ec",margin:"10px",  }}>
               <MDBCardBody>
               <MDBCardTitle>
                   <p

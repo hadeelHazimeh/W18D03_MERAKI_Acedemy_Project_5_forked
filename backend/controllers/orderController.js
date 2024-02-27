@@ -80,7 +80,8 @@ const createNewOrderServices = (req, res) => {
 
 
 const getAllOrders = (req, res) => {
-  const query = ` SELECT o.order_id, 
+  const query = ` 
+  SELECT o.order_id, 
 
   o.order_price, 
 
@@ -94,7 +95,8 @@ const getAllOrders = (req, res) => {
   s.price, 
   s.image,
 u.userName,
-u.email
+u.email,
+o.phone
 FROM 
   orders o
   JOIN orders_services os ON o.order_id = os.order_id
@@ -102,7 +104,8 @@ FROM
   JOIN users u ON o.user_id = u.user_id
 WHERE 
   o.is_deleted = 0
-  AND os.is_deleted = 0;`;
+  AND os.is_deleted = 0;
+  `;
 
   pool
     .query(query)

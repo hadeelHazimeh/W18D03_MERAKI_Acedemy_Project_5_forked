@@ -65,71 +65,8 @@ const dispatch=useDispatch()
     }, []);
 
   return (
-    <div>
-      {/* <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between' ,margin:"30px"}}>
-          {Packages.map((service) => (
-            <MDBCard  style={{ width: 'calc(30.33% - 20px)', marginBottom: '30px',backgroundColor:"#f3f1ec",margin:"10px",  }}>
-              <MDBCardBody>
-
-                <MDBCardImage
-                  src={service.image}
-                  alt="..."
-                  position="top"
-                  className="cardImg"
-                />
-                <MDBCardTitle>
-                  <p
-                    style={{
-                      textAlign: "",
-                      fontFamily: "Raleway",
-                      borderBottom: "1px solid #302B2B",
-                    }}
-                  >
-                    {" "}
-                    {service.service_name}
-                  </p>
-                </MDBCardTitle>
-                <br />
-                <MDBCardText>
-                  <p
-                    style={{
-                      textAlign: "justify",
-                      borderBottom: "1px  #00A3AF ",
-                      fontFamily: "Raleway",
-                      fontSize:"20px"
-                    }}
-                  >
-                    <strong>Price:</strong>{" "}
-                    <span style={{ display: "inline" }}>
-                      JD {service.price}
-                    </span>
-                  </p>
-                  <p
-                    style={{
-                      textAlign: "justify",
-                     paddingBottom:"10px",
-                      fontFamily: "Merriweather",
-                    }}
-                  >
-                    <strong>Description:</strong>{" "}
-                    <span style={{ display: "inline" }}>{service.details}</span>
-                  </p>
-                </MDBCardText>
-                <MDBBtn style={{backgroundColor:"#302B2B"}} onClick={()=>{
-        handelStatus("confirmed",service.service_id)
-      }} color='white' outline>
-        Confirm
-      </MDBBtn>
+    <>
       
-      <MDBBtn style={{backgroundColor:"#302B2B"}} onClick={()=>{
-        handelStatus("Rejected",service.service_id)
-      }} color='white' outline>
-        Reject
-      </MDBBtn>
-              </MDBCardBody>
-            </MDBCard>
-          ))}
-        </div> */}
          
           
       <div  style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-around' ,margin:"30px"}}>
@@ -189,8 +126,7 @@ package_name}</MDBCardTitle>
                     }} key={i}>
                       
                       
-                      <div>
-                     
+                      
 <p onClick={()=>{setModalShow(true)
            setServiceInfo(pac)}} style={{cursor: "pointer",
                         fontWeight:"normal",
@@ -206,7 +142,7 @@ package_name}</MDBCardTitle>
              
               }} > {pac.service_name}</p>
               
-              </div>
+              
 
 
 
@@ -247,7 +183,7 @@ package_name}</MDBCardTitle>
                     
                     }}>{serviceInfo.service_name}</Modal.Title>
         </Modal.Header>
-        <Modal.Body  >
+        <Modal.Body style={{backgroundColor:"#f3f1ec"}} >
         <Image src={serviceInfo.image} fluid />
 
         <p
@@ -269,7 +205,7 @@ package_name}</MDBCardTitle>
                     style={{
                       textAlign: "justify",
                      paddingBottom:"10px",
-                      fontFamily: "Raleway",
+                      fontFamily: "Merriweather",
                       borderBottom:"none"
                     }}
                   >
@@ -279,13 +215,13 @@ package_name}</MDBCardTitle>
            
        
         </Modal.Body>
-        <Modal.Footer >
-          <Button variant="dark" onClick={() => setModalShow(false)}>
+        <Modal.Footer style={{backgroundColor:"#f3f1ec"}}>
+          <Button style={{fontWeight:"bold"}} variant="dark" onClick={() => setModalShow(false)}>
             Close
           </Button>
         </Modal.Footer>
       </Modal>
-    </div>
+    </>
     
   )
 }
