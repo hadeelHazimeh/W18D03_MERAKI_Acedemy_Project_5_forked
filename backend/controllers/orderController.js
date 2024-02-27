@@ -143,7 +143,6 @@ const getOrderById = (req, res) => {
     o.event_name,
 
     o.place, 
-    o.phone,
     u.userName,
     os.service_id, 
     s.service_name, 
