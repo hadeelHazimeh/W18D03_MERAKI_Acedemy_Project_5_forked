@@ -73,16 +73,19 @@ letter-spacing: 4px;
 #pacific{
  border-radius:  999px 999px 0 0;
 }
-h3{
+
+.font-weight-bold{
     text-align: left;
     font-family:'Quattrocento',Georgia,"Times New Roman",serif ;
+    font-size: 2 rem;
+    font-weight: bolder;
 }
 .text-muted{
     text-align:left;
     color:#666;
     font-family: 'Quattrocento',Georgia,"Times New Roman",serif;
     line-height: 2.7em;
-    font-size:17px;
+    font-size:20px;
 }
 .Link{
     text-align:right !important;
@@ -94,3 +97,38 @@ h3{
     font-weight: bold;
 
 }
+
+#with {
+    float: left !important;
+  font-family:  "Crimson Pro", Sans-serif !important;
+  font-size: 22px;
+    letter-spacing: 4px;
+        color:#504f4f;
+         background-color:#f4f4f4; 
+        margin: 1em 0;
+    
+        &::after {
+            display: inline-block;
+            padding-left: 8px;
+            content: "\0279E"; 
+            -webkit-transition: transform 0.3s ease-out;
+            -moz-transition: transform 0.3s ease-out;
+            -ms-transition: transform 0.3s ease-out;
+            -o-transition: transform 0.3s ease-out;
+            transition: transform 0.3s ease-out;
+        }
+    
+        &:hover {
+            color: black;
+            cursor: pointer;
+            background-color:#F4F4F4 ;
+    
+            &::after {
+                -webkit-transform: translateX(4px);
+                -moz-transform: translateX(4px);
+                -ms-transform: translateX(4px);
+                -o-transform: translateX(4px);
+                transform: translateX(4px);
+            }
+        }
+    }
