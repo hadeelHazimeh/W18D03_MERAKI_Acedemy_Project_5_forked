@@ -75,19 +75,19 @@ const dispatch=useDispatch()
       <MDBCard key={i} style={{  width: 'calc(36.33% - 20px)', marginBottom: '30px',backgroundColor:"#f3f1ec",margin:"10px" }}>
        
         <MDBCardBody>
+        <MDBCardTitle style={{
+                      textAlign: "",
+                      fontFamily: "Raleway",
+                      borderBottom: "1px solid #302B2B",   textAlign: "start",paddingBottom:"10px"
+                    }}>{ele.
+package_name}</MDBCardTitle>
         <MDBCardImage
             src={ele.image}
             alt="..."
             position="top"
           />
-          <MDBCardTitle style={{
-                      textAlign: "",
-                      fontFamily: "Raleway",
-                      borderBottom: "1px solid #302B2B",
-                    }}>{ele.
-package_name}</MDBCardTitle>
-<MDBCardText>
-            
+         
+<MDBCardText>     
 <p
                     style={{
                       textAlign: "justify",

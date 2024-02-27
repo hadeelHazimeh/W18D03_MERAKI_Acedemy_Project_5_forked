@@ -56,6 +56,9 @@ const eventNameBodyTemplate = (rowData) => {
 const UserBodyTemplate = (rowData) => {
   return <span>{rowData.username}<br/><span>{rowData.email}</span></span>;
 };
+const phoneBodyTemplate = (rowData) => {
+  return <span>{rowData.phone}</span>;
+};
 const getSeverity = (status) => {
   switch (status) {
       case 'unqualified':
@@ -80,14 +83,15 @@ const statusBodyTemplate = (rowData) => {
 
   return (
     <div  style={{margin:"10px", marginRight:"60px", height:"90vh"}}>
-      <div className="mx-auto card col-10 m-5">
+      <div style={{fontFamily:""}} className="mx-auto card col-10 m-5">
             <DataTable
                 value={orders}
                 paginator
                 rows={8}
             
                 emptyMessage="No orders found."
-                className=" custom-datatable" // Add your custom class for table styling
+                className=" custom-datatable"
+                 // Add your custom class for table styling
             >
                 <Column className="text-center" header="Image" body={imageBodyTemplate} style={{width:"100px"}}></Column>
                 <Column className="text-center" header="user" body={UserBodyTemplate} style={{width:"200px"}}></Column>
@@ -95,7 +99,7 @@ const statusBodyTemplate = (rowData) => {
                 <Column style={{width:"150px"}} field="price" header="Price" body={priceBodyTemplate}></Column>
                 <Column style={{width:"200px"}} field="eventName" header="Event Name" body={eventNameBodyTemplate}></Column>
                 <Column style={{width:"150px"}} field="eventdate" header="Event Date" body={eventDateBodyTemplate}></Column>
-
+                <Column style={{width:"150px"}} field="phone" header="Phone" body={phoneBodyTemplate}></Column>
                 <Column style={{width:"100px"}} field="place" header="Place"></Column>
             </DataTable>
         </div>

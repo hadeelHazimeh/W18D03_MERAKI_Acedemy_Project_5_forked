@@ -18,10 +18,10 @@ const AdminSideBar = () => {
   const dispatch=useDispatch()
   const navigate =useNavigate()
     return (
-        <CDBSidebar style={{ backgroundColor: "#302B2B"  }}>
+        <CDBSidebar style={{ backgroundColor: "#302B2B",  }}>
           
-          <CDBSidebarHeader prefix={<i className="fa fa-bars" />}>Hello {name}</CDBSidebarHeader>
-          <CDBSidebarContent>
+          <CDBSidebarHeader style={{fontFamily:"Raleway"}} prefix={<i className="fa fa-bars" />}>Hello {name}</CDBSidebarHeader>
+          <CDBSidebarContent  style={{fontFamily:"Raleway" ,fontWeight: "bold"}}>
             <CDBSidebarMenu>
               <NavLink to="pending/Services"><CDBSidebarMenuItem icon="lock-open">Pending Services</CDBSidebarMenuItem></NavLink>
              <NavLink to={"packages"}> <CDBSidebarMenuItem icon="th-large">Packages</CDBSidebarMenuItem></NavLink>

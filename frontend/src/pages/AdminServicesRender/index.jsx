@@ -177,8 +177,9 @@ const callServices=()=>{
   return (
     <> <div  className="formContainer">
        <div className="row justify-content-center">
-   <h2 className="mb-1 animated fadeIn" style={{fontWeight: "bold", textAlign:"start", marginLeft:"20px",backgroundColor:"",marginTop:"10px"}}>Create a Package</h2>
-    <p className=".text-muted" style={{fontWeight: "", textAlign:"start", marginLeft:"20px",backgroundColor:"",marginTop:"10px"}}>Create tailored event packages effortlessly. Mix and match services to design memorable celebrations for any occasion.</p>
+   <h2 className="mb-1 animated fadeIn" style={{fontWeight: "bold", textAlign:"start", marginLeft:"20px",backgroundColor:"",marginTop:"10px",fontFamily:"Raleway"}}>Create a Package</h2>
+
+    <p className=".text-muted" style={{fontWeight: "", textAlign:"start", marginLeft:"20px",backgroundColor:"",marginTop:"10px",fontFamily:"Raleway"}}>Create tailored event packages effortlessly. Mix and match services to design memorable celebrations for any occasion.</p>
     <form className="">
       <div style={{backgroundColor:"rgb(243, 241, 236)",border:"1px solid rgb(221, 221, 221)",borderRadius:" 5px",width:"99%" ,margin:"2rem",marginLeft:"0",paddingTop:"1rem",paddingBottom:"1rem"}} >
     <MDBRow style={{marginLeft:"3px"}} className="formInput">
@@ -228,9 +229,9 @@ const callServices=()=>{
             <MDBCardTitle>
                   <p
                     style={{
-                      textAlign: "center",
+                      textAlign: "start",
                       fontFamily: "Raleway",
-                      borderBottom: "1px solid #302B2B",
+                      borderBottom: "1px solid #302B2B",paddingBottom:"10px"
                     }}
                   >
                     {" "}
