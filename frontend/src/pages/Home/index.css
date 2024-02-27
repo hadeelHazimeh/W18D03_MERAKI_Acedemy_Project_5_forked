@@ -40,6 +40,7 @@ padding: 0.55em 1em;
 .arrow {
   
 letter-spacing: 4px;
+text-decoration: none;
     color:#f6f3ed;
      background-color: #469da3; 
     margin: 3em 0;
@@ -106,6 +107,7 @@ letter-spacing: 4px;
     font-weight: bold;
   font-family:  "Crimson Pro", Sans-serif !important;
   font-size: 17px;
+  text-decoration: none;
     letter-spacing: 4px;
         color:#469da3;
          background-color:#f4f4f4; 
@@ -135,4 +137,7 @@ letter-spacing: 4px;
                 transform: translateX(4px);
             }
         }
+    }
+    #card1{
+        border: none;
     }

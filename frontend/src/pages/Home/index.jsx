@@ -1,5 +1,4 @@
 import "./index.css";
-
 const Home = () => {
   return (
     <div className="home">
@@ -12,13 +11,14 @@ const Home = () => {
         </video>
       </div>
       <div className="seenContainer" style={{ width: "100%" }}>
-        <img src="https://res.cloudinary.com/dycpjbdto/image/upload/v1708910801/AsSeen_rnansm.jpg" />
+        <img style={{width:"100%"}} src="https://res.cloudinary.com/dycpjbdto/image/upload/v1708910801/AsSeen_rnansm.jpg" />
       </div>
-      <div className="card bg-dark ">
+      <div className="card bg-dark " id="card1">
         <img
           src="https://res.cloudinary.com/dycpjbdto/image/upload/v1708823786/pexels-alena-koval-961402_eymjio.jpg"
           className="card-img"
           alt="..."
+          style={{border:'none'}}
         />
         <div className="card-img-overlay">
           <br />
@@ -128,14 +128,15 @@ const Home = () => {
                 to manage onsite expectations Guest & Timeline Management
                 throughout the experience Overseeing cleanup & load out of all.
               </p>
-            
-
+              <a className="button arrow" id="with" href="/portfolio">
+              CONTACT US TO GET STARTED              </a>
+ 
               
             </div>
           </div>
         </section>
       </div>
-      <footer></footer>
+      
     </div>
   );
 };
