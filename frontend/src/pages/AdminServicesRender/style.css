@@ -88,7 +88,7 @@
   }
   
   .formContainer {
-    max-width: 900px;
+    max-width: 96%;
     margin: 0 auto;
     padding: 20px;
     background-color: white;
@@ -96,7 +96,7 @@
   }
   
   .formInput {
-    width: 40%;
+    width: 70%;
     margin-bottom: 20px;
     margin-left: 50px;
     /* border: 1px solid #ccc; */

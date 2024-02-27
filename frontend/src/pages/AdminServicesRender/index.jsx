@@ -177,9 +177,10 @@ const callServices=()=>{
   return (
     <> <div  className="formContainer">
        <div className="row justify-content-center">
-   <h2 className="mb-4 animated fadeIn" style={{fontWeight: "bold", textAlign:"start", marginLeft:"20px",backgroundColor:"F3F1EC"}}>Create Package</h2>
-    
-    <form >
+   <h2 className="mb-1 animated fadeIn" style={{fontWeight: "bold", textAlign:"start", marginLeft:"20px",backgroundColor:"",marginTop:"10px"}}>Create a Package</h2>
+    <p className=".text-muted" style={{fontWeight: "", textAlign:"start", marginLeft:"20px",backgroundColor:"",marginTop:"10px"}}>Create tailored event packages effortlessly. Mix and match services to design memorable celebrations for any occasion.</p>
+    <form className="">
+      <div style={{backgroundColor:"rgb(243, 241, 236)",border:"1px solid rgb(221, 221, 221)",borderRadius:" 5px",width:"99%" ,margin:"2rem",marginLeft:"0",paddingTop:"1rem",paddingBottom:"1rem"}} >
     <MDBRow style={{marginLeft:"3px"}} className="formInput">
         <MDBInput 
           label="Package Name"
@@ -202,14 +203,9 @@ const callServices=()=>{
        value={packageInfo.Description}
         onChange={handleInputChange}
       />
-{/*       <MDBInput style={{height:"150px"}} wrapperClass='mb-3'  label="Description"
-          type="text"
-          id="Description"
-          name="Description"
-       value={packageInfo.Description}
-        onChange={handleInputChange} /> */}
+
       </MDBRow>
-       <MDBRow  className="formInput">
+       <MDBRow style={{width:"72%"}} className="formInput">
       <div className="mb-3">
               <label htmlFor="image" className="form-label">
                 Image
@@ -221,24 +217,55 @@ const callServices=()=>{
                 onChange={(e) => setImage(e.target.files[0])}
               />
             </div>
+            
       </MDBRow> 
+      </div>
 
-      <div  style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between' ,width:"100%"}}>
+      <div  style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between' ,}}>
         {services.map((service,i) => (
-          <MDBCard key={i}  style={{ width: 'calc(33.33% - 20px)', marginBottom: '20px',backgroundColor:"#f3f1ec" }} className="serviceCard">
+          <MDBCard key={i}  style={{ width: 'calc(40% - 17px)', marginBottom: '20px',backgroundColor:"#f3f1ec"  }} className="serviceCard">
             <MDBCardBody>
+            <MDBCardTitle>
+                  <p
+                    style={{
+                      textAlign: "center",
+                      fontFamily: "Raleway",
+                      borderBottom: "1px solid #302B2B",
+                    }}
+                  >
+                    {" "}
+                    {service.service_name}
+                  </p>
+                </MDBCardTitle>
             <MDBCardImage style={{marginBottom:"10px"}}
             src={service.image}
             alt="..."
             position="top"
           />
-              <MDBCardTitle style={{marginBottom:"10px"}} >{service.service_name}</MDBCardTitle>
 
               <MDBCardText>
-              
-                Price: JD {service.price}
-                <br />
-                description: {service.details}
+              <p
+                    style={{
+                      textAlign: "justify",
+                      borderBottom: "1px solid #302B2B ",
+                      fontFamily: "Raleway",
+                    }}
+                  >
+                    <strong>Price:</strong>{" "}
+                    <span style={{ display: "inline" }}>
+                      JD {service.price}
+                    </span>
+                  </p>
+                  <p
+                    style={{
+                      textAlign: "justify",
+                     paddingBottom:"10px",
+                      fontFamily: "Merriweather",
+                    }}
+                  >
+                    <strong>Description:</strong>{" "}
+                    <span >{service.details}</span>
+                  </p>
               </MDBCardText>
               <div className="checkBox"
 style={{
@@ -267,7 +294,7 @@ style={{
                                 type="button"
                                 className="btn btn-dark"
                                 onClick={handlePackagePrice}
-                                style={{width:"15%",margin:"8px"}}
+                                style={{width:"18%",margin:"8px",fontWeight:"bold",fontSize:"0.9rem"}}
                             >
                                  calculate the total Price
                             </button><br/>
@@ -279,9 +306,10 @@ style={{
 
       {ClickedPrice ? (
         <>
-          <MDBRow className="mb-4">
-            <p style={{margin:"8px", borderBottom:"solid black", display:"inline-block"}}> <span style={{fontWeight:"bold"}}>Total Price: </span> {packageInfo.price}<span style={{fontWeight:"bold"}}> JD</span></p>
-          </MDBRow>
+        <div style={{width:"18%",border:"solid black" ,marginLeft:"10px",textAlign:"center" ,backgroundColor:"#302B2B",borderRadius:" 0.25rem",}}>
+         
+            <p style={{margin:"5px",fontSize:"1.1rem", display:"inline",color:"white"}}> <span style={{fontWeight:"bold"}}>Total Price: </span> {packageInfo.price}<span style={{fontWeight:"bold"}}> JD</span></p>
+          </div>
         </>
       ) : (
         <></>
@@ -291,9 +319,8 @@ style={{
       <button
                                 type="button"
                                 className="btn btn-dark"
-                                onClick={handleSubmitPackage} style={{width:"15%",margin:"8px"}}
-                            >
-                               Create
+                                onClick={handleSubmitPackage} style={{width:"18%",margin:"8px",fontSize:"1rem",fontWeight:"bold"}}
+                            >Build Package
                             </button>
     </form>
     
