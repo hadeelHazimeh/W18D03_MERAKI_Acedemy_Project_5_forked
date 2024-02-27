@@ -45,16 +45,16 @@ const dispatch=useDispatch()
   //-----------------------------
 
   useEffect(() => {
-    getPackages()
+   
       axios
         .get(`http://localhost:5000/package/servicePackage`, {
           
         })
         .then((result) => {
-        
+         
           
           dispatch(setPackages(result.data.result))
-          
+          getPackages()
 
         })
         .catch((err) => {

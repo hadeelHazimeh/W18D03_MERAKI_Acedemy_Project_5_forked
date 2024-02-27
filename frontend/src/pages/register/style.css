@@ -1,12 +1,12 @@
 
 
 .register-form-container {
-    width: 40%; 
+    width: 30%; 
     margin: 0 auto;
     padding: 50px;
-    padding-right: 30px;
+    padding-right: 50px;
     /* border: 1px solid #ccc;
-    border-radius: 8px; */
+    border-radius: 8px;  */
    
  }
  .container{
@@ -18,10 +18,10 @@
   
  }
  .register-form-image {
-     margin-left:20px;
+     margin-left:40px;
 
-    width:630px;
-    height: 500px;
+    width:500px;
+    height: 550px;
     
   }
   .register-form-title {
@@ -44,7 +44,7 @@
     width: 500px !important;
     border: 1px solid #ccc !important;
     
-     /* margin-left: 1rem !important; */
+     margin-left: 3rem !important;
       }
 
  
