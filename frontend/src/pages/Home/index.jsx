@@ -60,15 +60,18 @@ const Home = () => {
 
             <div className="col-lg-6 d-flex flex-column align-items-center justify-content-center">
               <h3 className="font-weight-bold">Preplanning Production</h3>
-
+              <br />
               <p className="text-muted">
                 Curating your vendor team to match your style & guest experience
                 Refining and communicating your overall timeline & plan Menu
                 development & catering detail management Communication liaison
                 with venue and vendors for production schedule Establishing
                 meeting schedule & appointments for entire planning process
-                Managing all event orders, revisions & evolving details
+                Managing all event orders, revisions & evolving details.
               </p>
+              <a className="button arrow" id="with" href="/portfolio">
+                Let your eyes shine
+              </a>
             </div>
           </div>
         </section>
@@ -79,13 +82,16 @@ const Home = () => {
           <div className="row">
             <div className="col-lg-6 d-flex flex-column align-items-center justify-content-center">
               <h3 className="font-weight-bold">Design</h3>
-
+              <br />
               <p className="text-muted">
                 Creating an individualized mood board & color palette Building
                 custom layouts via our custom design program Curating custom
                 installs and plans designed for guest experience Managing the
-                printing suite design and presence
+                printing suite design and presence.
               </p>
+              <a className="button arrow" id="with" href="/portfolio">
+                Don't hesitate to take a look
+              </a>
             </div>
 
             <div className="col-lg-6 mb-4 mb-lg-0 d-flex align-items-center justify-content-center">
@@ -115,34 +121,16 @@ const Home = () => {
 
             <div className="col-lg-6 d-flex flex-column align-items-center justify-content-center">
               <h3 className="font-weight-bold">Onsite Production</h3>
-<br/>
+              <br />
               <p className="text-muted">
                 Staffing your event needs with our team of event managers
-                Supporting setup of all vendor components Partnering with 
-                
-                Venue to manage onsite expectations Guest & Timeline Management
+                Supporting setup of all vendor components Partnering with Venue
+                to manage onsite expectations Guest & Timeline Management
                 throughout the experience Overseeing cleanup & load out of all.
               </p>
             
-<br/>
-              <p className="Link" >
-                <a href="#" class="text-decoration-none" style={{color:'#555454'}}>
-                CONTACT US TO GET STARTED
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="16"
-                    height="16"
-                    fill="currentColor"
-                    class="bi bi-arrow-right"
-                    viewBox="0 0 16 16"
-                  >
-                    <path
-                      
-                      d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8"
-                    ></path>
-                  </svg>
-                </a>
-              </p>
+
+              
             </div>
           </div>
         </section>

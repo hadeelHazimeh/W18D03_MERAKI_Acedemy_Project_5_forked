@@ -89,6 +89,7 @@ CREATE TABLE orders (
     user_id INT,
     event_name VARCHAR(255),
     eventDate VARCHAR(255),
+    phone VARCHAR(255),
     place VARCHAR(255),
     created_at TIMESTAMP DEFAULT NOW(),
     is_deleted SMALLINT DEFAULT 0,
