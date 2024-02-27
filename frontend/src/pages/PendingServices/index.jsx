@@ -71,25 +71,25 @@ const PendingServices = () => {
           {pendingServices.map((service) => (
             <MDBCard  style={{ width: 'calc(30.33% - 20px)', marginBottom: '30px',backgroundColor:"#f3f1ec",margin:"10px",  }}>
               <MDBCardBody>
-
-                <MDBCardImage
-                  src={service.image}
-                  alt="..."
-                  position="top"
-                  className="cardImg"
-                />
-                <MDBCardTitle>
+              <MDBCardTitle>
                   <p
                     style={{
-                      textAlign: "",
+                      textAlign: "start",
                       fontFamily: "Raleway",
-                      borderBottom: "1px solid #302B2B",
+                      borderBottom: "1px solid #302B2B",paddingBottom:"10px",
                     }}
                   >
                     {" "}
                     {service.service_name}
                   </p>
                 </MDBCardTitle>
+                <MDBCardImage
+                  src={service.image}
+                  alt="..."
+                  position="top"
+                  className="cardImg"
+                />
+
                 <br />
                 <MDBCardText>
                   <p
@@ -97,7 +97,8 @@ const PendingServices = () => {
                       textAlign: "justify",
                       borderBottom: "1px  #00A3AF ",
                       fontFamily: "Raleway",
-                      fontSize:"20px"
+                      fontSize:"20px",
+                     
                     }}
                   >
                     <strong>Price:</strong>{" "}
@@ -116,13 +117,13 @@ const PendingServices = () => {
                     <span style={{ display: "inline" }}>{service.details}</span>
                   </p>
                 </MDBCardText>
-                <MDBBtn style={{backgroundColor:"#302B2B"}} onClick={()=>{
+                <MDBBtn style={{backgroundColor:"#302B2B",paddingBottom:"10px",margin:"8px"}} onClick={()=>{
         handelStatus("confirmed",service.service_id)
       }} color='white' outline>
         Confirm
       </MDBBtn>
       
-      <MDBBtn style={{backgroundColor:"#302B2B"}} onClick={()=>{
+      <MDBBtn style={{backgroundColor:"#302B2B",paddingBottom:"10px",margin:"8px"}} onClick={()=>{
         handelStatus("Rejected",service.service_id)
       }} color='white' outline>
         Reject

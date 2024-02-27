@@ -181,12 +181,11 @@ package_name}</MDBCardTitle>
         
             {packages.map((pac,i)=>{
               if(ele.package_name===pac.package_name){
-                return(<div style={{
+                return(<div className="service-name" style={{
                   fontFamily:"Raleway",
                   fontWeight:"bold",
                     position: "",
-                    bottom: "px", 
-                    left: "px",
+                    backgroundColor:"white",margin:"0"
                     }} key={i}>
                       
                       
@@ -194,18 +193,18 @@ package_name}</MDBCardTitle>
                      
 <p onClick={()=>{setModalShow(true)
            setServiceInfo(pac)}} style={{cursor: "pointer",
-            fontFamily:"Raleway",
-            fontWeight:"normal",
-            backgroundColor:"",
+                        fontWeight:"normal",
+           
              border:"1px solid grey",
            
             height:"50px",
             textAlign:"center",
-            margin:"3px",
+            marginTop:"3px",
+            marginBottom:"8px",
             paddingTop:"10px"
-            
+            ,  fontFamily: "Raleway"
              
-              }}> {pac.service_name}</p>
+              }} > {pac.service_name}</p>
               
               </div>
 

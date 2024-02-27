@@ -18,7 +18,7 @@ const [roleLocal, setRoleLocal] = useState(localStorage.getItem("role"))
   const navigate=useNavigate()
   return (
     <> 
- {isLoggedIn?<> { roleLocal==="1" ?<><div style={{height:"100vh",display:"grid",gridTemplateColumns:"0.5fr 4fr"}}>
+ {isLoggedIn?<> { roleLocal==="1" ?<><div style={{height:"100vh",display:"grid",gridTemplateColumns:"0.2fr 4fr"}}>
     <AdminSideBar/>
     <div> <Outlet/></div>
        
