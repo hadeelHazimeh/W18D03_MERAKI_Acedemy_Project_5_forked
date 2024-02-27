@@ -23,14 +23,14 @@ const [roleLocal, setRoleLocal] = useState(localStorage.getItem("role"))
     <div> <Outlet/></div>
        
     
-    </div></>:<><Container style={{display:"flex",justifyContent:"center"}} className=" text-center  service-container" ><MDBCard  style={{maxWidth:"70rem" ,justifyContent:"center",marginTop:"30px" ,backgroundColor:"#302B2B"}} className='mb-32'>
-        <MDBCardImage position='top' src='https://cdn.dribbble.com/users/959295/screenshots/2721842/404-inspiration.gif' alt='...' />
+    </div></>:<Container style={{display:"flex",justifyContent:"center" ,backgroundColor:"",}} className=" text-center" ><MDBCard  style={{maxWidth:"63rem" ,justifyContent:"center",marginTop:"30px" ,backgroundColor:"#212526",}} >
+        <MDBCardImage position='top' src='https://freefrontend.com/assets/img/403-forbidden-html-templates/403-Forbidden-CSS-Hover.gif' alt='...' />
         <MDBCardBody>
-          <MDBCardTitle style={{textAlign:"center",fontWeight:"bold",fontFamily:"Raleway",color:"whitesmoke"}}>Your Not Authorized to access this page </MDBCardTitle>
+          <MDBCardTitle style={{textAlign:"center",fontWeight:"bold",fontFamily:"Raleway",color:"whitesmoke"}}>access to this page is restricted</MDBCardTitle>
       
         </MDBCardBody>
       </MDBCard></Container> 
-</>
+
     
    }</>: <> {navigate("/login")} </> }
    

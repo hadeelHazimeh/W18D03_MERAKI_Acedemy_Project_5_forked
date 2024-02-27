@@ -80,7 +80,7 @@ const statusBodyTemplate = (rowData) => {
 
   return (
     <div  style={{margin:"10px", marginRight:"60px", height:"90vh"}}>
-      <div className="card col-10 m-5">
+      <div className="mx-auto card col-10 m-5">
             <DataTable
                 value={orders}
                 paginator
