@@ -140,10 +140,11 @@ const Home = () => {
       </div>
 <div className="heading">
   <h1 style={{fontSize:'50px'}}>OUR EVENTS</h1>
-  <div className="hr1">
-    <hr style={{width:'50%', marginLeft:'25% !important', marginRight:'25% !important'}}/>
-    </div>
+ 
 </div>
+<div className="center-line" style={{display:"flex",justifyContent:"center"}}>
+    <hr style={{width:'24%',color:"#666" }} />
+    </div>
       <HomeSlider />
       <footer></footer>
     </div>
