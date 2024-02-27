@@ -1,4 +1,5 @@
 import "./index.css";
+import HomeSlider from "../../components/HomeSlider/HomeSlider";
 const Home = () => {
   return (
     <div className="home">
@@ -11,14 +12,17 @@ const Home = () => {
         </video>
       </div>
       <div className="seenContainer" style={{ width: "100%" }}>
-        <img style={{width:"100%"}} src="https://res.cloudinary.com/dycpjbdto/image/upload/v1708910801/AsSeen_rnansm.jpg" />
+        <img
+          style={{ width: "100%" }}
+          src="https://res.cloudinary.com/dycpjbdto/image/upload/v1708910801/AsSeen_rnansm.jpg"
+        />
       </div>
       <div className="card bg-dark " id="card1">
         <img
           src="https://res.cloudinary.com/dycpjbdto/image/upload/v1708823786/pexels-alena-koval-961402_eymjio.jpg"
           className="card-img"
           alt="..."
-          style={{border:'none'}}
+          style={{ border: "none" }}
         />
         <div className="card-img-overlay">
           <br />
@@ -118,7 +122,6 @@ const Home = () => {
               />
             </div>
 
-
             <div className="col-lg-6 d-flex flex-column align-items-center justify-content-center">
               <h3 className="font-weight-bold">Onsite Production</h3>
               <br />
@@ -129,14 +132,20 @@ const Home = () => {
                 throughout the experience Overseeing cleanup & load out of all.
               </p>
               <a className="button arrow" id="with" href="/portfolio">
-              CONTACT US TO GET STARTED              </a>
- 
-              
+                CONTACT US TO GET STARTED{" "}
+              </a>
             </div>
           </div>
         </section>
       </div>
-      
+<div className="heading">
+  <h1 style={{fontSize:'50px'}}>OUR EVENTS</h1>
+  <div className="hr1">
+    <hr style={{width:'50%', marginLeft:'25% !important', marginRight:'25% !important'}}/>
+    </div>
+</div>
+      <HomeSlider />
+      <footer></footer>
     </div>
   );
 };

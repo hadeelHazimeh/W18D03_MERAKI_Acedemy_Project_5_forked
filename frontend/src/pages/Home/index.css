@@ -141,3 +141,7 @@ text-decoration: none;
     #card1{
         border: none;
     }
+    .heading{
+        font-size: 100px;
+        font-family:'Quattrocento',Georgia,"Times New Roman",serif ;
+    }
