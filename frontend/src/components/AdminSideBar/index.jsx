@@ -20,18 +20,18 @@ const AdminSideBar = () => {
     return (
         <CDBSidebar style={{ backgroundColor: "#302B2B",  }}>
           
-          <CDBSidebarHeader style={{fontFamily:"Raleway"}} prefix={<i className="fa fa-bars" />}>Hello {name}</CDBSidebarHeader>
+          <CDBSidebarHeader style={{fontFamily:"Raleway"}} prefix={<i className="fa fa-bars" title='Menu' />}>Hello {name}</CDBSidebarHeader>
           <CDBSidebarContent  style={{fontFamily:"Raleway" ,fontWeight: "bold"}}>
             <CDBSidebarMenu>
-              <NavLink to="pending/Services"><CDBSidebarMenuItem icon="lock-open">Pending Services</CDBSidebarMenuItem></NavLink>
-             <NavLink to={"packages"}> <CDBSidebarMenuItem icon="th-large">Packages</CDBSidebarMenuItem></NavLink>
-             <NavLink to={"Services"}> <CDBSidebarMenuItem icon="plus-square" iconType="solid">
-                Create Package
+              <NavLink to="pending/Services" ><CDBSidebarMenuItem icon="lock-open" title='Pending Services' >Pending Services</CDBSidebarMenuItem></NavLink>
+             <NavLink  to={"packages"}> <CDBSidebarMenuItem icon="th-large" title='Packages'>Packages</CDBSidebarMenuItem></NavLink>
+             <NavLink to={"Services"}> <CDBSidebarMenuItem icon="plus-square" iconType="solid" title="Create a Package">
+                Create a Package
               </CDBSidebarMenuItem></NavLink>
-              <NavLink to={"orders"}> <CDBSidebarMenuItem icon="shopping-bag" iconType="solid">
+              <NavLink to={"orders"}> <CDBSidebarMenuItem icon="shopping-bag" iconType="solid" title="All Orders">
                 All Orders
               </CDBSidebarMenuItem></NavLink>
-              <NavLink to={""}> <CDBSidebarMenuItem icon="sign-out-alt" iconType="solid" onClick={()=>{
+              <NavLink to={""}> <CDBSidebarMenuItem icon="sign-out-alt" iconType="solid" title="LogOut" onClick={()=>{
                 dispatch(setLogout())
                 navigate("/login")
               }} >
