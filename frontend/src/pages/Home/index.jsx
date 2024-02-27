@@ -60,8 +60,8 @@ const Home = () => {
 
             <div className="col-lg-6 d-flex flex-column align-items-center justify-content-center">
               <h3 className="font-weight-bold">Preplanning Production</h3>
-<br/>
-              <p className="text-muted" >
+              <br />
+              <p className="text-muted">
                 Curating your vendor team to match your style & guest experience
                 Refining and communicating your overall timeline & plan Menu
                 development & catering detail management Communication liaison
@@ -69,9 +69,9 @@ const Home = () => {
                 meeting schedule & appointments for entire planning process
                 Managing all event orders, revisions & evolving details.
               </p>
-              <a className="button arrow" id='with' href="/portfolio">
-
-CONTACT US TO GET STARTED          </a>
+              <a className="button arrow" id="with" href="/portfolio">
+                Let your eyes shine
+              </a>
             </div>
           </div>
         </section>
@@ -82,13 +82,16 @@ CONTACT US TO GET STARTED          </a>
           <div className="row">
             <div className="col-lg-6 d-flex flex-column align-items-center justify-content-center">
               <h3 className="font-weight-bold">Design</h3>
-<br/>
+              <br />
               <p className="text-muted">
                 Creating an individualized mood board & color palette Building
                 custom layouts via our custom design program Curating custom
                 installs and plans designed for guest experience Managing the
                 printing suite design and presence.
               </p>
+              <a className="button arrow" id="with" href="/portfolio">
+                Don't hesitate to take a look
+              </a>
             </div>
 
             <div className="col-lg-6 mb-4 mb-lg-0 d-flex align-items-center justify-content-center">
@@ -124,9 +127,9 @@ CONTACT US TO GET STARTED          </a>
                 to manage onsite expectations Guest & Timeline Management
                 throughout the experience Overseeing cleanup & load out of all.
               </p>
-              <a className="button arrow" id='with' href="/portfolio">
-
-              CONTACT US TO GET STARTED          </a>
+              <a className="button arrow" id="with" href="/portfolio">
+                CONTACT US TO GET STARTED{" "}
+              </a>
             </div>
           </div>
         </section>

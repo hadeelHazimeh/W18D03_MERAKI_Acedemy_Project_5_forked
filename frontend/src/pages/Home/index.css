@@ -85,7 +85,7 @@ letter-spacing: 4px;
     color:#666;
     font-family: 'Quattrocento',Georgia,"Times New Roman",serif;
     line-height: 2.7em;
-    font-size:20px;
+    font-size:18px;
 }
 .Link{
     text-align:right !important;
@@ -100,10 +100,11 @@ letter-spacing: 4px;
 
 #with {
     float: left !important;
+    font-weight: bold;
   font-family:  "Crimson Pro", Sans-serif !important;
-  font-size: 22px;
+  font-size: 17px;
     letter-spacing: 4px;
-        color:#504f4f;
+        color:#469da3;
          background-color:#f4f4f4; 
         margin: 1em 0;
     
