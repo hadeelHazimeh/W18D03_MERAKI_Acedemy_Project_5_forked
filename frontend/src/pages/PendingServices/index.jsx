@@ -18,6 +18,7 @@ import {
   MDBTypography,
   MDBBtnGroup 
 } from "mdb-react-ui-kit";
+import Loading from "../../components/loader";
 
 //http://localhost:5000/service/byStatus?status=pending
 
@@ -30,12 +31,18 @@ const PendingServices = () => {
       
       state.auth
   );
+  const [loadingStatus, setLoadingStatus] = useState(true);
+  
     const getPendingService = () => {
         axios
           .get("http://localhost:5000/service/byStatus?status=pending")
           .then((result) => {
            console.log(result.data.result);
            dispatch(setPendingServices(result.data.result));
+       
+            setLoadingStatus(false)
+         
+         
           })
           .catch((err) => {
             console.log(err);
@@ -54,6 +61,7 @@ const PendingServices = () => {
           })
           .then((result) => {
            console.log(result.data.result);
+           
           dispatch(updateServiceStatusById(id))
           })
           .catch((err) => {
@@ -66,8 +74,10 @@ const PendingServices = () => {
 
     )   
     return (
-        <>
-<div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between' ,margin:"30px"}}>
+        <> 
+        { loadingStatus? <>
+        <Loading/>
+        </> : <><div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between' ,margin:"30px"}}>
           {pendingServices.map((service,i) => (
             <MDBCard key={i} style={{ width: 'calc(30.33% - 20px)', marginBottom: '30px',backgroundColor:"#f3f1ec",margin:"10px",  }}>
               <MDBCardBody>
@@ -142,7 +152,8 @@ const PendingServices = () => {
         </div>
          
           
-          
+          </>  }
+
           </>
         );
 }

@@ -27,6 +27,7 @@ import ServiceSideBar from "../components/ServiceSideBar"
 import OrdersTable from "../pages/adminOrder"
 
 import ServiceProviderOrders from "../pages/ServiceProviderOrder"
+import Loading from "../components/loader"
 
 
 export const router= createBrowserRouter(
@@ -149,8 +150,14 @@ export const router= createBrowserRouter(
       element:<>
       <Navbar/>
       <CreatePackage/></>
-    }
+    },{
+      path:"/loading",
+      element:<>
+     <Loading/>
+      </>
+   
+   },
 
-]
+], 
 
 )
