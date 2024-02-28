@@ -1,10 +1,8 @@
-
 import "./index.css";
 
 const Home = () => {
   return (
     <div className="home">
-
       <div className="video-container">
         <video className="video-background" autoPlay muted controls loop>
           <source
@@ -32,7 +30,6 @@ const Home = () => {
           </h5>
           <br />
 
-
           <p className="card-text">
             Our creativity, attention to detail, and passion for planning <br />
             will ensure that your next corporate event is a huge success.
@@ -48,83 +45,103 @@ const Home = () => {
           </a>
         </div>
       </div>
-      <br />
-      <br />
-      <div class="container my-5 py-5 z-depth-1">
-        <section class="px-md-5 mx-md-5 dark-grey-text text-center text-lg-left">
-          <div class="row">
-            <div class="col-lg-6 mb-4 mb-lg-0 d-flex align-items-center justify-content-center">
+
+      <div className="container my-5 py-5 z-depth-1">
+        <section className="px-md-5 mx-md-5 dark-grey-text text-center text-lg-left">
+          <div className="row">
+            <div className="col-lg-6 mb-4 mb-lg-0 d-flex  align-items-center justify-content-center">
               <img
                 id="pacific"
-                src="https://res.cloudinary.com/dycpjbdto/image/upload/v1708912321/Scenic8-cropped_qlxqmv.png"
-                class="img-fluid"
+                src="https://adornmentevents.com/wp-content/uploads/gallery2023-lodge-60-683x1024.jpg"
+                className="img-fluid"
                 alt=""
               />
             </div>
 
-            <div class="col-lg-6 mb-4 mb-lg-0">
-              <h3 class="font-weight-bold">Pacific NW</h3>
-
-              <p class="text-muted">
-                Ready to explore the options that the Pacific NW has to offer?
-                Our team of collaborative event managers take on the brunt of
-                all the questions and logistics that come along with a
-                destination experience. Building a custom travel plan,
-                leveraging local relationships and resourcing the right vendors
-                to create a curated experience tailored to your story. Explore
-                Dundee Wine Country, Mt Hood, the renowned Columbia Gorge,
-                Eastern Oregon’s Bend and the Oregon Coastline as options with
-                the most gorgeous backdrops at every turn for your special day.
-                With years of experience creating events across all of these
-                landscapes, solid partnerships, local knowledge, and a refined
-                long-distance planning process, we provide an ease to wedding
-                planning for our couples.
+            <div className="col-lg-6 d-flex flex-column align-items-center justify-content-center">
+              <h3 className="font-weight-bold">Preplanning Production</h3>
+              <br />
+              <p className="text-muted">
+                Curating your vendor team to match your style & guest experience
+                Refining and communicating your overall timeline & plan Menu
+                development & catering detail management Communication liaison
+                with venue and vendors for production schedule Establishing
+                meeting schedule & appointments for entire planning process
+                Managing all event orders, revisions & evolving details.
               </p>
+              <a className="button arrow" id="with" href="/portfolio">
+                Let your eyes shine
+              </a>
             </div>
           </div>
         </section>
       </div>
-      <br />
-      <div class="container my-5 py-5 z-depth-1">
-        <section class="px-md-5 mx-md-5 dark-grey-text text-center text-lg-left">
-          <div class="row">
-          <div class="col-lg-6 mb-4 mb-lg-0">
-              <h3 class="font-weight-bold">Pacific NW</h3>
-
-              <p class="text-muted">
-                Ready to explore the options that the Pacific NW has to offer?
-                Our team of collaborative event managers take on the brunt of
-                all the questions and logistics that come along with a
-                destination experience. Building a custom travel plan,
-                leveraging local relationships and resourcing the right vendors
-                to create a curated experience tailored to your story. Explore
-                Dundee Wine Country, Mt Hood, the renowned Columbia Gorge,
-                Eastern Oregon’s Bend and the Oregon Coastline as options with
-                the most gorgeous backdrops at every turn for your special day.
-                With years of experience creating events across all of these
-                landscapes, solid partnerships, local knowledge, and a refined
-                long-distance planning process, we provide an ease to wedding
-                planning for our couples.
+      {/* {new card */}
+      <div className="container my-5 py-5 z-depth-1">
+        <section className="px-md-5 mx-md-5 dark-grey-text text-center text-lg-left">
+          <div className="row">
+            <div className="col-lg-6 d-flex flex-column align-items-center justify-content-center">
+              <h3 className="font-weight-bold">Design</h3>
+              <br />
+              <p className="text-muted">
+                Creating an individualized mood board & color palette Building
+                custom layouts via our custom design program Curating custom
+                installs and plans designed for guest experience Managing the
+                printing suite design and presence.
               </p>
+              <a className="button arrow" id="with" href="/portfolio">
+                Don't hesitate to take a look
+              </a>
             </div>
-            <br/>
-            <br/>
-            <div class="col-lg-6 mb-4 mb-lg-0 d-flex align-items-center justify-content-center">
+
+            <div className="col-lg-6 mb-4 mb-lg-0 d-flex align-items-center justify-content-center">
               <img
                 id="pacific"
-                src="https://res.cloudinary.com/dycpjbdto/image/upload/v1708912321/Scenic8-cropped_qlxqmv.png"
-                class="img-fluid"
+                src="https://adornmentevents.com/wp-content/uploads/elementor/thumbs/2024-slide-Slide1-qjgy4ytsero88mn1zfj2k2itb37gl2mi46rra4zgcc.webp"
+                className="img-fluid"
+                alt=""
+              />
+            </div>
+          </div>
+        </section>
+      </div>
+      {/* {new card */}
+      <div className="container my-5 py-5 z-depth-1">
+        <section className="px-md-5 mx-md-5 dark-grey-text text-center text-lg-left">
+          <div className="row">
+            <div className="col-lg-6 mb-4 mb-lg-0 d-flex align-items-center justify-content-center">
+              <img
+                id="pacific"
+                src="https://adornmentevents.com/wp-content/uploads/gallery2023-lodge-60-683x1024.jpg"
+                className="img-fluid"
                 alt=""
               />
             </div>
 
+
+            <div className="col-lg-6 d-flex flex-column align-items-center justify-content-center">
+              <h3 className="font-weight-bold">Onsite Production</h3>
+              <br />
+              <p className="text-muted">
+                Staffing your event needs with our team of event managers
+                Supporting setup of all vendor components Partnering with Venue
+                to manage onsite expectations Guest & Timeline Management
+                throughout the experience Overseeing cleanup & load out of all.
+              </p>
+
+              <a className="button arrow" id="with" href="/portfolio">
+                CONTACT US TO GET STARTED{" "}
+              </a>
+
             
+
+
+            </div>
           </div>
         </section>
       </div>
       <footer></footer>
     </div>
-
   );
 };
 

@@ -36,6 +36,8 @@ const ServiceSideBar = () => {
           <NavLink to="" onClick={handleMyServicesClick}><CDBSidebarMenuItem icon="cogs">My Services</CDBSidebarMenuItem></NavLink>
           <NavLink to="#" onClick={handleMyOrdersClick}><CDBSidebarMenuItem icon="shopping-cart">My Orders</CDBSidebarMenuItem></NavLink>
           <NavLink to="#" onClick={handleCreateServiceClick}><CDBSidebarMenuItem icon="plus">Create Service</CDBSidebarMenuItem></NavLink>
+          <CDBSidebarMenuItem icon="sign-out-alt">Logout</CDBSidebarMenuItem>
+
         </CDBSidebarMenu>
       </CDBSidebarContent>
     </CDBSidebar>
