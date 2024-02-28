@@ -17,6 +17,7 @@ import {
   MDBInput,
   MDBRadio,
 } from "mdb-react-ui-kit";
+import { useNavigate } from "react-router-dom";
 
 //......................................................
 
@@ -29,7 +30,7 @@ const Register = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
+  const navigate = useNavigate();
   const[role, setRole] = useState("");
 
  
@@ -41,7 +42,7 @@ const Register = () => {
     console.log("register");
     try {
       const result = await axios.post("http://localhost:5000/users/register", {
-        name,
+       userName:name,
         email,
         password,
         role,
@@ -53,11 +54,9 @@ const Register = () => {
           icon: "success",
           title: "Success!",
           text: result.data.message,
-
-
-          confirmButtonText: "Preview Order",
-
+          confirmButtonText: "ok",
         });
+       navigate ("/login")
       } else throw Error;
     } catch (error) {
       setStatus(false);
@@ -65,10 +64,7 @@ const Register = () => {
         icon: "error",
         text: error.response.data.message,
       });
-      // if (error.response && error.response.data) {
-      //   return setMessage(error.response.data.message);
-      // }
-      // setMessage("Error happened while register, please try again");
+      
     }
   };
   //............................
@@ -111,10 +107,10 @@ const Register = () => {
                 <MDBCol style={{ width: "100%" }} md="6">
                   <MDBInput
                     wrapperClass="mb-4"
-                    className="register-form-input"
+                    // className="register-form-input"
                     label="Email"
                     size="lg"
-                    id="form4"
+                    
                     type="email"
                     onChange={(e) => setEmail(e.target.value)}
                   />
@@ -123,17 +119,17 @@ const Register = () => {
                 <MDBCol style={{ width: "100%" }} md="6">
                   <MDBInput
                     wrapperClass="mb-4"
-                    className="register-form-input"
+                    // className="register-form-input"
                     label="password"
                     size="lg"
-                    id="form2"
+                   
                     type="password"
                     onChange={(e) => setPassword(e.target.value)}
                   />
                 </MDBCol>
 
                 <MDBRow>
-                  <MDBCol md="6" className="mb-4">
+                  <MDBCol md="6" >
                     <h6 className="fw-bold"> Join Us As : </h6>
                     <MDBRadio
                       name="inlineRadio"
@@ -167,7 +163,7 @@ const Register = () => {
 
                 <MDBBtn
                   color="dark"
-                  style={{ width: "50%" }}
+                  style={{ width: "100%",marginTop:"2rem",fontWeight:"bold" }}
                   onClick={() => {
                     console.log("addNew");
 

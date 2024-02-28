@@ -97,11 +97,7 @@ const Client = () => {
       });
       setShowPreview(true);
     } catch (error) {
-      // setStatus(false);
-      // Swal.fire({
-      //   icon: "error",
-      //   text: error.response.data.message
-      // });
+      
       console.error("Error creating order:", error);
     }
   };
