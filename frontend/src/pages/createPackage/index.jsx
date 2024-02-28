@@ -22,6 +22,8 @@ import {
 } from "../../services/redux/reducer/packages";
 import Swal from "sweetalert2";
 import { Button, Modal, Nav } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
+import { Container } from "react-bootstrap";
 //import { setPackagesName } from "../../services/redux/reducer/packages";
 const CreatePackage = () => {
   //const [packages, setPackages] = useState([]);
@@ -30,12 +32,13 @@ const CreatePackage = () => {
   const [ModalPreview, setModalPreview] = useState(false);
   const { packages, packagesName } = useSelector((state) => state.packages);
   const [checkedPackages, setCheckedPackages] = useState(null);
-  const token = useSelector((state) => state.auth.token);
-  const [modalShow, setModalShow] = useState(false);
+    const [modalShow, setModalShow] = useState(false);
   const [showPreview, setShowPreview] = useState(false);
-  const [showPrevButton, setShowPrevButton] = useState(false);
-  const [status, setStatus] = useState(false);
   const [orderDetails, setOrderDetails] = useState(null);
+  const navigate = useNavigate();
+  const { isLoggedIn, token, role } = useSelector((state) => state.auth);
+ const [roleLocal, setRoleLocal] = useState(localStorage.getItem("role"));
+  
   const [orderId, setOrderId] = useState("");
   const [orderData, setOrderData] = useState({
     order_price: 0,
@@ -174,6 +177,13 @@ const CreatePackage = () => {
   //......................................................................
   return (
     <div className="formContainer">
+
+{isLoggedIn?<>
+      
+      {roleLocal === "3"?<>
+      
+      
+      {/* code */}
       <h6
         style={{
           marginTop: "1rem",
@@ -466,6 +476,53 @@ const CreatePackage = () => {
           </Button>
         </Modal.Footer>
       </Modal>
+      </>:<>
+
+<Container
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          backgroundColor: "",
+        }}
+        className=" text-center"
+      >
+        <MDBCard
+          style={{
+            maxWidth: "63rem",
+            justifyContent: "center",
+            marginTop: "30px",
+            backgroundColor: "#212526",
+          }}
+        >
+          <MDBCardImage
+            position="top"
+            src="https://freefrontend.com/assets/img/403-forbidden-html-templates/403-Forbidden-CSS-Hover.gif"
+            alt="..."
+          />
+          <MDBCardBody>
+            <MDBCardTitle
+              style={{
+                textAlign: "center",
+                fontWeight: "bold",
+                fontFamily: "Raleway",
+                color: "whitesmoke",
+              }}
+            >
+              access to this page is restricted
+            </MDBCardTitle>
+          </MDBCardBody>
+        </MDBCard>
+      </Container>
+</>}
+
+
+
+
+</>:<>
+{/* {navigate("/login")} */}
+</>}
+
+
     </div>
   );
 };
