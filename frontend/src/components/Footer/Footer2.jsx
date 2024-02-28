@@ -48,7 +48,7 @@ const Footer2 = () => {
                 {" "}
                 <img
                   src="https://res.cloudinary.com/dycpjbdto/image/upload/v1708778225/new-removebg-preview_xdfemo.png"
-                  style={{ width: "70%", height: "50%" }}
+                  style={{ width: "50%", height: "50%" }}
                 />
               </div>
               <p>
