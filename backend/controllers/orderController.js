@@ -3,15 +3,16 @@ const { pool } = require("../models/db");
 
 const createNewOrder = (req, res) => {
 
-  const { order_price, event_name,eventDate,place, status } = req.body;
+  const { order_price, event_name,eventDate,place,phone, status } = req.body;
   const user_id = req.token.userId;
 
-  const data = [order_price, user_id,event_name, eventDate, place, status];
+  const data = [order_price, user_id,event_name, eventDate, place,phone, status];
 
 
   pool
     .query(
-      `INSERT INTO orders (order_price, user_id, event_name ,eventDate, place,status) VALUES ($1,$2,$3,$4,$5,$6) 
+      `INSERT INTO orders (order_price, user_id, event_name ,eventDate, place,phone,status)
+       VALUES ($1,$2,$3,$4,$5,$6,$7) 
     RETURNING * `,
       data
     )
@@ -37,13 +38,13 @@ const createNewOrderServices = (req, res) => {
 
   let service;
    service_ids?service=service_ids:service=null
-  console.log(service_ids,service);
+  //console.log(service_ids,service);
    const data2= service_package_id
     
     let query
    
   if(service!=null){
-    console.log(req.body)
+    //console.log(req.body)
     const data1= service.map((service_id) => `(${order_id}, ${service_id})`).join(', ');
     query=`
     INSERT INTO orders_services (order_id, service_id) 
@@ -57,7 +58,7 @@ const createNewOrderServices = (req, res) => {
     RETURNING *` 
     
   }
-  console.log(query)
+  //console.log(query)
   pool.query(query)
     .then((result) => {
        res.status(201).json({
@@ -80,7 +81,8 @@ const createNewOrderServices = (req, res) => {
 
 
 const getAllOrders = (req, res) => {
-  const query = ` SELECT o.order_id, 
+  const query = ` 
+  SELECT o.order_id, 
 
   o.order_price, 
 
@@ -88,13 +90,15 @@ const getAllOrders = (req, res) => {
 
   o.eventDate, 
   o.place,
+  o.phone,
   os.service_id, 
   s.service_name, 
   s.details, 
   s.price, 
   s.image,
 u.userName,
-u.email
+u.email,
+o.phone
 FROM 
   orders o
   JOIN orders_services os ON o.order_id = os.order_id
@@ -102,7 +106,8 @@ FROM
   JOIN users u ON o.user_id = u.user_id
 WHERE 
   o.is_deleted = 0
-  AND os.is_deleted = 0;`;
+  AND os.is_deleted = 0;
+  `;
 
   pool
     .query(query)

@@ -15,8 +15,10 @@ import {
 } from 'mdb-react-ui-kit';
 import {
  seRole,
- setLogout
+ setLogout,
+ setLogin
 } from "../../services/redux/reducer/auth";
+import {isLoggedIn} from "../../services/redux/reducer/auth/index";
 import { useSelector,useDispatch } from 'react-redux';
 
 const Navbar = () => {
@@ -24,6 +26,13 @@ const Navbar = () => {
   const [openNavSecond, setOpenNavSecond] = useState(false);
   const [hideLogin,setHideLogin]=useState(false)
   const role = useSelector((state) => state.auth.role);
+  // const isloggedIn=useSelector((state) => state.auth.isloggedIn)
+    const { isLoggedIn } = useSelector(
+    (state) =>
+
+      state.auth
+  );
+  // console.log(isLoggedIn)
    const dispatch=useDispatch();
 
   return (
@@ -31,8 +40,8 @@ const Navbar = () => {
     <div>
 
     <MDBNavbar expand='lg' light bgColor='light'>
-      <MDBContainer fluid>
-        <div style={{display:'flex',justifyContent: 'space-between'}}>
+      <MDBContainer fluid  style={{display:'flex',justifyContent: 'space-around',gap:"1rem"}}>
+        <div style={{display:'flex',justifyContent: 'space-evenly'}}>
       <MDBNavbarBrand href='/' style={{marginBlock:'10'}}>
             <img
               src='https://res.cloudinary.com/dycpjbdto/image/upload/v1708778225/new-removebg-preview_xdfemo.png'
@@ -65,9 +74,12 @@ const Navbar = () => {
         </MDBNavbarToggler>
             <MDBNavbarLink href='/client'>Plan Your Event</MDBNavbarLink>
             <MDBNavbarLink href='/portfolio'>PortFolio</MDBNavbarLink>
-            <MDBNavbarLink href='/letstalk'>Lets Talk!</MDBNavbarLink>
+           
             <MDBNavbarLink href='/AboutUs'>About Us</MDBNavbarLink>
-            {role==="3"?<><MDBNavbarLink href='/' onClick={()=>{dispatch(setLogout())}}>Log Out</MDBNavbarLink></>:<>
+             {isLoggedIn?<><MDBNavbarLink href='/letstalk'>Lets Talk!</MDBNavbarLink></>:<></>}
+
+            {isLoggedIn?<><MDBNavbarLink href='/' onClick={()=>{dispatch(setLogout())}}>Log Out
+            </MDBNavbarLink></>:<>
             <MDBNavbarLink href='/login' style={{color:'#469da3'}}>
           
                 <strong>Are You Vendor?</strong>

@@ -9,7 +9,7 @@ import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import Dropdown from 'react-bootstrap/Dropdown';
 import Swal from 'sweetalert2';
 import Modal from "react-bootstrap/Modal";
-
+import "./style.css"
 function AdminServicesRender() {
   const [image, setImage] = useState("");
 
@@ -175,14 +175,15 @@ const callServices=()=>{
       }, []);
     //...............................
   return (
-    <> <div className="formContainer">
-    <h1  style={{marginTop: "1rem", borderBottom: "1px solid #00a3af", padding: "1rem 0 0 0"}}>
-      create package
-    </h1>
-    
-    <form >
-    <MDBRow className="formInput">
-        <MDBInput
+    <> <div  className="formContainer">
+       <div className="row justify-content-center">
+   <h2 className="mb-1 animated fadeIn" style={{fontWeight: "bold", textAlign:"start", marginLeft:"20px",backgroundColor:"",marginTop:"10px",fontFamily:"Raleway"}}>Create a Package</h2>
+
+    <p className=".text-muted" style={{fontWeight: "", textAlign:"start", marginLeft:"20px",backgroundColor:"",marginTop:"10px",fontFamily:"Raleway"}}>Create tailored event packages effortlessly. Mix and match services to design memorable celebrations for any occasion.</p>
+    <form className="">
+      <div style={{backgroundColor:"rgb(243, 241, 236)",border:"1px solid rgb(221, 221, 221)",borderRadius:" 5px",width:"99%" ,margin:"2rem",marginLeft:"0",paddingTop:"1rem",paddingBottom:"1rem"}} >
+    <MDBRow style={{marginLeft:"3px"}} className="formInput">
+        <MDBInput 
           label="Package Name"
           type="text"
           id="package_Name"
@@ -192,51 +193,97 @@ const callServices=()=>{
         />
       </MDBRow>
 
-      <MDBRow rows={4} className="formInput">
-      <MDBInput wrapperClass='mb-4'  label="Description"
+      <MDBRow style={{marginLeft:"3px"}}  rows={4} className="formInput">
+      <textarea placeholder="Description"
+        className="form-control"
+      rows="5"
+         label="Description"
           type="text"
           id="Description"
           name="Description"
        value={packageInfo.Description}
-        onChange={handleInputChange} />
+        onChange={handleInputChange}
+      />
+
       </MDBRow>
-       <MDBRow  className="formInput">
+       <MDBRow style={{width:"72%"}} className="formInput">
       <div className="mb-3">
               <label htmlFor="image" className="form-label">
                 Image
               </label>
-              <input
+              <input style={{width:"100%"}}
                 type="file"
                 className="form-control"
                 id="image"
                 onChange={(e) => setImage(e.target.files[0])}
               />
             </div>
+            
       </MDBRow> 
+      </div>
 
-      <div className="cardContainer">
+      <div  style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between' ,}}>
         {services.map((service,i) => (
-          <MDBCard key={i} className="serviceCard">
+          <MDBCard key={i}  style={{ width: 'calc(40% - 17px)', marginBottom: '20px',backgroundColor:"#f3f1ec"  }} className="serviceCard">
             <MDBCardBody>
-            <MDBCardImage
+            <MDBCardTitle>
+                  <p
+                    style={{
+                      textAlign: "start",
+                      fontFamily: "Raleway",
+                      borderBottom: "1px solid #302B2B",paddingBottom:"10px"
+                    }}
+                  >
+                    {" "}
+                    {service.service_name}
+                  </p>
+                </MDBCardTitle>
+            <MDBCardImage style={{marginBottom:"10px"}}
             src={service.image}
             alt="..."
             position="top"
           />
-              <MDBCardTitle>name: {service.service_name}</MDBCardTitle>
 
               <MDBCardText>
-              
-                Price: JD {service.price}
-                <br />
-                description: {service.details}
+              <p
+                    style={{
+                      textAlign: "justify",
+                      borderBottom: "1px solid #302B2B ",
+                      fontFamily: "Raleway",
+                    }}
+                  >
+                    <strong>Price:</strong>{" "}
+                    <span style={{ display: "inline" }}>
+                      JD {service.price}
+                    </span>
+                  </p>
+                  <p
+                    style={{
+                      textAlign: "justify",
+                     paddingBottom:"10px",
+                      fontFamily: "Merriweather",
+                    }}
+                  >
+                    <strong>Description:</strong>{" "}
+                    <span >{service.details}</span>
+                  </p>
               </MDBCardText>
+              <div className="checkBox"
+style={{
+  fontFamily:"Raleway",
+  fontWeight:"bold",
+    position: "absolute",
+    bottom: "15px", 
+    left: "20px",
+    }}
 
-              <MDBCheckbox
+>
+              <MDBCheckbox 
                 label="Select"
                checked={checkedServices.includes(service.service_id)}
                  onChange={() => handleCheckboxChange(service.service_id)}
               />
+              </div>
             </MDBCardBody>
           </MDBCard>
         ))}
@@ -244,10 +291,15 @@ const callServices=()=>{
 
       {showPrice ? (
         <>
-          <MDBBtn className="totalPriceButton" onClick={handlePackagePrice}
-          >
-            calculate the total Price
-          </MDBBtn>
+                                    <button
+                                type="button"
+                                className="btn btn-dark"
+                                onClick={handlePackagePrice}
+                                style={{width:"18%",margin:"8px",fontWeight:"bold",fontSize:"0.9rem"}}
+                            >
+                                 calculate the total Price
+                            </button><br/>
+
         </>
       ) : (
         <></>
@@ -255,18 +307,25 @@ const callServices=()=>{
 
       {ClickedPrice ? (
         <>
-          <MDBRow className="mb-4">
-            <p>Total Price: {packageInfo.price} JD</p>
-          </MDBRow>
+        <div style={{width:"18%",border:"solid black" ,marginLeft:"10px",textAlign:"center" ,backgroundColor:"#302B2B",borderRadius:" 0.25rem",}}>
+         
+            <p style={{margin:"5px",fontSize:"1.1rem", display:"inline",color:"white"}}> <span style={{fontWeight:"bold"}}>Total Price: </span> {packageInfo.price}<span style={{fontWeight:"bold"}}> JD</span></p>
+          </div>
         </>
       ) : (
         <></>
       )}
 
-      <MDBBtn onClick={handleSubmitPackage}   className="totalPriceButton">Submit your Package</MDBBtn>
+{/*       <MDBBtn   className="totalPriceButton">Submit your Package</MDBBtn> */}
+      <button
+                                type="button"
+                                className="btn btn-dark"
+                                onClick={handleSubmitPackage} style={{width:"18%",margin:"8px",fontSize:"1rem",fontWeight:"bold"}}
+                            >Build Package
+                            </button>
     </form>
     
-    
+    </div>
   </div></>
   )
 }

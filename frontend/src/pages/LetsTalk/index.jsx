@@ -1,8 +1,21 @@
 
-const Talk = () => {
-  return (
-    <div>Lets Talk!</div>
-  )
-}
+import React from 'react';
+import { InlineWidget } from 'react-calendly';
 
-export default Talk
+const Talk = () => {
+  
+  return (
+    
+  
+ 
+    <div style={{backgroundColor:"#f3f1ec"}}>
+
+      <InlineWidget url="https://calendly.com/hadeel-f-hazimeh/event" />
+    </div>
+
+        
+    
+  );
+};
+
+export default Talk;
