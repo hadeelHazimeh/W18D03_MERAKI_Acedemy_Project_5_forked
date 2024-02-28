@@ -22,6 +22,7 @@ import {
 } from "../../services/redux/reducer/packages";
 import Swal from "sweetalert2";
 import { Button, Modal, Nav } from "react-bootstrap";
+import Loading from "../../components/loader";
 import { useNavigate } from "react-router-dom";
 import { Container } from "react-bootstrap";
 //import { setPackagesName } from "../../services/redux/reducer/packages";
@@ -35,6 +36,7 @@ const CreatePackage = () => {
     const [modalShow, setModalShow] = useState(false);
   const [showPreview, setShowPreview] = useState(false);
   const [orderDetails, setOrderDetails] = useState(null);
+  const [loadingStatus, setLoadingStatus] = useState(true);
   const navigate = useNavigate();
   const { isLoggedIn, token, role } = useSelector((state) => state.auth);
  const [roleLocal, setRoleLocal] = useState(localStorage.getItem("role"));
@@ -59,8 +61,9 @@ const CreatePackage = () => {
       .get(`http://localhost:5000/package`)
       .then((result) => {
         console.log("first", result.data.result);
-
+        setLoadingStatus(false)
         dispatch(setPackagesName(result.data.result));
+        setLoadingStatus(false)
       })
       .catch((err) => {
         console.log(err);
@@ -69,13 +72,15 @@ const CreatePackage = () => {
   //-----------------------------
 
   useEffect(() => {
-    //getPackages()
+    
     axios
       .get(`http://localhost:5000/package/servicePackage`, {})
       .then((result) => {
         getPackages();
+        
         console.log("result.data", result.data.result);
         dispatch(setPackages(result.data.result));
+        setLoadingStatus(false)
       })
       .catch((err) => {
         console.log(err);
@@ -96,6 +101,7 @@ const CreatePackage = () => {
       );
       console.log("order", order);
       setOrderDetails(order.data.result[0]);
+      setLoadingStatus(false)
     } catch (error) {
       Swal.fire({
         icon: "error",
@@ -177,6 +183,10 @@ const CreatePackage = () => {
   //......................................................................
   return (
     <div className="formContainer">
+      {loadingStatus?<><Loading/></>:<>
+      
+      
+      
 
 {isLoggedIn?<>
       
@@ -395,12 +405,14 @@ const CreatePackage = () => {
 
       {showPreview ? (
         <div>
+        
           <MDBBtn
             onClick={() => {
               setModalPreview(true);
 
               console.log("orderData", orderData);
               getOrderDetails(orderId);
+              setLoadingStatus(false)
             }}
             className="totalPriceButton"
             color="dark"
@@ -522,7 +534,7 @@ const CreatePackage = () => {
 {/* {navigate("/login")} */}
 </>}
 
-
+</>}
     </div>
   );
 };

@@ -19,14 +19,15 @@ import { useState } from "react";
 import Swal from "sweetalert2";
  import { Container } from "react-bootstrap";
 import "./style.css"
+import Loading from "../../components/loader";
 //.....................................
 
 const Client = () => {
-  // const { isLoggedIn } = useSelector((state) => state.auth);
+  const [loadingStatus, setLoadingStatus] = useState(true);
   const [showPrice, setShowPrice] = useState(false);
   const navigate = useNavigate();
   const [ClickedPrice, setClickedPrice] = useState(false);
-   //const token = useSelector((state) => state.auth.token);
+   
   const [services, setServices] = useState([]);
   const [status, setStatus] = useState(false);
   const [checkedServices, setCheckedServices] = useState([]);
@@ -52,6 +53,7 @@ const Client = () => {
       .then((services) => {
         console.log("services", services.data);
         setServices(services.data.services);
+        setLoadingStatus(false)
       })
       .catch((err) => {
         console.log(err);
@@ -142,9 +144,10 @@ const Client = () => {
         `http://localhost:5000/orders/search_1/${orderId}`
       );
       console.log("Detailsorder", order);
-      console.log("date", order.data.result[0].eventdate);
-      setOrderDetails(order.data.result[0]);
+      console.log("phone", order.data.result[0].phone);
 
+      setOrderDetails(order.data.result[0]);
+      setLoadingStatus(false)
       setSelectedServices(order.data.result);
       console.log("SelectedServices", order.data.result);
 
@@ -159,6 +162,7 @@ const Client = () => {
   return (
     
     <div className="formContainer">
+      {loadingStatus?<> <Loading/></>:<>
       {isLoggedIn?<>
       
         {roleLocal === "3"?<>
@@ -300,6 +304,7 @@ style={{
               setModalShow(true);
               console.log("orderData", orderData);
               getOrderDetails(orderId);
+              setLoadingStatus(false)
             }}
             // className="totalPriceButton"
             style={{fontWeight:"bold"}}
@@ -446,6 +451,7 @@ style={{
 
 </>:<>
 {<Button></Button>}
+</>}
 </>}
     </div>
   );
