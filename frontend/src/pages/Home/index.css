@@ -23,6 +23,7 @@
   height: 500px;
 }
 
+
 .card-title {
   color: rgb(0 0 0);
   font-family: "Quattrocento", Georgia, "Times New Roman", serif;
@@ -35,6 +36,7 @@
   line-height: 2.7em;
   font-size: 17px;
   text-align: left;
+
 }
 .button {
   margin: 50px;
