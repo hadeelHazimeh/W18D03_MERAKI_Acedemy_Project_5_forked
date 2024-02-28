@@ -15,7 +15,7 @@ import Logo from "../../assets/logo (3).png"; // Importing logo from assets
 import "./style.css";
 import Navbar from "../../components/Navbar";
 import { useDispatch } from "react-redux";
-import { setLogin, setUserId, seRole } from "../../services/redux/reducer/auth";
+import { setLogin, setUserId, seRole, setUserName } from "../../services/redux/reducer/auth";
 
 function Login() {
   const [email, setEmail] = useState("");
@@ -35,6 +35,7 @@ function Login() {
         dispatch(setLogin(result.data.token));
         dispatch(setUserId(result.data.userId));
         dispatch(seRole(result.data.role));
+        dispatch(setUserName(result.data.username));
         if (result.data.role === 1) {
           navigate("/admin/dashboard/pending/Services");
         } else if (result.data.role === 2) {
