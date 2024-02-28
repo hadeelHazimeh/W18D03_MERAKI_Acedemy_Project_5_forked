@@ -67,67 +67,82 @@ const PendingServices = () => {
     )   
     return (
         <>
+<div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between' ,margin:"30px"}}>
+          {pendingServices.map((service,i) => (
+            <MDBCard key={i} style={{ width: 'calc(30.33% - 20px)', marginBottom: '30px',backgroundColor:"#f3f1ec",margin:"10px",  }}>
+              <MDBCardBody>
+              <MDBCardTitle>
+                  <p
+                    style={{
+                      textAlign: "start",
+                      fontFamily: "Raleway",
+                      borderBottom: "1px solid #302B2B",paddingBottom:"10px",
+                    }}
+                  >
+                    {" "}
+                    {service.service_name}
+                  </p>
+                </MDBCardTitle>
+                <MDBCardImage
+                  src={service.image}
+                  alt="..."
+                  position="top"
+                  className="cardImg"
+                />
 
-          <MDBContainer className="py-5 ">
-          
-              
-                <MDBRow style={{marginBottom:"80px"}} className="justify-content-right align-items-center h-100"> 
-            {pendingServices.length===0?<>no pending services available</>:<>{pendingServices.map((service,i)=>{
-return(
- 
- <MDBCol key={i}  size={"sm"} sm="3"> <MDBCard style={{padding:"10px"}}>
-          <MDBCardImage
-            src="https://mdbootstrap.com/img/new/standard/city/042.webp"
-            alt="..."
-            position="top"
-          />
-          <MDBCardBody >
-            <MDBCardTitle>{service.service_name}</MDBCardTitle>
-            <MDBCardText>
-            <span className="text-muted">Provider: </span>{service.provider}<br/>
-            </MDBCardText>
-            <MDBCardText>
-                  
-          <span className="text-muted">Details: </span>{service.details}<br/>
-            </MDBCardText>
-            <MDBCardText>
-                  
-            <span className="text-muted">Status: </span>{service.status}
-                    </MDBCardText>
-                    <MDBTypography tag="h5" className="mb-0">
-        {service.price} JOD
-      </MDBTypography>
-      
-      
-      <MDBBtn onClick={()=>{
+                <br />
+                <MDBCardText>
+                  <p
+                    style={{
+                      textAlign: "justify",
+                      borderBottom: "1px  #00A3AF ",
+                      fontFamily: "Raleway",
+                      fontSize:"20px",
+                     
+                    }}
+                  >
+                    <strong>Price:</strong>{" "}
+                    <span style={{ display: "inline" }}>
+                      JD {service.price}
+                    </span>
+                  </p>
+                  <p
+                    style={{
+                      textAlign: "justify",
+                     paddingBottom:"10px",
+                      fontFamily: "Merriweather",
+                    }}
+                  >
+                    <strong>Description:</strong>{" "}
+                    <span style={{ display: "inline" }}>{service.details}</span>
+                  </p>
+                </MDBCardText>
+                <div style={{
+  fontFamily:"Raleway",
+  
+    position: "absolute",
+    bottom: "1px", 
+    left: "20px",
+    }}>
+                <MDBBtn style={{backgroundColor:"#302B2B",paddingBottom:"10px",margin:"8px",fontWeight:"bold",}} onClick={()=>{
         handelStatus("confirmed",service.service_id)
-      }} color='secondary' outline>
+      }} color='white' outline>
         Confirm
       </MDBBtn>
       
-      <MDBBtn onClick={()=>{
+      <MDBBtn style={{backgroundColor:"#302B2B",paddingBottom:"10px",margin:"8px",fontWeight:"bold",}} onClick={()=>{
         handelStatus("Rejected",service.service_id)
-      }} color='secondary' outline>
+      }} color='white' outline>
         Reject
       </MDBBtn>
-    
-          </MDBCardBody>
-        </MDBCard>
-        </MDBCol>
-       
-)
-            })}</>}
-      
-      </MDBRow>
-             {/*    <MDBCard>
-                  <MDBCardBody>
-                    <MDBBtn className="ms-3" color="warning" block size="lg">
-                      Apply
-                    </MDBBtn>
-                  </MDBCardBody>
-                </MDBCard> */}
+      </div>
+              </MDBCardBody>
+            </MDBCard>
+          ))}
+        </div>
+         
           
-          </MDBContainer>
+          
           </>
         );
 }
