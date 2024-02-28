@@ -32,7 +32,7 @@ const Navbar = () => {
 
       state.auth
   );
-  console.log(isLoggedIn)
+  // console.log(isLoggedIn)
    const dispatch=useDispatch();
 
   return (
@@ -74,8 +74,9 @@ const Navbar = () => {
         </MDBNavbarToggler>
             <MDBNavbarLink href='/client'>Plan Your Event</MDBNavbarLink>
             <MDBNavbarLink href='/portfolio'>PortFolio</MDBNavbarLink>
-            <MDBNavbarLink href='/letstalk'>Lets Talk!</MDBNavbarLink>
+           
             <MDBNavbarLink href='/AboutUs'>About Us</MDBNavbarLink>
+             {isLoggedIn?<><MDBNavbarLink href='/letstalk'>Lets Talk!</MDBNavbarLink></>:<></>}
 
             {isLoggedIn?<><MDBNavbarLink href='/' onClick={()=>{dispatch(setLogout())}}>Log Out
             </MDBNavbarLink></>:<>
