@@ -138,14 +138,21 @@ const Home = () => {
           </div>
         </section>
       </div>
-<div className="heading">
-  <h1 style={{fontSize:'50px'}}>OUR EVENTS</h1>
- 
-</div>
-<div className="center-line" style={{display:"flex",justifyContent:"center"}}>
-    <hr style={{width:'24%',color:"#666" }} />
-    </div>
+      <div className="heading">
+        <h1 style={{ fontSize: "50px" }}>OUR EVENTS</h1>
+      </div>
+      <div
+        className="center-line"
+        style={{ display: "flex", justifyContent: "center" }}
+      >
+        <hr style={{ width: "24%", color: "#666" }} />
+      </div>
       <HomeSlider />
+      <div className="gallery">
+        <a className="child bounce" href="/portfolio">
+          The Portfolio ⟶
+        </a>
+      </div>
       <footer></footer>
     </div>
   );

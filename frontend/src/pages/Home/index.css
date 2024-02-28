@@ -146,3 +146,39 @@ text-decoration: none;
         font-family:'Quattrocento',Georgia,"Times New Roman",serif ;
     }
 
+.gallery{
+    display: flex;
+    font-size: 15px;
+    font-family: "Montserrat",sans-serif;
+    text-transform: uppercase;
+    font-style: italic;
+    letter-spacing: 0.5rem;
+      text-align: center;  
+    cursor: pointer;
+    align-content: center;
+    align-items: center;
+    justify-content: center;
+}
+.child {
+
+    align-self: flex-end;
+    width: 300px;
+    height: 100px;
+    animation-duration: 2.7s;
+    animation-iteration-count: infinite;
+    transform-origin: bottom;
+    text-decoration: none;
+    color: #777777;
+
+
+}
+.bounce:hover {
+    animation-name: bounce;
+    animation-timing-function: ease;
+    color: #000;
+}
+@keyframes bounce {
+  0%   { transform: translateY(0); }
+  50%  { transform: translateY(-50px); }
+  100% { transform: translateY(0); }
+}
