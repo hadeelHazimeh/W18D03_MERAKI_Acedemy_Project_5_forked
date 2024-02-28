@@ -106,7 +106,7 @@ package_name}</MDBCardTitle>
                     style={{
                       textAlign: "justify",
                      paddingBottom:"10px",
-                      fontFamily: "Merriweather",
+                      fontFamily: "Merriweather", 
                     }}
                   >
                     <strong>Description:</strong>{" "}
@@ -123,10 +123,14 @@ package_name}</MDBCardTitle>
                   fontFamily:"Raleway",
                   fontWeight:"bold",
                     position: "",
-                    backgroundColor:"white",margin:"0"
+                    backgroundColor:"white",margin:"0",
                     }} key={i}>
                       
-                      
+                      {/* style={{
+  fontFamily:"Raleway",
+  
+   ,
+    }} */}
                       
 <p onClick={()=>{setModalShow(true)
            setServiceInfo(pac)}} style={{cursor: "pointer",
@@ -139,7 +143,7 @@ package_name}</MDBCardTitle>
             marginTop:"3px",
             marginBottom:"8px",
             paddingTop:"10px"
-            ,  fontFamily: "Raleway"
+            ,  fontFamily: "Raleway",
              
               }} > {pac.service_name}</p>
               
