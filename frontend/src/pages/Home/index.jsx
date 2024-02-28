@@ -1,5 +1,6 @@
 import "./index.css";
 import HomeSlider from "../../components/HomeSlider/HomeSlider";
+import Footer2 from "../../components/Footer/Footer2";
 const Home = () => {
   return (
     <div className="home">
@@ -153,7 +154,9 @@ const Home = () => {
           The Portfolio ⟶
         </a>
       </div>
-      <footer></footer>
+      <footer>
+        <Footer2/>
+      </footer>
     </div>
   );
 };
