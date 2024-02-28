@@ -15,7 +15,7 @@
 }
 
 html {
-  font-size: 62.5%;
+  /* font-size: 62.5%; */
   scroll-behavior: smooth;
 }
 
@@ -62,7 +62,7 @@ body {
 
 .container {
   max-width: 124rem;
-  padding: 4rem 1rem;
+  /* padding: 4rem 1rem; */
   margin: 0 auto;
 }
 
@@ -73,15 +73,16 @@ body {
 }
 
 .swiper_container {
-  height: 52rem;
+  height: 37rem;
   padding: 2rem 0;
   position: relative;
 }
 
 .swiper-slide {
-  width: 37rem;
-  height: 42rem;
+  width: 20rem;
+  height: 29rem;
   position: relative;
+  margin-bottom: 0;
 }
 
 @media (max-width: 500px) {
@@ -99,8 +100,8 @@ body {
 }
 
 .swiper-slide img {
-  width: 37rem;
-  height: 42rem;
+  width: 22rem;
+  height: 27rem;
   border-radius: 2rem;
   object-fit: cover;
 }

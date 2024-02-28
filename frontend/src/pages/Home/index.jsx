@@ -5,7 +5,7 @@ const Home = () => {
   return (
     <div className="home">
       <div className="video-container">
-        <video className="video-background" autoPlay muted controls loop>
+        <video className="video-background" autoPlay muted  loop>
           <source
             src="https://res.cloudinary.com/dycpjbdto/video/upload/v1708783111/km_farah_720p_50f_20240224_142639_lkpe5z.3gp"
             type="video/mp4"
@@ -18,7 +18,7 @@ const Home = () => {
           src="https://res.cloudinary.com/dycpjbdto/image/upload/v1708910801/AsSeen_rnansm.jpg"
         />
       </div>
-      <div className="card bg-dark " id="card1">
+      <div className="card" id="card1">
         <img
           src="https://res.cloudinary.com/dycpjbdto/image/upload/v1708823786/pexels-alena-koval-961402_eymjio.jpg"
           className="card-img"
@@ -94,7 +94,7 @@ const Home = () => {
                 installs and plans designed for guest experience Managing the
                 printing suite design and presence.
               </p>
-              <a className="button arrow" id="with" href="/portfolio">
+              <a className="button arrow" id="with" style={{alignSelf:"flex-start",justifySelf:"left",marginLeft:"0",padding:"0"}} href="/portfolio">
                 Don't hesitate to take a look
               </a>
             </div>

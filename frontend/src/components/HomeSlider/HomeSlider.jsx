@@ -11,7 +11,7 @@ import 'swiper/css/effect-coverflow';
 
 const HomeSlider = () => {
   return (
-    <div className="container">
+    <div className="container" >
     
     <Swiper
       effect={'coverflow'}

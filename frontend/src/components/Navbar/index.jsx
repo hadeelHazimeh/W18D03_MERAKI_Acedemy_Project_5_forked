@@ -39,8 +39,8 @@ const Navbar = () => {
     <div>
 
     <MDBNavbar expand='lg' light bgColor='light'>
-      <MDBContainer fluid>
-        <div style={{display:'flex',justifyContent: 'space-between'}}>
+      <MDBContainer fluid  style={{display:'flex',justifyContent: 'space-around',gap:"1rem"}}>
+        <div style={{display:'flex',justifyContent: 'space-evenly'}}>
       <MDBNavbarBrand href='/' style={{marginBlock:'10'}}>
             <img
               src='https://res.cloudinary.com/dycpjbdto/image/upload/v1708778225/new-removebg-preview_xdfemo.png'
