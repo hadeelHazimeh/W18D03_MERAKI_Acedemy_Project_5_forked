@@ -1,16 +1,14 @@
 import React, { useState } from "react";
 import axios from "axios";
+import Swal from "sweetalert2";
 import { useDispatch, useSelector } from "react-redux";
 import { addService } from "../../services/redux/reducer/serviceProvider";
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal'; 
-import './style.css'; // Import your CSS file for custom styling
+import './style.css';
 
 const CreateService = () => {
-    const [show, setShow] = useState(false);
-    const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
     const [service_name, setService_name] = useState("");
     const [details, setDetails] = useState("");
     const [price, setPrice] = useState("");
@@ -41,9 +39,24 @@ const CreateService = () => {
                 { service_name, details, price, image: imageUrl },
                 { headers: { Authorization: `Bearer ${token}` } }
             );
-            console.log(result);
+            
+            Swal.fire({
+                title: "Success!",
+                text: "Service created successfully.",
+                icon: "success",
+            }).then(() => {
+                setService_name("");
+                setDetails("");
+                setPrice("");
+                setImage("");
+            });
         } catch (error) {
             console.log(error);
+            Swal.fire({
+                title: "Error!",
+                text: "Failed to create service.",
+                icon: "error",
+            });
         }
     };
 
@@ -117,6 +130,6 @@ const CreateService = () => {
             </div>
         </div>
     );
-};
+}; 
 
 export default CreateService;

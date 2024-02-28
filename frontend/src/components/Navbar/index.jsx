@@ -32,7 +32,7 @@ const Navbar = () => {
 
       state.auth
   );
-  console.log(isLoggedIn)
+  // console.log(isLoggedIn)
    const dispatch=useDispatch();
 
   return (
@@ -40,8 +40,8 @@ const Navbar = () => {
     <div>
 
     <MDBNavbar expand='lg' light bgColor='light'>
-      <MDBContainer fluid>
-        <div style={{display:'flex',justifyContent: 'space-between'}}>
+      <MDBContainer fluid  style={{display:'flex',justifyContent: 'space-around',gap:"1rem"}}>
+        <div style={{display:'flex',justifyContent: 'space-evenly'}}>
       <MDBNavbarBrand href='/' style={{marginBlock:'10'}}>
             <img
               src='https://res.cloudinary.com/dycpjbdto/image/upload/v1708778225/new-removebg-preview_xdfemo.png'
@@ -74,8 +74,9 @@ const Navbar = () => {
         </MDBNavbarToggler>
             <MDBNavbarLink href='/client'>Plan Your Event</MDBNavbarLink>
             <MDBNavbarLink href='/portfolio'>PortFolio</MDBNavbarLink>
-            <MDBNavbarLink href='/letstalk'>Lets Talk!</MDBNavbarLink>
+           
             <MDBNavbarLink href='/AboutUs'>About Us</MDBNavbarLink>
+             {isLoggedIn?<><MDBNavbarLink href='/letstalk'>Lets Talk!</MDBNavbarLink></>:<></>}
 
             {isLoggedIn?<><MDBNavbarLink href='/' onClick={()=>{dispatch(setLogout())}}>Log Out
             </MDBNavbarLink></>:<>

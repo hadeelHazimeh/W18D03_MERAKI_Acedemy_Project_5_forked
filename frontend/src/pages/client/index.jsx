@@ -12,28 +12,28 @@ import {
   MDBCardImage
 } from "mdb-react-ui-kit";
 import {Button,Modal,Nav} from "react-bootstrap";
-
-
-
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useSelector } from "react-redux";
 import { useState } from "react";
 import Swal from "sweetalert2";
-
+ import { Container } from "react-bootstrap";
 import "./style.css"
 //.....................................
 
 const Client = () => {
   // const { isLoggedIn } = useSelector((state) => state.auth);
   const [showPrice, setShowPrice] = useState(false);
+  const navigate = useNavigate();
   const [ClickedPrice, setClickedPrice] = useState(false);
-  const token = useSelector((state) => state.auth.token);
+   //const token = useSelector((state) => state.auth.token);
   const [services, setServices] = useState([]);
   const [status, setStatus] = useState(false);
   const [checkedServices, setCheckedServices] = useState([]);
   const [modalShow, setModalShow] = useState(false);
   const [showPreview, setShowPreview] = useState(false);
- 
+  const { isLoggedIn, token, role } = useSelector((state) => state.auth);
+  const [roleLocal, setRoleLocal] = useState(localStorage.getItem("role"));
   const [orderDetails, setOrderDetails] = useState(null);
   const [SelectedServices, setSelectedServices] = useState([]);
   const [orderId, setOrderId] = useState("");
@@ -157,7 +157,17 @@ const Client = () => {
   //..........................................................................................
 
   return (
+    
     <div className="formContainer">
+      {isLoggedIn?<>
+      
+        {roleLocal === "3"?<>
+        
+        
+        {/* code */}
+        
+        
+       
       <div >
       <h2>
         Plan your event using these services or choose from our{" "}
@@ -392,6 +402,51 @@ style={{
           </Button>
         </Modal.Footer>
       </Modal>
+      </>:<>
+
+      <Container
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                backgroundColor: "",
+              }}
+              className=" text-center"
+            >
+              <MDBCard
+                style={{
+                  maxWidth: "63rem",
+                  justifyContent: "center",
+                  marginTop: "30px",
+                  backgroundColor: "#212526",
+                }}
+              >
+                <MDBCardImage
+                  position="top"
+                  src="https://freefrontend.com/assets/img/403-forbidden-html-templates/403-Forbidden-CSS-Hover.gif"
+                  alt="..."
+                />
+                <MDBCardBody>
+                  <MDBCardTitle
+                    style={{
+                      textAlign: "center",
+                      fontWeight: "bold",
+                      fontFamily: "Raleway",
+                      color: "whitesmoke",
+                    }}
+                  >
+                    access to this page is restricted
+                  </MDBCardTitle>
+                </MDBCardBody>
+              </MDBCard>
+            </Container>
+      </>}
+
+
+
+
+</>:<>
+{<Button></Button>}
+</>}
     </div>
   );
 };

@@ -1,6 +1,4 @@
-
 import { useEffect, useState } from "react";
-
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -17,6 +15,7 @@ import {
   updateServiceById,
   deleteServiceByID,
 } from "../../services/redux/reducer/serviceProvider";
+import Swal from "sweetalert2";
 import './style.css';
 
 const ServiceProvider = () => {
@@ -30,7 +29,6 @@ const ServiceProvider = () => {
   const [service_name, setService_name] = useState("");
   const [details, setDetails] = useState("");
   const [price, setPrice] = useState("");
-
   const [image, setImage] = useState("");
 
   const handleClose = () => setShowModal(false);
@@ -38,6 +36,7 @@ const ServiceProvider = () => {
 
   const uploadImage = (image) => {
     const formData = new FormData();
+    console.log(formData);
     formData.append("file", image[0]); // Assuming only one file is selected
     formData.append("upload_preset", "amalhawwari"); // Your Cloudinary upload preset name
     formData.append("cloud_name", "dhgpwshhe"); // Your Cloudinary cloud name
@@ -54,64 +53,102 @@ const ServiceProvider = () => {
       });
   };
   const handeUpdateClick = (serviceId) => {
-    setServiceId(serviceId);
-    handleShow();
+  const serviceToUpdate = serviceProvider.find(service => service.service_id === serviceId);
+
+  setServiceId(serviceId);
+  setService_name(serviceToUpdate.service_name);
+  setDetails(serviceToUpdate.details);
+  setPrice(serviceToUpdate.price);
+  setImage(serviceToUpdate.image);
+
+  handleShow();
   };
 
   // delete a service by id
   const deleteService = (id) => {
-    console.log("serviceId", id);
-    axios
-    .delete(`http://localhost:5000/service/${id}`, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-      })
-      .then((result) => {
-        console.log(result);
-
-
-        dispatch(deleteServiceByID(id));
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    Swal.fire({
+      title: "Are you sure?",
+      text: "Do you want to delete this service?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#d33",
+      cancelButtonColor: "#3085d6",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axios
+          .delete(`http://localhost:5000/service/${id}`, {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("token")}`,
+            },
+          })
+          .then((result) => {
+            dispatch(deleteServiceByID(id));
+            Swal.fire({
+              title: "Deleted!",
+              text: "The service has been deleted.",
+              icon: "success",
+            });
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      }
+    });
   };
+
 
   const updateService = () => {
-    axios
-      .put(
-        `http://localhost:5000/service/provider/update/${serviceId}`,
-        {
-          service_name,
-          details,
-          price,
-          image,
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-          },
-        }
-      )
-      .then((response) => {
-        console.log(response.data);
-        handleClose();
-        dispatch(
-          updateServiceById({
-            service_name,
-            details,
-            price,
-            image,
-            service_id: serviceId,
+    Swal.fire({
+      title: "Are you sure?",
+      text: "Do you want to save the changes?",
+      icon: "question",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, save it!",
+    }).then((result) => {
+      console.log(result);
+      if (result.isConfirmed) {
+        axios
+          .put(
+            `http://localhost:5000/service/provider/update/${serviceId}`,
+            {
+              service_name,
+              details,
+              price,
+              image,
+            },
+            {
+              headers: {
+                Authorization: `Bearer ${localStorage.getItem("token")}`,
+              },
+            }
+          )
+          .then((response) => {
+            handleClose();
+            dispatch(
+              updateServiceById({
+                service_name,
+                details,
+                price,
+                image,
+                service_id: serviceId,
+              })
+            );
+            Swal.fire({
+              title: "Saved!",
+              text: "The changes have been saved.",
+              icon: "success",
+            });
           })
-        );
-        // getServiceProvider();
-      })
-      .catch((error) => {
-        console.error("Error updating service:", error);
-      });
+          .catch((error) => {
+            console.error("Error updating service:", error);
+          });
+      }
+    });
   };
+
 
   const getServiceProvider = () => {
     axios
@@ -156,27 +193,27 @@ const ServiceProvider = () => {
             </Col>
             <Col lg={4} className="mt-3 ms-5 service-details">
               <div className="right-content mt-3">
-                <h4 className="right-content mb-3 fw-bolder">
+                <h4 className="right-content mb-3 fw-bolder" style={{fontFamily: "Merriweather"}}>
                   {service.service_name}
                 </h4>
-                <p>{service.details}</p>
+                <p style={{textAlign: "justify"}}>{service.details}</p>
                 </div>
                 <div className="total">
-                  <h4>status: {service.status}</h4>
-                  <h4 className="service-price">price: $ {service.price}</h4>
+                  <h5>status: {service.status}</h5>
+                  <h6 className="service-price">price: JOD {service.price}</h6>
                   <div className="main-border-button service-buttons">
                     <Button
                       variant="dark"
-                      className="mt-3 mx-1 "
-                      onClick={() => handeUpdateClick(service.service_id)}
+                      className="mt-3 mx-1"
+                    
+                      onClick={() =>{handeUpdateClick(service.service_id)
+                      console.log(service.service_id);} }
                     >
                       UPDATE
                     </Button>
                     <Button
                       variant="dark"
-
                       className="mt-3 ms-3 "
-
                       onClick={() => deleteService(service.service_id)}
                     >
                       Delete
@@ -188,7 +225,7 @@ const ServiceProvider = () => {
         </Container>
       ))}
       <Modal show={showModal} onHide={handleClose}>
-        <Modal.Header closeButton>
+        <Modal.Header closeButton style={{background: "#302B2B"}}>
           <Modal.Title>Update Service</Modal.Title>
         </Modal.Header>
         <Modal.Body>
@@ -228,7 +265,7 @@ const ServiceProvider = () => {
                   type="file"
                   onChange={(e) => uploadImage(e.target.files)}
                 />
-                {/* <img src={image} alt="uploaded image" /> */}
+                <img src={image} alt="uploaded image" />
               </div>
             </Form.Group>
           </Form>
@@ -237,8 +274,7 @@ const ServiceProvider = () => {
           <Button variant="secondary" onClick={handleClose}>
             Close
           </Button>
-
-          <Button  onClick={updateService} style={{backgroundColor: "#00A3AF !important" }}>
+          <Button variant="dark" onClick={updateService} >
             Save Changes
           </Button>
         </Modal.Footer>

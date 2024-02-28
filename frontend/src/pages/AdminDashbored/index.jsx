@@ -1,9 +1,10 @@
-import React, { useState } from 'react'
+import React, { useState } from "react";
 import {
   MDBCard,
   MDBCardBody,
   MDBCardTitle,
   MDBCardText,
+
   MDBCardImage
 } from 'mdb-react-ui-kit';
 import {
@@ -116,8 +117,9 @@ const [roleLocal, setRoleLocal] = useState(localStorage.getItem("role"))
    
     </> }
    
-    </>
-  )
-}
 
-export default AdminDashboard
+    </>
+  );
+};
+
+export default AdminDashboard;

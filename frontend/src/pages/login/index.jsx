@@ -38,7 +38,7 @@ function Login() {
         dispatch(setUserId(result.data.userId));
         dispatch(seRole(result.data.role));
 
-        dispatch(setUserName(result.data.username))
+        dispatch(setUserName(result.data.username));
 
         if (result.data.role === 1) {
           navigate("/admin/dashboard/pending/Services");

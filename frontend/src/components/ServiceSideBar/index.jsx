@@ -7,10 +7,11 @@ import {
   CDBSidebarMenuItem,
 } from 'cdbreact';
 import { NavLink } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-
+import { setLogout } from '../../services/redux/reducer/auth';
 const ServiceSideBar = () => {
+  const dispatch=useDispatch()
   const navigate = useNavigate();
   const serviceProviderName = useSelector(
     (state) => state.auth.userName
@@ -36,7 +37,12 @@ const ServiceSideBar = () => {
           <NavLink to="" onClick={handleMyServicesClick}><CDBSidebarMenuItem icon="cogs">My Services</CDBSidebarMenuItem></NavLink>
           <NavLink to="#" onClick={handleMyOrdersClick}><CDBSidebarMenuItem icon="shopping-cart">My Orders</CDBSidebarMenuItem></NavLink>
           <NavLink to="#" onClick={handleCreateServiceClick}><CDBSidebarMenuItem icon="plus">Create Service</CDBSidebarMenuItem></NavLink>
-          <CDBSidebarMenuItem icon="sign-out-alt">Logout</CDBSidebarMenuItem>
+          <NavLink to={""}> <CDBSidebarMenuItem icon="sign-out-alt" iconType="solid" onClick={()=>{
+                dispatch(setLogout())
+                navigate("/login")
+              }} >
+                Log Out
+              </CDBSidebarMenuItem></NavLink>
 
         </CDBSidebarMenu>
       </CDBSidebarContent>
