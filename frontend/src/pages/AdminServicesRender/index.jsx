@@ -10,6 +10,7 @@ import Dropdown from 'react-bootstrap/Dropdown';
 import Swal from 'sweetalert2';
 import Modal from "react-bootstrap/Modal";
 import "./style.css"
+import Loading from "../../components/loader";
 function AdminServicesRender() {
   const [image, setImage] = useState("");
 
@@ -32,7 +33,7 @@ const uploadImage = async (image) => {
   const [packageDetails, setPackageDetails] = useState(null);
   const [showPrice, setShowPrice] = useState(false);
 
-  const [modalShow, setModalShow] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
 const [package_id, setPackageId] = useState(null)
   const dispatch=useDispatch()
     const { isLoggedIn,token } = useSelector((state) => state.auth);
@@ -40,7 +41,7 @@ const [package_id, setPackageId] = useState(null)
    
     const { packages,packagesName  } = useSelector((state) => state.packages);
     const [services, setServices] = useState([]);
-    const [messageForAddService, setMessageForAddService] = useState(false);
+    const [loadingStatus, setLoadingStatus] = useState(true);
     const [packageInfo, setPackageInfo] = useState({price:0,
       package_Name:"",
       Description:"",
@@ -129,25 +130,11 @@ const [package_id, setPackageId] = useState(null)
   //..........................................................................................
 
 
-  const getPackageDetails = async (package_id) => {
-    try {
-      const packageService = await axios.get(`http://localhost:5000/package/${package_id}`);
-      console.log("Detailsorder",packageService.data.result)
-      setPackageDetails(packageService.data.result[0]);
-
-      setModalShow(true);
-    } catch (error) {
-      console.error("Error getting package details:", error);
-    }
-  };
 
 
 
 
-  //..........................................................................................
-    //-----------------------------
 
-    //-----------------------------
 
 const callServices=()=>{
   axios
@@ -157,13 +144,13 @@ const callServices=()=>{
   .then((result) => {
    // console.log("services", result.data.services);
     setServices(result.data.services);
-    
+    setLoadingStatus(false)
     
   })
   .catch((err) => {
     
     console.log(err);
-
+setErrorMessage("Error occur while loading the page")
   });
 
 }
@@ -175,158 +162,161 @@ const callServices=()=>{
       }, []);
     //...............................
   return (
-    <> <div  className="formContainer">
-       <div className="row justify-content-center">
-   <h2 className="mb-1 animated fadeIn" style={{fontWeight: "bold", textAlign:"start", marginLeft:"20px",backgroundColor:"",marginTop:"10px",fontFamily:"Raleway"}}>Create a Package</h2>
+    <>  {loadingStatus?<>
+    <Loading/>
+    
+    </>:<><div  className="formContainer">
+    <div className="row justify-content-center">
+<h2 className="mb-1 animated fadeIn" style={{fontWeight: "bold", textAlign:"start", marginLeft:"20px",backgroundColor:"",marginTop:"10px",fontFamily:"Raleway"}}>Create a Package</h2>
 
-    <p className=".text-muted" style={{fontWeight: "", textAlign:"start", marginLeft:"20px",backgroundColor:"",marginTop:"10px",fontFamily:"Raleway"}}>Create tailored event packages effortlessly. Mix and match services to design memorable celebrations for any occasion.</p>
-    <form className="">
-      <div style={{backgroundColor:"rgb(243, 241, 236)",border:"1px solid rgb(221, 221, 221)",borderRadius:" 5px",width:"99%" ,margin:"2rem",marginLeft:"0",paddingTop:"1rem",paddingBottom:"1rem"}} >
-    <MDBRow style={{marginLeft:"3px"}} className="formInput">
-        <MDBInput 
-          label="Package Name"
-          type="text"
-          id="package_Name"
-          name="package_Name"
-          value={packageInfo.package_Name}
-          onChange={handleInputChange}
-        />
-      </MDBRow>
+ <p className=".text-muted" style={{fontWeight: "", textAlign:"start", marginLeft:"20px",backgroundColor:"",marginTop:"10px",fontFamily:"Raleway"}}>Create tailored event packages effortlessly. Mix and match services to design memorable celebrations for any occasion.</p>
+ <form className="">
+   <div style={{backgroundColor:"rgb(243, 241, 236)",border:"1px solid rgb(221, 221, 221)",borderRadius:" 5px",width:"99%" ,margin:"2rem",marginLeft:"0",paddingTop:"1rem",paddingBottom:"1rem"}} >
+ <MDBRow style={{marginLeft:"3px"}} className="formInput">
+     <MDBInput 
+       label="Package Name"
+       type="text"
+       id="package_Name"
+       name="package_Name"
+       value={packageInfo.package_Name}
+       onChange={handleInputChange}
+     />
+   </MDBRow>
 
-      <MDBRow style={{marginLeft:"3px"}}  rows={4} className="formInput">
-      <textarea placeholder="Description"
-        className="form-control"
-      rows="5"
-         label="Description"
-          type="text"
-          id="Description"
-          name="Description"
-       value={packageInfo.Description}
-        onChange={handleInputChange}
-      />
+   <MDBRow style={{marginLeft:"3px"}}  rows={4} className="formInput">
+   <textarea placeholder="Description"
+     className="form-control"
+   rows="5"
+      label="Description"
+       type="text"
+       id="Description"
+       name="Description"
+    value={packageInfo.Description}
+     onChange={handleInputChange}
+   />
 
-      </MDBRow>
-       <MDBRow style={{width:"72%"}} className="formInput">
-      <div className="mb-3">
-              <label htmlFor="image" className="form-label">
-                Image
-              </label>
-              <input style={{width:"100%"}}
-                type="file"
-                className="form-control"
-                id="image"
-                onChange={(e) => setImage(e.target.files[0])}
-              />
-            </div>
-            
-      </MDBRow> 
-      </div>
+   </MDBRow>
+    <MDBRow style={{width:"72%"}} className="formInput">
+   <div className="mb-3">
+           <label htmlFor="image" className="form-label">
+             Image
+           </label>
+           <input style={{width:"100%"}}
+             type="file"
+             className="form-control"
+             id="image"
+             onChange={(e) => setImage(e.target.files[0])}
+           />
+         </div>
+         
+   </MDBRow> 
+   </div>
 
-      <div  style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between' ,}}>
-        {services.map((service,i) => (
-          <MDBCard key={i}  style={{ width: 'calc(40% - 17px)', marginBottom: '20px',backgroundColor:"#f3f1ec"  }} className="serviceCard">
-            <MDBCardBody>
-            <MDBCardTitle>
-                  <p
-                    style={{
-                      textAlign: "start",
-                      fontFamily: "Raleway",
-                      borderBottom: "1px solid #302B2B",paddingBottom:"10px"
-                    }}
-                  >
-                    {" "}
-                    {service.service_name}
-                  </p>
-                </MDBCardTitle>
-            <MDBCardImage style={{marginBottom:"10px"}}
-            src={service.image}
-            alt="..."
-            position="top"
-          />
+   <div  style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between' ,}}>
+     {services.map((service,i) => (
+       <MDBCard key={i}  style={{ width: 'calc(40% - 17px)', marginBottom: '20px',backgroundColor:"#f3f1ec"  }} className="serviceCard">
+         <MDBCardBody>
+         <MDBCardTitle>
+               <p
+                 style={{
+                   textAlign: "start",
+                   fontFamily: "Raleway",
+                   borderBottom: "1px solid #302B2B",paddingBottom:"10px"
+                 }}
+               >
+                 {" "}
+                 {service.service_name}
+               </p>
+             </MDBCardTitle>
+         <MDBCardImage style={{marginBottom:"10px"}}
+         src={service.image}
+         alt="..."
+         position="top"
+       />
 
-              <MDBCardText>
-              <p
-                    style={{
-                      textAlign: "justify",
-                      borderBottom: "1px solid #302B2B ",
-                      fontFamily: "Raleway",
-                    }}
-                  >
-                    <strong>Price:</strong>{" "}
-                    <span style={{ display: "inline" }}>
-                      JD {service.price}
-                    </span>
-                  </p>
-                  <p
-                    style={{
-                      textAlign: "justify",
-                     paddingBottom:"10px",
-                      fontFamily: "Merriweather",
-                    }}
-                  >
-                    <strong>Description:</strong>{" "}
-                    <span >{service.details}</span>
-                  </p>
-              </MDBCardText>
-              <div className="checkBox"
+           <MDBCardText>
+           <p
+                 style={{
+                   textAlign: "justify",
+                   borderBottom: "1px solid #302B2B ",
+                   fontFamily: "Raleway",
+                 }}
+               >
+                 <strong>Price:</strong>{" "}
+                 <span style={{ display: "inline" }}>
+                   JD {service.price}
+                 </span>
+               </p>
+               <p
+                 style={{
+                   textAlign: "justify",
+                  paddingBottom:"10px",
+                   fontFamily: "Merriweather",
+                 }}
+               >
+                 <strong>Description:</strong>{" "}
+                 <span >{service.details}</span>
+               </p>
+           </MDBCardText>
+           <div className="checkBox"
 style={{
-  fontFamily:"Raleway",
-  fontWeight:"bold",
-    position: "absolute",
-    bottom: "15px", 
-    left: "20px",
-    }}
+fontFamily:"Raleway",
+fontWeight:"bold",
+ position: "absolute",
+ bottom: "15px", 
+ left: "20px",
+ }}
 
 >
-              <MDBCheckbox 
-                label="Select"
-               checked={checkedServices.includes(service.service_id)}
-                 onChange={() => handleCheckboxChange(service.service_id)}
-              />
-              </div>
-            </MDBCardBody>
-          </MDBCard>
-        ))}
-      </div>
+           <MDBCheckbox 
+             label="Select"
+            checked={checkedServices.includes(service.service_id)}
+              onChange={() => handleCheckboxChange(service.service_id)}
+           />
+           </div>
+         </MDBCardBody>
+       </MDBCard>
+     ))}
+   </div>
 
-      {showPrice ? (
-        <>
-                                    <button
-                                type="button"
-                                className="btn btn-dark"
-                                onClick={handlePackagePrice}
-                                style={{width:"18%",margin:"8px",fontWeight:"bold",fontSize:"0.9rem"}}
-                            >
-                                 calculate the total Price
-                            </button><br/>
+   {showPrice ? (
+     <>
+                                 <button
+                             type="button"
+                             className="btn btn-dark"
+                             onClick={handlePackagePrice}
+                             style={{width:"18%",margin:"8px",fontWeight:"bold",fontSize:"0.9rem"}}
+                         >
+                              calculate the total Price
+                         </button><br/>
 
-        </>
-      ) : (
-        <></>
-      )}
+     </>
+   ) : (
+     <></>
+   )}
 
-      {ClickedPrice ? (
-        <>
-        <div style={{width:"18%",border:"solid black" ,marginLeft:"10px",textAlign:"center" ,backgroundColor:"#302B2B",borderRadius:" 0.25rem",}}>
-         
-            <p style={{margin:"5px",fontSize:"1.1rem", display:"inline",color:"white"}}> <span style={{fontWeight:"bold"}}>Total Price: </span> {packageInfo.price}<span style={{fontWeight:"bold"}}> JD</span></p>
-          </div>
-        </>
-      ) : (
-        <></>
-      )}
+   {ClickedPrice ? (
+     <>
+     <div style={{width:"18%",border:"solid black" ,marginLeft:"10px",textAlign:"center" ,backgroundColor:"#302B2B",borderRadius:" 0.25rem",}}>
+      
+         <p style={{margin:"5px",fontSize:"1.1rem", display:"inline",color:"white"}}> <span style={{fontWeight:"bold"}}>Total Price: </span> {packageInfo.price}<span style={{fontWeight:"bold"}}> JD</span></p>
+       </div>
+     </>
+   ) : (
+     <></>
+   )}
 
 {/*       <MDBBtn   className="totalPriceButton">Submit your Package</MDBBtn> */}
-      <button
-                                type="button"
-                                className="btn btn-dark"
-                                onClick={handleSubmitPackage} style={{width:"18%",margin:"8px",fontSize:"1rem",fontWeight:"bold"}}
-                            >Build Package
-                            </button>
-    </form>
-    
-    </div>
-  </div></>
+   <button
+                             type="button"
+                             className="btn btn-dark"
+                             onClick={handleSubmitPackage} style={{width:"18%",margin:"8px",fontSize:"1rem",fontWeight:"bold"}}
+                         >Build Package
+                         </button>
+ </form>
+ 
+ </div>
+</div></>} </>
   )
 }
 
